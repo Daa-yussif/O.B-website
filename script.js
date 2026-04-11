@@ -1,8 +1,16 @@
-/* ── API base (Live Render Backend) ────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   script.js  —  O.B Kingsland
+   All sensitive data (credentials, secrets) lives ONLY on the backend.
+   This file never stores or checks passwords.
+═══════════════════════════════════════════════════════════════════ */
+
+/* ── API base (only non-sensitive config allowed in frontend) ──── */
 const API_BASE = 'https://o-b-backend.onrender.com/api';
+// ↑ Change to your deployed server URL when going live, e.g.:
+// const API_BASE = 'https://obkingsland-api.onrender.com/api';
 
 /* ══════════════════════════════════════════════════════════════════
-    COPYRIGHT
+   COPYRIGHT
 ══════════════════════════════════════════════════════════════════ */
 const copyrightEl = document.getElementById('copyright');
 if (copyrightEl) {
@@ -10,12 +18,10 @@ if (copyrightEl) {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-    DARK / LIGHT MODE
+   DARK / LIGHT MODE
 ══════════════════════════════════════════════════════════════════ */
 const colorModeToggle = document.getElementById('colorModeToggle');
 const colorModeIcon   = colorModeToggle ? colorModeToggle.querySelector('i') : null;
-
-// Apply saved mode immediately
 applyColorMode(localStorage.getItem('obk_color_mode') || 'light');
 
 if (colorModeToggle) {
@@ -30,13 +36,13 @@ function applyColorMode(mode) {
   const isDark = mode === 'dark';
   document.body.classList.toggle('dark-mode', isDark);
   if (!colorModeIcon) return;
-  
-  colorModeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  colorModeIcon.classList.toggle('fa-sun',  !isDark);
+  colorModeIcon.classList.toggle('fa-moon',  isDark);
   colorModeIcon.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 }
 
 /* ══════════════════════════════════════════════════════════════════
-    SEARCH TABS & FILTER PILLS
+   SEARCH TABS & FILTER PILLS
 ══════════════════════════════════════════════════════════════════ */
 document.querySelectorAll('.stab').forEach(tab => {
   tab.addEventListener('click', function () {
@@ -53,7 +59,7 @@ document.querySelectorAll('.filter-pill').forEach(pill => {
 });
 
 /* ══════════════════════════════════════════════════════════════════
-    ADMIN MODAL — open / close
+   ADMIN MODAL — open / close
 ══════════════════════════════════════════════════════════════════ */
 const adminOverlay   = document.getElementById('adminModalOverlay');
 const adminModalClose = document.getElementById('adminModalClose');
@@ -87,19 +93,16 @@ function togglePwd() {
   const show  = input.type === 'password';
   input.type  = show ? 'text' : 'password';
   if (icon) {
-    icon.classList.toggle('fa-eye', !show);
+    icon.classList.toggle('fa-eye',      !show);
     icon.classList.toggle('fa-eye-slash', show);
   }
 }
 
 /* ══════════════════════════════════════════════════════════════════
-    ADMIN LOGIN
+   ADMIN LOGIN  — calls the real backend API
+   No passwords are hardcoded here. Credentials are validated
+   server-side by bcrypt comparison against the MongoDB record.
 ══════════════════════════════════════════════════════════════════ */
-const loginForm = document.getElementById('adminLoginForm');
-if (loginForm) {
-  loginForm.addEventListener('submit', handleAdminLogin);
-}
-
 async function handleAdminLogin(e) {
   e.preventDefault();
 
@@ -125,7 +128,7 @@ async function handleAdminLogin(e) {
   btn.disabled  = true;
 
   try {
-    const res = await fetch(`${API_BASE}/auth/login`, {
+    const res  = await fetch(`${API_BASE}/auth/login`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ email, password }),
@@ -134,35 +137,37 @@ async function handleAdminLogin(e) {
     const data = await res.json();
 
     if (!res.ok) {
+      // Server returned 401/400 — wrong credentials or validation error
       throw new Error(data.message || 'Incorrect email or password');
     }
 
-    // Success: store JWT token and redirect
+    // ── Success: store JWT token, redirect to dashboard ──────────
+    // Only the non-sensitive JWT token is stored in localStorage.
+    // The actual password NEVER touches the frontend after this point.
     localStorage.setItem('obk_token', data.token);
     closeAdminModal();
     window.location.href = 'admin-dashboard.html';
 
   } catch (err) {
     errorEl.textContent = err.message || 'Login failed. Please try again.';
-    btn.innerHTML = '<span>Sign In to Dashboard</span> <i class="fas fa-arrow-right"></i>';
+    btn.innerHTML = '<span>Sign In to Dashboard</span><i class="fas fa-arrow-right"></i>';
     btn.disabled  = false;
   }
 }
 
 /* ══════════════════════════════════════════════════════════════════
-    WISHLIST TOGGLE
+   WISHLIST TOGGLE
 ══════════════════════════════════════════════════════════════════ */
 document.querySelectorAll('.lcard-wish').forEach(btn => {
   btn.addEventListener('click', function (e) {
     e.stopPropagation();
-    const isWished = this.textContent === '♡';
-    this.textContent = isWished ? '♥' : '♡';
-    this.style.color = isWished ? '#E8622A' : '';
+    this.textContent = this.textContent === '♡' ? '♥' : '♡';
+    this.style.color = this.textContent === '♥' ? '#E8622A' : '';
   });
 });
 
 /* ══════════════════════════════════════════════════════════════════
-    NAV SCROLL EFFECT
+   NAV SCROLL EFFECT
 ══════════════════════════════════════════════════════════════════ */
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
@@ -173,7 +178,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* ══════════════════════════════════════════════════════════════════
-    AOS ANIMATIONS
+   AOS ANIMATIONS
 ══════════════════════════════════════════════════════════════════ */
 if (window.AOS) {
   AOS.init({ duration: 800, easing: 'ease-in-out', once: false, mirror: true });

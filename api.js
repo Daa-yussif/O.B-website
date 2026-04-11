@@ -1,4 +1,12 @@
+/* ═══════════════════════════════════════════════════════════════════
+   api.js  —  O.B Kingsland frontend API helper
+   Shared by: listings.html, site-visit.html, admin-dashboard.html
+   No sensitive data (passwords, secrets, API keys) lives here.
+═══════════════════════════════════════════════════════════════════ */
+
 const API_BASE = 'https://o-b-backend.onrender.com/api';
+// ↑ Change to your deployed server URL when going live, e.g.:
+// const API_BASE = 'https://obkingsland-api.onrender.com/api';
 
 /* ── Helpers ─────────────────────────────────────────────────────── */
 function getToken() {
@@ -7,7 +15,6 @@ function getToken() {
 
 function authHeaders(isFormData = false) {
   const h = { Authorization: `Bearer ${getToken()}` };
-  // If sending FormData, the browser automatically sets the Content-Type with boundary
   if (!isFormData) h['Content-Type'] = 'application/json';
   return h;
 }
@@ -22,6 +29,10 @@ async function handleResponse(res) {
    AUTH
 ══════════════════════════════════════════════════════════════════ */
 
+/**
+ * Login — sends credentials to backend, receives JWT.
+ * Password never stored in frontend after this call.
+ */
 async function adminLogin(email, password) {
   const res = await fetch(`${API_BASE}/auth/login`, {
     method:  'POST',
@@ -38,15 +49,12 @@ function adminLogout() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   LISTINGS (public reads, protected writes)
+   LISTINGS  (public reads, protected writes)
 ══════════════════════════════════════════════════════════════════ */
-
 async function getListings(params = {}) {
-  const filteredParams = new URLSearchParams();
-  for (const [key, value] of Object.entries(params)) {
-    if (value !== '' && value != null) filteredParams.append(key, value);
-  }
-  const qs = filteredParams.toString();
+  const qs = new URLSearchParams(
+    Object.fromEntries(Object.entries(params).filter(([, v]) => v !== '' && v != null))
+  ).toString();
   const res = await fetch(`${API_BASE}/listings${qs ? '?' + qs : ''}`);
   return handleResponse(res);
 }
@@ -57,16 +65,14 @@ async function getListing(id) {
 }
 
 async function getStats() {
-  const res = await fetch(`${API_BASE}/listings/stats`, { 
-    headers: authHeaders() 
-  });
+  const res = await fetch(`${API_BASE}/listings/stats`, { headers: authHeaders() });
   return handleResponse(res);
 }
 
 async function createListing(formData) {
   const res = await fetch(`${API_BASE}/listings`, {
     method:  'POST',
-    headers: authHeaders(true), 
+    headers: authHeaders(true),  // no Content-Type — browser sets multipart boundary
     body:    formData,
   });
   return handleResponse(res);
@@ -90,9 +96,10 @@ async function deleteListing(id) {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   SITE VISITS (public submit, protected reads/updates/deletes)
+   SITE VISITS  (public submit, protected reads/updates/deletes)
 ══════════════════════════════════════════════════════════════════ */
 
+/** Public — called from site-visit.html form */
 async function submitSiteVisit(data) {
   const res = await fetch(`${API_BASE}/site-visits`, {
     method:  'POST',
@@ -102,12 +109,11 @@ async function submitSiteVisit(data) {
   return handleResponse(res);
 }
 
+/** Protected — admin only */
 async function getSiteVisits(params = {}) {
-  const filteredParams = new URLSearchParams();
-  for (const [key, value] of Object.entries(params)) {
-    if (value !== '' && value != null) filteredParams.append(key, value);
-  }
-  const qs = filteredParams.toString();
+  const qs = new URLSearchParams(
+    Object.fromEntries(Object.entries(params).filter(([, v]) => v !== '' && v != null))
+  ).toString();
   const res = await fetch(`${API_BASE}/site-visits${qs ? '?' + qs : ''}`, {
     headers: authHeaders(),
   });
@@ -115,12 +121,11 @@ async function getSiteVisits(params = {}) {
 }
 
 async function getSiteVisitStats() {
-  const res = await fetch(`${API_BASE}/site-visits/stats`, { 
-    headers: authHeaders() 
-  });
+  const res = await fetch(`${API_BASE}/site-visits/stats`, { headers: authHeaders() });
   return handleResponse(res);
 }
 
+/** Admin: update visit status (triggers email notification) */
 async function updateSiteVisitStatus(id, status) {
   const res = await fetch(`${API_BASE}/site-visits/${id}/status`, {
     method:  'PATCH',
@@ -130,6 +135,7 @@ async function updateSiteVisitStatus(id, status) {
   return handleResponse(res);
 }
 
+/** Admin: permanently delete a visit request */
 async function deleteSiteVisit(id) {
   const res = await fetch(`${API_BASE}/site-visits/${id}`, {
     method:  'DELETE',

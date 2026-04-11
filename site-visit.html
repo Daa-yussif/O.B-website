@@ -785,7 +785,7 @@ async function submitSVForm(e) {
 
   try {
     /* POST to the real backend — no localStorage involved */
-    const res  = await fetch(`${typeof API_BASE !== 'undefined' ? API_BASE : 'http://localhost:5000/api'}/site-visits`, {
+    const res  = await fetch(`${typeof API_BASE !== 'undefined' ? API_BASE : 'https://o-b-backend.onrender.com/api'}/site-visits`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ fullName, phone, email, visitDate, landType, budget, plotId, notes, regions }),
