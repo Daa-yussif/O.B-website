@@ -99,8 +99,8 @@ async function handleAdminLogin(e){
   try {
     const res  = await fetch('https://o-b-backend.onrender.com/api/auth/login', {
       method:  'POST',
-      headers: {'Content-Type':'application/json'},
-      body:    JSON.stringify({email, password}),
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ email, password }),
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.message || 'Incorrect email or password');
