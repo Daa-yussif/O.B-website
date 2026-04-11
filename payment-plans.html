@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexible Payment Plans – O.B Kingsland</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ─── RESET & VARS ─── */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D1B2A;--navy2:#152336;--navy3:#1E3050;
+  --orange:#E8622A;--orange2:#F07840;
+  --white:#FFFFFF;--light:#F4F6FA;
+  --text:#1A2B3C;--muted:#6B7C8D;--border:#E2E8F0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden;padding-top:68px}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:68px;display:flex;align-items:center;padding:0 40px;animation:navSlide .6s ease both}
+@keyframes navSlide{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.nav-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:20px;height:20px;fill:#fff}
+.logo-text{color:#fff;font-weight:800;font-size:18px;letter-spacing:-0.3px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-icon-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-cta{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:background .2s}
+.nav-cta:hover{background:var(--orange2)}
+
+/* ─── HERO BANNER ─── */
+.pp-banner{
+  background:linear-gradient(125deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:80px 40px 90px;text-align:center;
+  position:relative;overflow:hidden
+}
+.pp-banner::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:44px 44px;
+  animation:gridDrift 22s linear infinite
+}
+@keyframes gridDrift{from{background-position:0 0}to{background-position:44px 44px}}
+#ppCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.blob1{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,42,0.1),transparent 70%);top:-100px;right:-80px;animation:blobPulse 5s ease-in-out infinite alternate}
+.blob2{position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);bottom:-80px;left:-40px;animation:blobPulse 6s ease-in-out infinite alternate-reverse}
+@keyframes blobPulse{from{transform:scale(1)}to{transform:scale(1.2)}}
+
+.pp-back{position:absolute;top:24px;left:40px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px;font-weight:700;text-decoration:none;transition:all .25s;animation:fadeInLeft .7s .2s ease both}
+.pp-back:hover{color:#fff;gap:12px}
+.pp-back i{transition:transform .25s}
+.pp-back:hover i{transform:translateX(-3px)}
+
+.pp-banner-icon{
+  width:84px;height:84px;border-radius:22px;
+  background:rgba(232,98,42,0.15);border:1.5px solid rgba(232,98,42,0.4);
+  display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--orange);
+  margin:0 auto 24px;position:relative;z-index:2;
+  animation:iconPop .8s .3s cubic-bezier(.34,1.56,.64,1) both
+}
+@keyframes iconPop{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.pp-banner-icon::after{content:'';position:absolute;inset:-10px;border-radius:30px;border:1.5px solid rgba(232,98,42,0.2);animation:orbitSpin 7s linear infinite}
+@keyframes orbitSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+.pp-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(232,98,42,0.18);border:1px solid rgba(232,98,42,0.35);border-radius:20px;padding:5px 14px;margin-bottom:18px;position:relative;z-index:2;animation:fadeInUp .7s .4s ease both}
+.pp-badge span{color:var(--orange);font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.pp-banner h1{font-family:'Playfair Display',serif;color:#fff;font-size:clamp(30px,4vw,56px);font-weight:800;line-height:1.12;margin-bottom:16px;position:relative;z-index:2;animation:fadeInUp .7s .5s ease both}
+.pp-banner h1 em{color:var(--orange);font-style:normal}
+.pp-banner p{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.8;max-width:480px;margin:0 auto 36px;position:relative;z-index:2;animation:fadeInUp .7s .6s ease both}
+
+/* ─── TRUST PILLS ─── */
+.trust-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;animation:fadeInUp .7s .75s ease both}
+.trust-pill{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:22px;padding:8px 18px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.75);font-size:12.5px;font-weight:700}
+.trust-pill i{color:var(--orange)}
+
+/* ─── PLANS SECTION ─── */
+.pp-wrap{max-width:1100px;margin:0 auto;padding:56px 24px 100px}
+
+.pp-intro{text-align:center;margin-bottom:52px;opacity:0;transform:translateY(24px);transition:all .6s ease}
+.pp-intro.visible{opacity:1;transform:translateY(0)}
+.section-label{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:block}
+.pp-intro h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:800;color:var(--text);margin-bottom:12px}
+.pp-intro h2 em{color:var(--orange);font-style:normal}
+.pp-intro p{color:var(--muted);font-size:15px;line-height:1.75;max-width:500px;margin:0 auto}
+
+/* ─── PLAN CARDS ─── */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:60px}
+
+.plan-card{
+  background:#fff;border-radius:20px;padding:36px 28px;
+  border:1.5px solid var(--border);
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  opacity:0;transform:translateY(32px);
+  transition:opacity .6s ease,transform .6s ease,border-color .3s,box-shadow .3s
+}
+.plan-card.visible{opacity:1;transform:translateY(0)}
+.plan-card:hover{border-color:var(--orange);box-shadow:0 16px 48px rgba(232,98,42,0.13);transform:translateY(-6px) !important}
+
+.plan-card.featured{
+  background:linear-gradient(145deg,var(--navy) 0%,var(--navy3) 100%);
+  border-color:var(--orange)
+}
+.plan-card.featured::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at top right,rgba(232,98,42,0.15),transparent 60%)
+}
+
+.plan-popular{
+  position:absolute;top:18px;right:18px;
+  background:var(--orange);color:#fff;
+  font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;
+  animation:popBadge .5s .8s cubic-bezier(.34,1.56,.64,1) both
+}
+@keyframes popBadge{from{transform:scale(0)}to{transform:scale(1)}}
+
+.plan-duration-wrap{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.plan-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:rgba(232,98,42,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;color:var(--orange);
+  flex-shrink:0
+}
+.plan-card.featured .plan-icon{background:rgba(232,98,42,0.2)}
+.plan-duration{font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.plan-card.featured .plan-duration{color:rgba(255,255,255,0.5)}
+
+.plan-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--text);margin-bottom:6px}
+.plan-card.featured .plan-name{color:#fff}
+.plan-tagline{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.plan-card.featured .plan-tagline{color:rgba(255,255,255,0.5)}
+
+.plan-price-wrap{margin-bottom:28px;padding:20px;background:var(--light);border-radius:14px;text-align:center}
+.plan-card.featured .plan-price-wrap{background:rgba(255,255,255,0.07)}
+.plan-price-label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:4px}
+.plan-card.featured .plan-price-label{color:rgba(255,255,255,0.4)}
+.plan-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--orange);line-height:1}
+.plan-price small{font-size:14px;font-weight:700;color:var(--muted);font-family:'Nunito Sans',sans-serif}
+.plan-card.featured .plan-price small{color:rgba(255,255,255,0.4)}
+.plan-interest{font-size:12px;font-weight:700;color:#10B981;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:5px}
+
+.plan-features{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.plan-feat{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text)}
+.plan-card.featured .plan-feat{color:rgba(255,255,255,0.8)}
+.plan-feat i{width:20px;height:20px;border-radius:6px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;color:#10B981;font-size:10px;flex-shrink:0}
+.plan-card.featured .plan-feat i{background:rgba(16,185,129,0.2)}
+
+.plan-btn{
+  width:100%;padding:13px;border-radius:11px;border:none;cursor:pointer;
+  font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:all .25s;position:relative;overflow:hidden
+}
+.plan-btn::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shimmer 2.5s infinite}
+@keyframes shimmer{to{left:160%}}
+.plan-btn-outline{background:transparent;border:2px solid var(--navy);color:var(--navy)}
+.plan-btn-outline:hover{background:var(--navy);color:#fff}
+.plan-btn-fill{background:var(--orange);color:#fff}
+.plan-btn-fill:hover{background:var(--orange2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,98,42,0.3)}
+.plan-btn-navy{background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.2)}
+.plan-btn-navy:hover{background:#fff;color:var(--navy)}
+
+/* ─── CALCULATOR ─── */
+.calc-card{
+  background:#fff;border-radius:22px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.08);
+  overflow:hidden;margin-bottom:48px;
+  opacity:0;transform:translateY(28px);transition:all .6s ease
+}
+.calc-card.visible{opacity:1;transform:translateY(0)}
+.calc-header{
+  background:linear-gradient(90deg,var(--navy),var(--navy3));
+  padding:22px 36px;display:flex;align-items:center;gap:14px
+}
+.calc-header i{color:var(--orange);font-size:20px}
+.calc-header div h3{color:#fff;font-size:16px;font-weight:800}
+.calc-header div p{color:rgba(255,255,255,0.45);font-size:12px;margin-top:2px}
+.calc-body{padding:36px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+.calc-field{display:flex;flex-direction:column;gap:8px}
+.calc-field label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--text)}
+.calc-input-wrap{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:11px;padding:0 14px;background:#fff;transition:border-color .25s,box-shadow .25s}
+.calc-input-wrap:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,98,42,0.1)}
+.calc-input-wrap i{color:var(--muted);font-size:14px}
+.calc-input-wrap input,.calc-input-wrap select{flex:1;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:15px;font-weight:700;color:var(--text);background:transparent;padding:13px 0}
+.calc-input-wrap select{cursor:pointer}
+
+.calc-result{
+  background:linear-gradient(135deg,var(--navy),var(--navy3));
+  border-radius:16px;padding:28px;
+  display:flex;flex-direction:column;gap:16px
+}
+.calc-result-row{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.calc-result-row:last-child{border-bottom:none;padding-bottom:0}
+.calc-result-label{color:rgba(255,255,255,0.5);font-size:12.5px;font-weight:700}
+.calc-result-val{color:#fff;font-size:16px;font-weight:800}
+.calc-result-val.highlight{color:var(--orange);font-size:22px;font-family:'Playfair Display',serif}
+.calc-result-val.green{color:#10B981}
+
+/* Range slider */
+.range-wrap{display:flex;flex-direction:column;gap:8px}
+.range-wrap label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--text)}
+input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:5px;background:var(--border);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;box-shadow:0 0 0 3px rgba(232,98,42,0.2);transition:box-shadow .2s}
+input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 5px rgba(232,98,42,0.25)}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:700}
+
+/* ─── FAQ ─── */
+.faq-section{opacity:0;transform:translateY(24px);transition:all .6s ease}
+.faq-section.visible{opacity:1;transform:translateY(0)}
+.faq-title{text-align:center;margin-bottom:32px}
+.faq-title h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-bottom:8px}
+.faq-title h2 em{color:var(--orange);font-style:normal}
+.faq-title p{color:var(--muted);font-size:14px}
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s}
+.faq-item.open{border-color:var(--orange)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;font-size:14.5px;font-weight:800;color:var(--text);gap:12px}
+.faq-q i{color:var(--muted);font-size:13px;transition:transform .35s,color .25s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(180deg);color:var(--orange)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:18px}
+.faq-a p{padding:0 22px;font-size:13.5px;color:var(--muted);line-height:1.75}
+
+/* ─── CTA ─── */
+.pp-cta{
+  background:linear-gradient(120deg,var(--navy),var(--navy3));
+  border-radius:22px;padding:56px 40px;text-align:center;
+  margin-top:52px;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(24px);transition:all .6s ease
+}
+.pp-cta.visible{opacity:1;transform:translateY(0)}
+.pp-cta::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,42,0.1),transparent 70%);top:-80px;right:-60px}
+.pp-cta h2{font-family:'Playfair Display',serif;color:#fff;font-size:clamp(24px,3vw,38px);font-weight:800;margin-bottom:14px;position:relative;z-index:1}
+.pp-cta h2 em{color:var(--orange);font-style:normal}
+.pp-cta p{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.75;max-width:420px;margin:0 auto 32px;position:relative;z-index:1}
+.pp-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cta-btn{padding:14px 32px;border-radius:11px;font-size:14px;font-weight:800;font-family:'Nunito Sans',sans-serif;cursor:pointer;border:none;display:flex;align-items:center;gap:10px;text-decoration:none;transition:all .25s}
+.cta-btn-primary{background:var(--orange);color:#fff}
+.cta-btn-primary:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,98,42,0.35)}
+.cta-btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.25)}
+.cta-btn-outline:hover{background:rgba(255,255,255,0.1)}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .plans-grid{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .pp-wrap{padding:40px 16px 80px}
+  .pp-banner{padding:72px 24px 64px}
+  .pp-back{left:20px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .calc-body{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+      <div class="logo-text">O.B Kingsland</div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#featured">Featured</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#about">About</a>
+      <a href="listings.html">Listings</a>
+    </div>
+    <div class="nav-right">
+      
+      <button class="nav-icon-btn color-mode-toggle" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
+      <button class="nav-cta">＋ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="pp-banner">
+  <canvas id="ppCanvas"></canvas>
+  <div class="blob1"></div><div class="blob2"></div>
+  <a href="index.html" class="pp-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  <div class="pp-badge"><span><i class="fas fa-percent" style="margin-right:5px"></i> Zero Interest Options Available</span></div>
+  <div class="pp-banner-icon"><i class="fas fa-credit-card"></i></div>
+  <h1>Flexible <em>Payment</em> Plans</h1>
+  <p>Spread your land payments across 6, 12, or 24 months — with zero interest. We also partner with trusted banks and mortgage providers.</p>
+  <div class="trust-pills">
+    <div class="trust-pill"><i class="fas fa-shield-alt"></i> 0% Interest</div>
+    <div class="trust-pill"><i class="fas fa-handshake"></i> No Hidden Fees</div>
+    <div class="trust-pill"><i class="fas fa-university"></i> Bank Partners</div>
+    <div class="trust-pill"><i class="fas fa-lock"></i> Secure Payments</div>
+  </div>
+</div>
+
+<!-- MAIN WRAP -->
+<div class="pp-wrap">
+
+  <!-- Intro -->
+  <div class="pp-intro" data-animate>
+    <span class="section-label">Choose Your Plan</span>
+    <h2>Pick a Plan That <em>Works For You</em></h2>
+    <p>All plans come with full title deed transfer, GPS survey documents, and dedicated agent support — at no extra cost.</p>
+  </div>
+
+  <!-- PLAN CARDS -->
+  <div class="plans-grid">
+
+    <!-- 6 Months -->
+    <div class="plan-card" data-animate data-delay="0">
+      <div class="plan-duration-wrap">
+        <div class="plan-icon"><i class="fas fa-bolt"></i></div>
+        <div class="plan-duration">6 Months</div>
+      </div>
+      <div class="plan-name">Swift Plan</div>
+      <div class="plan-tagline">Pay off your plot fast and take full ownership in just 6 months.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price-label">Monthly Payment From</div>
+        <div class="plan-price">GHS 16,667 <small>/mo</small></div>
+        <div class="plan-interest"><i class="fas fa-check-circle"></i> 0% Interest</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feat"><i class="fas fa-check"></i> 6 equal monthly instalments</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Immediate site access on deposit</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Title deed on final payment</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Dedicated agent assigned</div>
+      </div>
+      <button class="plan-btn plan-btn-outline" onclick="window.location.href='site-visit.html'">
+        <i class="fas fa-arrow-right"></i> Get Started
+      </button>
+    </div>
+
+    <!-- 12 Months — Featured -->
+    <div class="plan-card featured" data-animate data-delay="150">
+      <div class="plan-popular">Most Popular</div>
+      <div class="plan-duration-wrap">
+        <div class="plan-icon"><i class="fas fa-star"></i></div>
+        <div class="plan-duration">12 Months</div>
+      </div>
+      <div class="plan-name" style="color:#fff">Balanced Plan</div>
+      <div class="plan-tagline">Our most popular plan — a perfect balance of speed and affordability.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price-label">Monthly Payment From</div>
+        <div class="plan-price">GHS 8,333 <small>/mo</small></div>
+        <div class="plan-interest"><i class="fas fa-check-circle"></i> 0% Interest</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feat"><i class="fas fa-check"></i> 12 equal monthly instalments</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Immediate site access on deposit</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Title deed on final payment</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Priority agent support</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Free property valuation</div>
+      </div>
+      <button class="plan-btn plan-btn-fill" onclick="window.location.href='site-visit.html'">
+        <i class="fas fa-star"></i> Choose This Plan
+      </button>
+    </div>
+
+    <!-- 24 Months -->
+    <div class="plan-card" data-animate data-delay="300">
+      <div class="plan-duration-wrap">
+        <div class="plan-icon"><i class="fas fa-leaf"></i></div>
+        <div class="plan-duration">24 Months</div>
+      </div>
+      <div class="plan-name">Easy Plan</div>
+      <div class="plan-tagline">Spread payments over 2 years for the lowest monthly commitment.</div>
+      <div class="plan-price-wrap">
+        <div class="plan-price-label">Monthly Payment From</div>
+        <div class="plan-price">GHS 4,167 <small>/mo</small></div>
+        <div class="plan-interest"><i class="fas fa-check-circle"></i> 0% Interest</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feat"><i class="fas fa-check"></i> 24 equal monthly instalments</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Immediate site access on deposit</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Title deed on final payment</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Flexible top-up option</div>
+        <div class="plan-feat"><i class="fas fa-check"></i> Bank mortgage compatible</div>
+      </div>
+      <button class="plan-btn plan-btn-outline" onclick="window.location.href='site-visit.html'">
+        <i class="fas fa-arrow-right"></i> Get Started
+      </button>
+    </div>
+
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="calc-card" data-animate>
+    <div class="calc-header">
+      <i class="fas fa-calculator"></i>
+      <div>
+        <h3>Payment Calculator</h3>
+        <p>Estimate your monthly instalment instantly</p>
+      </div>
+    </div>
+    <div class="calc-body">
+      <div class="calc-grid">
+        <div style="display:flex;flex-direction:column;gap:22px">
+
+          <div class="range-wrap">
+            <label>Plot Price (GHS) — <span id="priceLabel" style="color:var(--orange)">100,000</span></label>
+            <input type="range" id="plotPrice" min="50000" max="800000" step="5000" value="100000" oninput="calcPayment()">
+            <div class="range-labels"><span>50K</span><span>800K</span></div>
+          </div>
+
+          <div class="range-wrap">
+            <label>Deposit (%) — <span id="depositLabel" style="color:var(--orange)">20%</span></label>
+            <input type="range" id="depositPct" min="10" max="50" step="5" value="20" oninput="calcPayment()">
+            <div class="range-labels"><span>10%</span><span>50%</span></div>
+          </div>
+
+          <div class="calc-field">
+            <label>Payment Duration</label>
+            <div class="calc-input-wrap">
+              <i class="fas fa-calendar-alt"></i>
+              <select id="duration" onchange="calcPayment()">
+                <option value="6">6 Months — Swift Plan</option>
+                <option value="12" selected>12 Months — Balanced Plan</option>
+                <option value="24">24 Months — Easy Plan</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="calc-result">
+          <div class="calc-result-row">
+            <span class="calc-result-label">Plot Price</span>
+            <span class="calc-result-val" id="rPrice">GHS 100,000</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Initial Deposit (20%)</span>
+            <span class="calc-result-val green" id="rDeposit">GHS 20,000</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Balance to Pay</span>
+            <span class="calc-result-val" id="rBalance">GHS 80,000</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Interest Rate</span>
+            <span class="calc-result-val green">0% (Zero)</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Monthly Instalment</span>
+            <span class="calc-result-val highlight" id="rMonthly">GHS 6,667</span>
+          </div>
+          <button class="plan-btn plan-btn-fill" style="margin-top:8px" onclick="window.location.href='site-visit.html'">
+            <i class="fas fa-paper-plane"></i> Apply for This Plan
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section" data-animate>
+    <div class="faq-title">
+      <h2>Common <em>Questions</em></h2>
+      <p>Everything you need to know about our payment plans</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there really zero interest on all plans? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a"><p>Yes — absolutely. All three of our plans (6, 12, and 24 months) carry zero interest. The price you see is the price you pay, split evenly across your chosen duration. No hidden charges, no surprises.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What deposit is required to start? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a"><p>A minimum deposit of 10% of the plot price is required to secure your land and begin your instalment plan. We recommend 20–30% to reduce your monthly payments. Full deposits are also welcome.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I switch plans after I've started? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a"><p>Yes, you can upgrade to a shorter plan at any time (e.g., move from 24 months to 12 months) by paying off more of the balance. Downgrading requires agent approval and may depend on your payment history.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">When do I receive my title deed? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a"><p>The full title deed is transferred to you upon completion of your final instalment. However, you receive a signed and notarised purchase agreement immediately after your deposit, which legally protects your ownership rights throughout the payment period.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you work with banks or mortgage providers? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a"><p>Yes. We have partnerships with several Ghanaian banks and mortgage institutions. Our agents can connect you with the right provider based on your financial situation and preferred plot.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="pp-cta" data-animate>
+    <h2>Ready to Secure Your <em>Plot?</em></h2>
+    <p>Talk to a land agent today and we'll find the perfect payment plan for your budget and timeline.</p>
+    <div class="pp-cta-btns">
+      <a href="site-visit.html" class="cta-btn cta-btn-primary"><i class="fas fa-car"></i> Book a Free Site Visit</a>
+      <a href="tel:+233300000000" class="cta-btn cta-btn-outline"><i class="fas fa-phone"></i> Call Us Now</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── PARTICLES ── */
+(function(){
+  const c=document.getElementById('ppCanvas'),ctx=c.getContext('2d');
+  let W,H,dots=[];
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<50;i++) dots.push({x:Math.random()*1400,y:Math.random()*500,r:Math.random()*2+0.5,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.3,alpha:Math.random()*.45+.1});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    dots.forEach(d=>{
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,98,42,${d.alpha})`;ctx.fill();
+      d.x+=d.vx;d.y+=d.vy;
+      if(d.x<0||d.x>W)d.vx*=-1;if(d.y<0||d.y>H)d.vy*=-1;
+    });
+    dots.forEach((a,i)=>dots.slice(i+1).forEach(b=>{
+      const dist=Math.hypot(a.x-b.x,a.y-b.y);
+      if(dist<110){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(232,98,42,${.07*(1-dist/110)})`;ctx.lineWidth=.8;ctx.stroke()}
+    }));
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── SCROLL REVEAL ── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+  });
+},{threshold:.1});
+document.querySelectorAll('[data-animate]').forEach(el=>observer.observe(el));
+
+/* Stagger plan cards */
+document.querySelectorAll('.plan-card[data-delay]').forEach(card=>{
+  const delay=parseInt(card.getAttribute('data-delay'));
+  card.style.transitionDelay=delay+'ms';
+});
+
+/* ── CALCULATOR ── */
+function fmt(n){return 'GHS '+Math.round(n).toLocaleString()}
+function calcPayment(){
+  const price=parseInt(document.getElementById('plotPrice').value);
+  const depPct=parseInt(document.getElementById('depositPct').value);
+  const months=parseInt(document.getElementById('duration').value);
+  const deposit=price*(depPct/100);
+  const balance=price-deposit;
+  const monthly=balance/months;
+  document.getElementById('priceLabel').textContent=price.toLocaleString();
+  document.getElementById('depositLabel').textContent=depPct+'%';
+  document.getElementById('rPrice').textContent=fmt(price);
+  document.getElementById('rDeposit').textContent=fmt(deposit);
+  document.getElementById('rBalance').textContent=fmt(balance);
+  document.getElementById('rMonthly').textContent=fmt(monthly);
+}
+calcPayment();
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+</script>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-modal-overlay" id="adminModalOverlay">
+  <div class="admin-modal" id="adminModal">
+    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
+
+    <div class="admin-modal-left">
+      <div class="aml-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+        <span class="logo-text">O.B Kingsland</span>
+      </div>
+      <h2>Admin <em>Portal</em></h2>
+      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
+      <div class="aml-features">
+        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
+        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
+        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
+      </div>
+    </div>
+
+    <div class="admin-modal-right">
+      <div class="amr-header">
+        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your administrator credentials</p>
+      </div>
+
+      <form class="admin-form" onsubmit="handleAdminLogin(event)">
+        <div class="af-group">
+          <label>Email Address</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="admin@obkingsland.gh" required>
+          </div>
+        </div>
+        <div class="af-group">
+          <label>Password</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
+            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
+          </div>
+        </div>
+        <div class="af-row">
+          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
+          <a href="#" class="af-forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="af-submit">
+          <span>Sign In to Dashboard</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="af-error" id="afError"></div>
+      </form>
+
+      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

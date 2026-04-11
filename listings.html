@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Listings – O.B Kingsland</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D1B2A;--navy2:#152336;--navy3:#1E3050;
+  --orange:#E8622A;--orange2:#F07840;
+  --white:#FFFFFF;--light:#F4F6FA;
+  --text:#1A2B3C;--muted:#6B7C8D;--border:#E2E8F0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden;padding-top:68px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);height:68px;display:flex;align-items:center;padding:0 40px;animation:navSlide .6s ease both}
+@keyframes navSlide{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.nav-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:20px;height:20px;fill:#fff}
+.logo-text{color:#fff;font-weight:800;font-size:18px;letter-spacing:-0.3px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-icon-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-cta{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:background .2s}
+.nav-cta:hover{background:var(--orange2)}
+
+/* BANNER */
+.listings-banner{
+  background:linear-gradient(125deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:64px 40px 72px;position:relative;overflow:hidden
+}
+.listings-banner::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:44px 44px;animation:gridDrift 22s linear infinite}
+@keyframes gridDrift{from{background-position:0 0}to{background-position:44px 44px}}
+.blob-a{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,42,0.1),transparent 70%);top:-80px;right:-60px;animation:bp 5s ease-in-out infinite alternate}
+.blob-b{position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);bottom:-60px;left:-40px;animation:bp 6s ease-in-out infinite alternate-reverse}
+@keyframes bp{from{transform:scale(1)}to{transform:scale(1.18)}}
+
+.banner-inner{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+.b-back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:13px;font-weight:700;text-decoration:none;transition:all .25s;margin-bottom:24px;animation:fadeInLeft .7s .2s ease both}
+.b-back:hover{color:#fff;gap:12px}
+.b-back i{transition:transform .25s}
+.b-back:hover i{transform:translateX(-3px)}
+.b-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(232,98,42,0.18);border:1px solid rgba(232,98,42,0.35);border-radius:20px;padding:5px 14px;margin-bottom:18px;animation:fadeInUp .7s .3s ease both}
+.b-badge span{color:var(--orange);font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.banner-inner h1{font-family:'Playfair Display',serif;color:#fff;font-size:clamp(28px,4vw,52px);font-weight:800;line-height:1.12;margin-bottom:14px;animation:fadeInUp .7s .4s ease both}
+.banner-inner h1 em{color:var(--orange);font-style:normal}
+.banner-inner p{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.8;max-width:500px;animation:fadeInUp .7s .5s ease both}
+
+/* SEARCH + FILTER BAR */
+.filter-bar{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:18px 40px;position:sticky;top:68px;z-index:900;
+  box-shadow:0 2px 16px rgba(0,0,0,0.06);
+  animation:fadeInDown .5s .3s ease both
+}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.filter-bar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.fb-search{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:10px;padding:0 14px;transition:border-color .25s,box-shadow .25s}
+.fb-search:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,98,42,0.1)}
+.fb-search i{color:var(--muted);font-size:14px}
+.fb-search input{flex:1;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text);padding:11px 0;background:transparent}
+.fb-select{border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-family:'Nunito Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--text);background:#fff;cursor:pointer;outline:none;transition:border-color .25s}
+.fb-select:focus{border-color:var(--orange)}
+.fb-count{font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;margin-left:auto}
+.fb-count span{color:var(--orange)}
+
+/* MAIN LAYOUT */
+.listings-main{max-width:1280px;margin:0 auto;padding:40px 40px 100px}
+
+/* EMPTY STATE */
+.empty-state{
+  text-align:center;padding:100px 20px;
+  animation:fadeInUp .6s ease both
+}
+.empty-icon{font-size:64px;color:var(--border);margin-bottom:20px}
+.empty-state h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px}
+.empty-state p{font-size:14px;color:var(--muted);line-height:1.7;max-width:360px;margin:0 auto 28px}
+.empty-cta{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:800;font-family:'Nunito Sans',sans-serif;cursor:pointer;text-decoration:none;transition:all .2s}
+.empty-cta:hover{background:var(--orange2);transform:translateY(-2px)}
+
+/* GRID */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px
+}
+
+/* LAND CARD */
+.land-card{
+  background:#fff;border-radius:18px;overflow:hidden;
+  border:1.5px solid var(--border);
+  transition:all .3s;cursor:pointer;
+  opacity:0;transform:translateY(24px);
+  animation:cardIn .5s ease forwards
+}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.land-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.12);border-color:rgba(232,98,42,0.3)}
+
+.lcard-img{position:relative;height:210px;overflow:hidden;background:var(--light)}
+.lcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.land-card:hover .lcard-img img{transform:scale(1.06)}
+.lcard-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edf2,#d0d8e0);color:#9bb0c4;font-size:48px}
+
+.lcard-badge{position:absolute;top:14px;left:14px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:6px;color:#fff}
+.badge-hot{background:var(--orange)}
+.badge-new{background:#3B82F6}
+.badge-avail{background:#10B981}
+.badge-sold{background:#6B7C8D}
+
+.lcard-wish{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:background .2s;color:#ccc}
+.lcard-wish.liked{color:var(--orange)}
+.lcard-wish:hover{background:#fff}
+
+.lcard-body{padding:18px}
+.lcard-type-tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:8px}
+.tag-residential{background:rgba(59,130,246,0.1);color:#3B82F6}
+.tag-commercial{background:rgba(16,185,129,0.1);color:#10B981}
+
+.lcard-title{font-size:15.5px;font-weight:800;color:var(--text);margin-bottom:5px;line-height:1.3}
+.lcard-loc{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-bottom:10px}
+.lcard-loc i{color:var(--orange);font-size:11px}
+.lcard-desc{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+.lcard-specs{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px;flex-wrap:wrap}
+.spec{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:700}
+.spec i{color:var(--orange);font-size:12px}
+
+.lcard-footer{display:flex;align-items:center;justify-content:space-between}
+.lcard-price{font-size:18px;font-weight:800;color:var(--orange)}
+.lcard-price small{font-size:11px;font-weight:600;color:var(--muted);margin-left:2px}
+.details-btn{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:background .2s}
+.details-btn:hover{background:var(--orange)}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:52px}
+.pg-btn{width:38px;height:38px;border-radius:9px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'Nunito Sans',sans-serif}
+.pg-btn:hover,.pg-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pg-btn.active{background:var(--orange);border-color:var(--orange)}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+
+@media(max-width:960px){.cards-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.cards-grid{grid-template-columns:1fr}.listings-banner{padding:60px 20px 56px}.filter-bar{padding:14px 20px}.listings-main{padding:28px 16px 80px}nav{padding:0 20px}.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+      <div class="logo-text">O.B Kingsland</div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="listings.html" class="active">Listings</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      
+      <button class="nav-icon-btn color-mode-toggle" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
+      <button class="nav-cta">＋ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- BANNER -->
+<div class="listings-banner">
+  <div class="blob-a"></div><div class="blob-b"></div>
+  <div class="banner-inner">
+    <a href="index.html" class="b-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    <div class="b-badge"><span><i class="fas fa-map-marker-alt" style="margin-right:5px"></i> Live Listings — Updated in Real Time</span></div>
+    <h1>Browse All <em>Land Listings</em></h1>
+    <p>Every plot is GPS-surveyed, title-verified, and ready for purchase. Filter by type, region, or price to find your perfect match.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <div class="fb-search">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search by title, location, ID…" oninput="filterListings()">
+    </div>
+    <select class="fb-select" id="typeFilter" onchange="filterListings()">
+      <option value="">All Types</option>
+      <option value="Residential">Residential</option>
+      <option value="Commercial">Commercial</option>
+    </select>
+    <select class="fb-select" id="regionFilter" onchange="filterListings()">
+      <option value="">All Regions</option>
+      <option value="Greater Accra">Greater Accra</option>
+      <option value="Ashanti">Ashanti</option>
+      <option value="Western">Western</option>
+      <option value="Eastern">Eastern</option>
+      <option value="Volta">Volta</option>
+      <option value="Northern">Northern</option>
+      <option value="Central">Central</option>
+    </select>
+    <select class="fb-select" id="sortFilter" onchange="filterListings()">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+    <div class="fb-count">Showing <span id="countDisplay">0</span> listings</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="listings-main">
+  <div class="cards-grid" id="cardsGrid"></div>
+  <div id="emptyState" class="empty-state" style="display:none">
+    <div class="empty-icon"><i class="fas fa-map"></i></div>
+    <h3>No Listings Yet</h3>
+    <p>The admin hasn't posted any listings yet. Check back soon or contact us directly.</p>
+    <a href="index.html#contact" class="empty-cta"><i class="fas fa-envelope"></i> Contact Us</a>
+  </div>
+  <div id="noResults" class="empty-state" style="display:none">
+    <div class="empty-icon"><i class="fas fa-search"></i></div>
+    <h3>No Results Found</h3>
+    <p>Try adjusting your filters or search terms to find what you're looking for.</p>
+    <button class="empty-cta" onclick="clearFilters()"><i class="fas fa-times"></i> Clear Filters</button>
+  </div>
+  <div class="pagination" id="pagination"></div>
+</div>
+
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   listings.html — loads from MongoDB via backend API.
+   No localStorage. No hardcoded data.
+═══════════════════════════════════════════════════════════════ */
+const API_BASE_LISTINGS = 'http://localhost:5000/api';
+
+const ITEMS_PER_PAGE = 9;
+let currentPage  = 1;
+let filteredData = [];
+let allListings  = [];
+
+/* ── Helpers ── */
+function formatPrice(p) { return 'GHS ' + Number(p).toLocaleString(); }
+function badgeClass(s)  { return { hot:'badge-hot', new:'badge-new', available:'badge-avail', sold:'badge-sold' }[s] || 'badge-avail'; }
+function badgeLabel(s)  { return { hot:'Hot Deal',  new:'New',       available:'Available',   sold:'Sold'        }[s] || 'Available'; }
+function typeTagClass(t){ return { Residential:'tag-residential', Commercial:'tag-commercial' }[t] || 'tag-residential'; }
+
+/* ── Render a single card ── */
+function renderCard(listing, delay) {
+  /* Use _id (MongoDB) with fallback to id (legacy) */
+  const id  = listing._id || listing.id;
+  const img = listing.imageUrl
+    ? `<img src="${listing.imageUrl}" alt="${listing.title}"
+          onerror="this.parentElement.innerHTML='<div class=\\'lcard-img-placeholder\\'><i class=\\'fas fa-image\\'></i></div>'">`
+    : `<div class="lcard-img-placeholder"><i class="fas fa-image"></i></div>`;
+
+  const specs = [];
+  if (listing.size)      specs.push(`<div class="spec"><i class="fas fa-ruler-combined"></i> ${listing.size}</div>`);
+  if (listing.surveyed)  specs.push(`<div class="spec"><i class="fas fa-map"></i> GPS Surveyed</div>`);
+  if (listing.titleDeed) specs.push(`<div class="spec"><i class="fas fa-scroll"></i> Title Deed</div>`);
+
+  return `
+  <div class="land-card" style="animation-delay:${delay}ms" onclick="viewListing('${id}')">
+    <div class="lcard-img">
+      ${img}
+      <span class="lcard-badge ${badgeClass(listing.status)}">${badgeLabel(listing.status)}</span>
+      <button class="lcard-wish" onclick="event.stopPropagation();toggleWish(this)"><i class="fas fa-heart"></i></button>
+    </div>
+    <div class="lcard-body">
+      <span class="lcard-type-tag ${typeTagClass(listing.type)}">${listing.type}</span>
+      <div class="lcard-title">${listing.title}</div>
+      <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> ${listing.location}${listing.region ? ', ' + listing.region : ''}</div>
+      <div class="lcard-desc">${listing.description || 'No description provided.'}</div>
+      <div class="lcard-specs">${specs.join('')}</div>
+      <div class="lcard-footer">
+        <div class="lcard-price">${formatPrice(listing.price)} <small>/${listing.priceUnit || 'plot'}</small></div>
+        <button class="details-btn" onclick="event.stopPropagation();viewListing('${id}')"><i class="fas fa-home"></i> Details</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function viewListing(id) {
+  const l = allListings.find(x => (x._id || x.id) === id);
+  if (l) alert(`📍 ${l.title}\n📌 ${l.location}${l.region ? ', ' + l.region : ''}\n💰 GHS ${Number(l.price).toLocaleString()} /${l.priceUnit || 'plot'}\n📐 ${l.size || 'N/A'}\n\n${l.description || ''}`);
+}
+
+function toggleWish(btn) { btn.classList.toggle('liked'); }
+
+/* ── Read ?type= from URL and pre-fill filter ── */
+function initFilterFromQuery() {
+  const type = new URLSearchParams(window.location.search).get('type');
+  if (['Residential', 'Commercial'].includes(type)) {
+    const el = document.getElementById('typeFilter');
+    if (el) el.value = type;
+  }
+}
+
+/* ── Apply client-side filter & sort on the already-fetched data ── */
+function filterListings() {
+  const search = (document.getElementById('searchInput').value || '').toLowerCase();
+  const type   = document.getElementById('typeFilter').value;
+  const region = document.getElementById('regionFilter').value;
+  const sort   = document.getElementById('sortFilter').value;
+
+  filteredData = allListings.filter(l => {
+    const matchSearch = !search
+      || l.title.toLowerCase().includes(search)
+      || (l.location || '').toLowerCase().includes(search)
+      || (l.region   || '').toLowerCase().includes(search);
+    const matchType   = !type   || l.type === type;
+    const matchRegion = !region || (l.region || '').includes(region);
+    return matchSearch && matchType && matchRegion;
+  });
+
+  if (sort === 'newest')     filteredData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  else if (sort === 'oldest')     filteredData.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  else if (sort === 'price-low')  filteredData.sort((a, b) => Number(a.price) - Number(b.price));
+  else if (sort === 'price-high') filteredData.sort((a, b) => Number(b.price) - Number(a.price));
+
+  currentPage = 1;
+  renderPage();
+}
+
+/* ── Render current page of cards ── */
+function renderPage() {
+  const grid       = document.getElementById('cardsGrid');
+  const emptyState = document.getElementById('emptyState');
+  const noResults  = document.getElementById('noResults');
+  const countEl    = document.getElementById('countDisplay');
+
+  countEl.textContent = filteredData.length;
+
+  if (allListings.length === 0) {
+    grid.innerHTML = ''; emptyState.style.display = ''; noResults.style.display = 'none';
+    document.getElementById('pagination').innerHTML = ''; return;
+  }
+  emptyState.style.display = 'none';
+
+  if (filteredData.length === 0) {
+    grid.innerHTML = ''; noResults.style.display = '';
+    document.getElementById('pagination').innerHTML = ''; return;
+  }
+  noResults.style.display = 'none';
+
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
+  grid.innerHTML = filteredData.slice(start, start + ITEMS_PER_PAGE).map((l, i) => renderCard(l, i * 80)).join('');
+  renderPagination();
+}
+
+function renderPagination() {
+  const total = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const pag   = document.getElementById('pagination');
+  if (total <= 1) { pag.innerHTML = ''; return; }
+  let html = `<button class="pg-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+  for (let i = 1; i <= total; i++) {
+    html += `<button class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="pg-btn" onclick="goPage(${currentPage + 1})" ${currentPage === total ? 'disabled' : ''}>›</button>`;
+  pag.innerHTML = html;
+}
+
+function goPage(p) {
+  const total = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  if (p < 1 || p > total) return;
+  currentPage = p;
+  renderPage();
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+function clearFilters() {
+  document.getElementById('searchInput').value  = '';
+  document.getElementById('typeFilter').value   = '';
+  document.getElementById('regionFilter').value = '';
+  document.getElementById('sortFilter').value   = 'newest';
+  filterListings();
+}
+
+/* ── Show loading skeleton ── */
+function showLoadingState() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = Array(6).fill(0).map(() => `
+    <div class="land-card" style="pointer-events:none;opacity:.6">
+      <div class="lcard-img" style="background:#e2e8f0;height:220px;border-radius:12px 12px 0 0;
+           animation:pulse-load 1.4s ease infinite"></div>
+      <div class="lcard-body">
+        <div style="background:#e2e8f0;height:14px;border-radius:6px;margin-bottom:10px;
+             animation:pulse-load 1.4s ease infinite"></div>
+        <div style="background:#e2e8f0;height:10px;border-radius:6px;width:60%;
+             animation:pulse-load 1.4s ease infinite"></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── Main: fetch from API then render ── */
+async function loadListingsFromAPI() {
+  showLoadingState();
+  try {
+    const res = await fetch(`${API_BASE_LISTINGS}/listings?limit=200`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to load listings');
+    allListings = data.data || [];
+    initFilterFromQuery();
+    filterListings();
+  } catch (err) {
+    console.error('Listings error:', err);
+    /* Show empty state with message */
+    document.getElementById('emptyState').style.display = '';
+    document.getElementById('emptyState').querySelector && (
+      document.getElementById('emptyState').innerHTML =
+        `<i class="fas fa-exclamation-circle" style="font-size:36px;color:#E8622A;display:block;margin-bottom:12px"></i>
+         <p style="font-weight:700;color:#1A2B3C">Could not load listings</p>
+         <p style="font-size:13px;color:#6B7C8D;margin-top:6px">${err.message}</p>
+         <button onclick="loadListingsFromAPI()" style="margin-top:14px;padding:10px 22px;
+           background:#E8622A;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer">
+           Try Again</button>`
+    );
+    document.getElementById('cardsGrid').innerHTML = '';
+    document.getElementById('countDisplay').textContent = '0';
+  }
+}
+
+/* Pulse animation for skeletons */
+const _ps = document.createElement('style');
+_ps.textContent = '@keyframes pulse-load{0%,100%{opacity:1}50%{opacity:.4}}';
+document.head.appendChild(_ps);
+
+/* ── Init ── */
+loadListingsFromAPI();
+</script>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-modal-overlay" id="adminModalOverlay">
+  <div class="admin-modal" id="adminModal">
+    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
+
+    <div class="admin-modal-left">
+      <div class="aml-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+        <span class="logo-text">O.B Kingsland</span>
+      </div>
+      <h2>Admin <em>Portal</em></h2>
+      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
+      <div class="aml-features">
+        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
+        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
+        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
+      </div>
+    </div>
+
+    <div class="admin-modal-right">
+      <div class="amr-header">
+        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your administrator credentials</p>
+      </div>
+
+      <form class="admin-form" onsubmit="handleAdminLogin(event)">
+        <div class="af-group">
+          <label>Email Address</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="admin@obkingsland.gh" required>
+          </div>
+        </div>
+        <div class="af-group">
+          <label>Password</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
+            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
+          </div>
+        </div>
+        <div class="af-row">
+          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
+          <a href="#" class="af-forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="af-submit">
+          <span>Sign In to Dashboard</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="af-error" id="afError"></div>
+      </form>
+
+      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
+    </div>
+  </div>
+</div>
+<script src="api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

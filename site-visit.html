@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Free Site Visit – O.B Kingsland</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ─── RESET & VARS ─── */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D1B2A;
+  --navy2:#152336;
+  --navy3:#1E3050;
+  --orange:#E8622A;
+  --orange2:#F07840;
+  --white:#FFFFFF;
+  --light:#F4F6FA;
+  --text:#1A2B3C;
+  --muted:#6B7C8D;
+  --border:#E2E8F0;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito Sans',sans-serif;
+  background:var(--light);
+  color:var(--text);
+  overflow-x:hidden;
+  padding-top:68px
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(13,27,42,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  height:68px;display:flex;align-items:center;padding:0 40px;
+  animation:navSlide .6s ease both
+}
+@keyframes navSlide{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.nav-inner{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:20px;height:20px;fill:#fff}
+.logo-text{color:#fff;font-weight:800;font-size:18px;letter-spacing:-0.3px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:600;text-decoration:none;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-icon-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-cta{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:background .2s}
+.nav-cta:hover{background:var(--orange2)}
+
+/* ─── HERO BANNER ─── */
+.sv-banner{
+  background:linear-gradient(120deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:72px 40px 80px;
+  text-align:center;
+  position:relative;
+  overflow:hidden
+}
+
+/* Animated grid overlay */
+.sv-banner::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  animation:gridDrift 20s linear infinite
+}
+@keyframes gridDrift{from{background-position:0 0}to{background-position:40px 40px}}
+
+/* Diagonal accent slash */
+.sv-banner-slash{
+  position:absolute;
+  top:-60px;right:-40px;
+  width:320px;height:320px;
+  background:linear-gradient(135deg,rgba(232,98,42,0.12),transparent);
+  border-radius:50%;
+  animation:pulse 4s ease-in-out infinite alternate
+}
+.sv-banner-slash2{
+  position:absolute;
+  bottom:-80px;left:-60px;
+  width:260px;height:260px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent);
+  border-radius:50%;
+  animation:pulse 5s ease-in-out infinite alternate-reverse
+}
+@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.15)}}
+
+/* Floating particles canvas */
+#particleCanvas{
+  position:absolute;inset:0;width:100%;height:100%;pointer-events:none
+}
+
+.sv-back{
+  position:absolute;top:24px;left:40px;
+  display:flex;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.6);font-size:13px;font-weight:700;
+  text-decoration:none;transition:all .25s;
+  animation:fadeInLeft .7s .2s ease both
+}
+.sv-back:hover{color:#fff;gap:12px}
+.sv-back i{transition:transform .25s}
+.sv-back:hover i{transform:translateX(-3px)}
+
+.sv-banner-icon{
+  width:80px;height:80px;border-radius:22px;
+  background:rgba(232,98,42,0.15);
+  border:1.5px solid rgba(232,98,42,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;color:var(--orange);
+  margin:0 auto 28px;
+  position:relative;z-index:2;
+  animation:iconPop .8s .3s cubic-bezier(.34,1.56,.64,1) both
+}
+@keyframes iconPop{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+
+/* Orbit ring around icon */
+.sv-banner-icon::after{
+  content:'';
+  position:absolute;inset:-8px;
+  border-radius:30px;
+  border:1.5px solid rgba(232,98,42,0.25);
+  animation:orbitSpin 6s linear infinite
+}
+@keyframes orbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.sv-banner-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(232,98,42,0.18);
+  border:1px solid rgba(232,98,42,0.35);
+  border-radius:20px;padding:5px 14px;
+  margin-bottom:20px;position:relative;z-index:2;
+  animation:fadeInUp .7s .4s ease both
+}
+.sv-banner-badge span{color:var(--orange);font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+
+.sv-banner h1{
+  font-family:'Playfair Display',serif;
+  color:#fff;font-size:clamp(30px,4vw,54px);
+  font-weight:800;line-height:1.12;margin-bottom:16px;
+  position:relative;z-index:2;
+  animation:fadeInUp .7s .5s ease both
+}
+.sv-banner h1 em{color:var(--orange);font-style:normal}
+.sv-banner p{
+  color:rgba(255,255,255,0.55);font-size:15px;line-height:1.8;
+  max-width:460px;margin:0 auto 32px;
+  position:relative;z-index:2;
+  animation:fadeInUp .7s .6s ease both
+}
+
+/* Step indicators */
+.sv-steps{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  position:relative;z-index:2;
+  animation:fadeInUp .7s .75s ease both
+}
+.sv-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px
+}
+.sv-step-dot{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.4);font-size:13px;font-weight:800;
+  transition:all .4s
+}
+.sv-step.active .sv-step-dot{
+  background:var(--orange);border-color:var(--orange);color:#fff;
+  box-shadow:0 0 0 4px rgba(232,98,42,0.25)
+}
+.sv-step-label{font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.5px}
+.sv-step.active .sv-step-label{color:rgba(255,255,255,0.8)}
+.sv-step-line{
+  width:60px;height:1.5px;
+  background:rgba(255,255,255,0.1);
+  margin:0 4px;margin-bottom:18px;
+  position:relative;overflow:hidden
+}
+.sv-step-line::after{
+  content:'';position:absolute;inset:0;
+  background:var(--orange);
+  transform:translateX(-100%);
+  transition:transform .6s ease
+}
+.sv-step-line.done::after{transform:translateX(0)}
+
+/* ─── FORM WRAP ─── */
+.sv-wrap{
+  max-width:800px;margin:0 auto;
+  padding:48px 24px 100px
+}
+
+/* ─── FORM CARD ─── */
+.sv-card{
+  background:#fff;border-radius:22px;
+  box-shadow:0 12px 50px rgba(0,0,0,0.1);
+  overflow:hidden;
+  animation:cardRise .8s .5s cubic-bezier(.22,1,.36,1) both
+}
+@keyframes cardRise{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.sv-card-header{
+  background:linear-gradient(90deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:22px 36px;
+  display:flex;align-items:center;gap:14px;
+  position:relative;overflow:hidden
+}
+.sv-card-header::after{
+  content:'';
+  position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(232,98,42,0.12)
+}
+.sv-card-header i{color:var(--orange);font-size:18px}
+.sv-card-header span{color:#fff;font-size:14px;font-weight:800;letter-spacing:0.3px}
+.sv-card-header .hdr-badge{
+  margin-left:auto;
+  background:rgba(232,98,42,0.2);
+  border:1px solid rgba(232,98,42,0.35);
+  border-radius:12px;padding:4px 12px;
+  color:var(--orange);font-size:10.5px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase
+}
+
+.sv-form{
+  padding:40px 36px;
+  display:flex;flex-direction:column;gap:26px
+}
+
+/* Section labels inside form */
+.form-section-label{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:800;text-transform:uppercase;
+  letter-spacing:2px;color:var(--muted);
+  opacity:0;transform:translateX(-16px);
+  transition:all .5s ease
+}
+.form-section-label.visible{opacity:1;transform:translateX(0)}
+.form-section-label::after{
+  content:'';flex:1;height:1px;background:var(--border)
+}
+.form-section-label i{color:var(--orange);font-size:13px}
+
+/* ─── FORM ROW ─── */
+.form-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px
+}
+.form-group{
+  display:flex;flex-direction:column;gap:8px;
+  opacity:0;transform:translateY(18px);
+  transition:all .5s ease
+}
+.form-group.visible{opacity:1;transform:translateY(0)}
+.form-group.full{grid-column:1/-1}
+.form-group label{
+  font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.2px;color:var(--text)
+}
+.form-group label span{color:var(--orange)}
+
+.input-wrap{
+  display:flex;align-items:center;gap:10px;
+  border:1.5px solid var(--border);
+  border-radius:11px;padding:0 14px;
+  background:#fff;
+  transition:border-color .25s,box-shadow .25s,transform .2s
+}
+.input-wrap:focus-within{
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(232,98,42,0.11);
+  transform:translateY(-1px)
+}
+.input-wrap i{color:var(--muted);font-size:14px;flex-shrink:0;transition:color .25s}
+.input-wrap:focus-within i{color:var(--orange)}
+.input-wrap input,
+.input-wrap select,
+.input-wrap textarea{
+  flex:1;border:none;outline:none;
+  font-family:'Nunito Sans',sans-serif;
+  font-size:14px;font-weight:600;
+  color:var(--text);background:transparent;
+  padding:13px 0
+}
+.input-wrap select{cursor:pointer}
+.input-wrap textarea{
+  resize:vertical;min-height:100px;
+  padding:13px 0;line-height:1.6
+}
+.input-wrap input::placeholder,
+.input-wrap textarea::placeholder{color:#c0ccd8;font-weight:400}
+
+/* ─── REGION CHIPS ─── */
+.chips-wrap{
+  opacity:0;transform:translateY(18px);
+  transition:all .5s ease
+}
+.chips-wrap.visible{opacity:1;transform:translateY(0)}
+.chips-label{
+  font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.2px;
+  color:var(--text);margin-bottom:10px;display:block
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:9px 18px;border-radius:22px;
+  font-size:12.5px;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:#fff;color:var(--muted);
+  transition:all .22s;user-select:none;
+  position:relative;overflow:hidden
+}
+.chip::after{
+  content:'';position:absolute;inset:0;
+  background:var(--navy);
+  transform:scale(0);border-radius:22px;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  z-index:0
+}
+.chip span{position:relative;z-index:1}
+.chip.selected{color:#fff;border-color:var(--navy)}
+.chip.selected::after{transform:scale(1)}
+
+/* ─── DIVIDER ─── */
+.sv-divider{border:none;border-top:1px solid var(--border);margin:4px 0}
+
+/* ─── NOTICE ─── */
+.sv-notice{
+  background:rgba(232,98,42,0.06);
+  border:1px solid rgba(232,98,42,0.2);
+  border-radius:12px;padding:16px 20px;
+  display:flex;align-items:flex-start;gap:13px;
+  opacity:0;transform:translateY(18px);
+  transition:all .5s ease
+}
+.sv-notice.visible{opacity:1;transform:translateY(0)}
+.sv-notice i{color:var(--orange);margin-top:2px;flex-shrink:0;font-size:15px}
+.sv-notice p{font-size:12.5px;color:var(--muted);line-height:1.65;font-weight:600}
+
+/* ─── SUBMIT BUTTON ─── */
+.sv-submit{
+  background:var(--navy);color:#fff;border:none;
+  border-radius:12px;padding:17px 28px;
+  font-size:15px;font-weight:800;cursor:pointer;
+  font-family:'Nunito Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  transition:background .25s,transform .2s,box-shadow .25s;
+  width:100%;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .5s ease, transform .5s ease, background .25s, box-shadow .25s
+}
+.sv-submit.visible{opacity:1;transform:translateY(0)}
+.sv-submit::before{
+  content:'';
+  position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+  animation:shimmer 2.5s infinite
+}
+@keyframes shimmer{to{left:160%}}
+.sv-submit:hover{background:var(--orange);transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,98,42,0.35)}
+.sv-submit:active{transform:translateY(0)}
+.sv-submit .btn-icon{
+  width:30px;height:30px;border-radius:8px;
+  background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:13px
+}
+
+/* ─── SUCCESS STATE ─── */
+.sv-success{
+  display:none;flex-direction:column;align-items:center;
+  text-align:center;padding:70px 40px 60px;gap:0
+}
+.sv-success.show{display:flex}
+.sv-form.hide{display:none}
+
+/* Confetti burst */
+.confetti-ring{
+  width:110px;height:110px;border-radius:50%;
+  background:rgba(16,185,129,0.08);
+  border:2px solid rgba(16,185,129,0.2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;margin-bottom:28px;
+  animation:ringPop .6s cubic-bezier(.34,1.56,.64,1) both
+}
+@keyframes ringPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.confetti-ring::before,.confetti-ring::after{
+  content:'';position:absolute;inset:-12px;border-radius:50%;
+  border:1.5px solid rgba(16,185,129,0.1);
+  animation:rippleOut 2s ease infinite
+}
+.confetti-ring::after{animation-delay:.6s}
+@keyframes rippleOut{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(1.4);opacity:0}
+}
+.success-check{
+  font-size:42px;color:#10B981;
+  animation:checkBounce .5s .3s cubic-bezier(.34,1.56,.64,1) both
+}
+@keyframes checkBounce{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(0)}}
+
+.sv-success h3{
+  font-family:'Playfair Display',serif;
+  font-size:30px;font-weight:800;color:var(--text);
+  margin-bottom:12px;
+  animation:fadeInUp .6s .4s ease both
+}
+.sv-success > p{
+  font-size:14.5px;color:var(--muted);
+  line-height:1.75;max-width:380px;
+  margin-bottom:32px;
+  animation:fadeInUp .6s .5s ease both
+}
+.success-cards{
+  display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap;justify-content:center;
+  animation:fadeInUp .6s .6s ease both
+}
+.success-card{
+  background:var(--light);border:1px solid var(--border);
+  border-radius:12px;padding:14px 20px;
+  display:flex;align-items:center;gap:10px;
+  font-size:12.5px;font-weight:700;color:var(--text)
+}
+.success-card i{color:var(--orange);font-size:16px}
+.sv-success a{
+  background:var(--navy);color:#fff;
+  border-radius:11px;padding:14px 32px;
+  font-size:14px;font-weight:800;
+  text-decoration:none;display:inline-flex;
+  align-items:center;gap:10px;
+  transition:background .2s,transform .2s;
+  animation:fadeInUp .6s .7s ease both
+}
+.sv-success a:hover{background:var(--orange);transform:translateY(-2px)}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  .form-row{grid-template-columns:1fr}
+  .sv-form{padding:28px 20px}
+  .sv-card-header{padding:16px 20px}
+  .sv-banner{padding:64px 24px 48px}
+  .sv-back{left:20px}
+  .sv-steps{gap:0}
+  .sv-step-line{width:32px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg>
+      </div>
+      <div class="logo-text">O.B Kingsland</div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#featured">Featured</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#about">About</a>
+      <a href="listings.html">Listings</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-icon-btn"><i class="fas fa-bell"></i></button>
+      <button class="nav-icon-btn color-mode-toggle" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
+      <button class="nav-cta">＋ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="sv-banner">
+  <canvas id="particleCanvas"></canvas>
+  <div class="sv-banner-slash"></div>
+  <div class="sv-banner-slash2"></div>
+
+  <a href="index.html" class="sv-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+  <div class="sv-banner-badge"><span><i class="fas fa-star" style="margin-right:5px"></i> Completely Free Service</span></div>
+  <div class="sv-banner-icon"><i class="fas fa-car"></i></div>
+  <h1>Book a <em>Free</em> Site Visit</h1>
+  <p>Our team will drive you to any plot — at zero cost. Fill in the form below and we'll confirm your visit within 24 hours.</p>
+
+  <!-- Progress Steps -->
+  <div class="sv-steps">
+    <div class="sv-step active">
+      <div class="sv-step-dot">1</div>
+      <div class="sv-step-label">Fill Form</div>
+    </div>
+    <div class="sv-step-line" id="line1"></div>
+    <div class="sv-step active" id="step2">
+      <div class="sv-step-dot">2</div>
+      <div class="sv-step-label">We Call You</div>
+    </div>
+    <div class="sv-step-line" id="line2"></div>
+    <div class="sv-step" id="step3">
+      <div class="sv-step-dot">3</div>
+      <div class="sv-step-label">Visit Site</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM WRAP -->
+<div class="sv-wrap">
+  <div class="sv-card">
+
+    <div class="sv-card-header">
+      <i class="fas fa-clipboard-list"></i>
+      <span>Site Visit Request Form — Fields marked * are required</span>
+      <div class="hdr-badge">Free</div>
+    </div>
+
+    <!-- FORM -->
+    <form class="sv-form" id="svForm" onsubmit="submitSVForm(event)">
+
+      <!-- Personal Info Section -->
+      <div class="form-section-label" data-animate>
+        <i class="fas fa-user-circle"></i> Personal Information
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" data-animate>
+          <label>Full Name <span>*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="e.g. Kwame Mensah" required>
+          </div>
+        </div>
+        <div class="form-group" data-animate>
+          <label>Phone Number <span>*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-phone"></i>
+            <input type="tel" placeholder="e.g. 0244 000 000" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" data-animate>
+          <label>Email Address <span>*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+        <div class="form-group" data-animate>
+          <label>Preferred Visit Date <span>*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-calendar-alt"></i>
+            <input type="date" required>
+          </div>
+        </div>
+      </div>
+
+      <hr class="sv-divider">
+
+      <!-- Plot Section -->
+      <div class="form-section-label" data-animate>
+        <i class="fas fa-map-marked-alt"></i> Plot Details
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" data-animate>
+          <label>Land Type <span>*</span></label>
+          <div class="input-wrap">
+            <i class="fas fa-layer-group"></i>
+            <select required>
+              <option value="" disabled selected>Select land type</option>
+              <option>Residential</option>
+              <option>Commercial</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" data-animate>
+          <label>Budget Range (GHS)</label>
+          <div class="input-wrap">
+            <i class="fas fa-coins"></i>
+            <select>
+              <option value="" disabled selected>Select range</option>
+              <option>Under 50,000</option>
+              <option>50,000 – 150,000</option>
+              <option>150,000 – 400,000</option>
+              <option>400,000 – 800,000</option>
+              <option>Above 800,000</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Region Chips -->
+      <div class="chips-wrap" data-animate>
+        <span class="chips-label">Preferred Region(s) <span style="color:var(--orange)">*</span></span>
+        <div class="chips" id="regionChips">
+          <div class="chip" onclick="toggleChip(this)"><span>Greater Accra</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Ashanti</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Western</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Eastern</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Volta</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Northern</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Central</span></div>
+          <div class="chip" onclick="toggleChip(this)"><span>Bono</span></div>
+        </div>
+      </div>
+
+      <hr class="sv-divider">
+
+      <!-- Extra -->
+      <div class="form-section-label" data-animate>
+        <i class="fas fa-info-circle"></i> Additional Info
+      </div>
+
+      <div class="form-group full" data-animate>
+        <label>Specific Plot ID or Listing (if known)</label>
+        <div class="input-wrap">
+          <i class="fas fa-map-pin"></i>
+          <input type="text" placeholder="e.g. Lakeside Residential Plot – Prampram">
+        </div>
+      </div>
+
+      <div class="form-group full" data-animate>
+        <label>Additional Notes or Questions</label>
+        <div class="input-wrap">
+          <i class="fas fa-comment-alt" style="align-self:flex-start;margin-top:14px"></i>
+          <textarea placeholder="Any special requirements, accessibility needs, or questions for our agent…"></textarea>
+        </div>
+      </div>
+
+      <!-- Notice -->
+      <div class="sv-notice" data-animate>
+        <i class="fas fa-info-circle"></i>
+        <p>Site visits are <strong>completely free of charge</strong>. Our agent will call you within <strong>24 hours</strong> to confirm your booking and arrange transport if needed. Visit times are available <strong>Mon–Sat, 8am–5pm</strong>.</p>
+      </div>
+
+      <button type="submit" class="sv-submit" data-animate>
+        <div class="btn-icon"><i class="fas fa-paper-plane"></i></div>
+        <span>Submit Visit Request</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+
+    </form>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="sv-success" id="svSuccess">
+      <div class="confetti-ring">
+        <i class="fas fa-check success-check"></i>
+      </div>
+      <h3>You're All Set!</h3>
+      <p>Your free site visit request has been received. Our team will call you within 24 hours to confirm and arrange everything.</p>
+      <div class="success-cards">
+        <div class="success-card"><i class="fas fa-clock"></i> Within 24 hrs</div>
+        <div class="success-card"><i class="fas fa-car"></i> Free Transport</div>
+        <div class="success-card"><i class="fas fa-user-tie"></i> Dedicated Agent</div>
+      </div>
+      <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── PARTICLES ── */
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, dots = [];
+
+  function resize(){
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for(let i=0;i<55;i++){
+    dots.push({
+      x: Math.random()*1400,
+      y: Math.random()*500,
+      r: Math.random()*2+0.5,
+      vx: (Math.random()-.5)*0.4,
+      vy: (Math.random()-.5)*0.3,
+      alpha: Math.random()*0.5+0.1
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    dots.forEach(d=>{
+      ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(232,98,42,${d.alpha})`;
+      ctx.fill();
+      d.x += d.vx; d.y += d.vy;
+      if(d.x<0||d.x>W) d.vx*=-1;
+      if(d.y<0||d.y>H) d.vy*=-1;
+    });
+
+    // Draw connecting lines
+    dots.forEach((a,i)=>{
+      dots.slice(i+1).forEach(b=>{
+        const dist = Math.hypot(a.x-b.x,a.y-b.y);
+        if(dist<110){
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=`rgba(232,98,42,${0.07*(1-dist/110)})`;
+          ctx.lineWidth=0.8;
+          ctx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach((entry, i)=>{
+    if(entry.isIntersecting){
+      setTimeout(()=>{
+        entry.target.classList.add('visible');
+      }, 80);
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+
+document.querySelectorAll('[data-animate]').forEach((el,i)=>{
+  observer.observe(el);
+});
+
+/* Stagger siblings in same row */
+document.querySelectorAll('.form-row').forEach(row=>{
+  row.querySelectorAll('[data-animate]').forEach((el,i)=>{
+    el.style.transitionDelay = (i*0.08)+'s';
+  });
+});
+
+/* ── CHIPS ── */
+function toggleChip(el){
+  el.classList.toggle('selected');
+}
+
+/* ── SUBMIT ── */
+async function submitSVForm(e) {
+  e.preventDefault();
+
+  const selected = document.querySelectorAll('.chip.selected');
+  if (selected.length === 0) { shakeNotice(); return; }
+
+  const btn = document.querySelector('.sv-submit');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:18px"></i><span>Submitting…</span>';
+  btn.style.background = 'var(--orange)';
+  btn.disabled = true;
+
+  /* Collect all form fields by ID so order changes won't break anything */
+  const fullName  = document.getElementById('svFullName')  ? document.getElementById('svFullName').value.trim()  : document.querySelectorAll('.sv-form input')[0].value.trim();
+  const phone     = document.getElementById('svPhone')     ? document.getElementById('svPhone').value.trim()     : document.querySelectorAll('.sv-form input')[1].value.trim();
+  const email     = document.getElementById('svEmail')     ? document.getElementById('svEmail').value.trim()     : document.querySelectorAll('.sv-form input[type="email"]')[0].value.trim();
+  const visitDate = document.getElementById('svVisitDate') ? document.getElementById('svVisitDate').value        : document.querySelectorAll('.sv-form input[type="date"]')[0].value;
+  const landType  = document.getElementById('svLandType')  ? document.getElementById('svLandType').value         : document.querySelectorAll('.sv-form select')[0].value;
+  const budget    = document.getElementById('svBudget')    ? document.getElementById('svBudget').value           : (document.querySelectorAll('.sv-form select')[1] || {}).value || '';
+  const plotId    = document.getElementById('svPlotId')    ? document.getElementById('svPlotId').value.trim()    : '';
+  const notes     = document.getElementById('svNotes')     ? document.getElementById('svNotes').value.trim()     : '';
+  const regions   = [...document.querySelectorAll('.chip.selected')].map(c => c.querySelector('span') ? c.querySelector('span').textContent.trim() : c.textContent.trim());
+
+  try {
+    /* POST to the real backend — no localStorage involved */
+    const res  = await fetch(`${typeof API_BASE !== 'undefined' ? API_BASE : 'http://localhost:5000/api'}/site-visits`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ fullName, phone, email, visitDate, landType, budget, plotId, notes, regions }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Submission failed');
+
+    /* ── Success: animate steps then show success screen ── */
+    setTimeout(() => {
+      document.getElementById('line1').classList.add('done');
+      document.getElementById('line2').classList.add('done');
+      document.getElementById('step3').classList.add('active');
+    }, 600);
+    setTimeout(() => {
+      document.getElementById('svForm').classList.add('hide');
+      document.getElementById('svSuccess').classList.add('show');
+    }, 1600);
+
+  } catch (err) {
+    /* Reset button and show inline error */
+    btn.innerHTML = '<div class="btn-icon"><i class="fas fa-paper-plane"></i></div><span>Submit Visit Request</span><i class="fas fa-arrow-right"></i>';
+    btn.style.background = '';
+    btn.disabled = false;
+
+    /* Show error in the notice box */
+    const notice = document.querySelector('.sv-notice p');
+    if (notice) {
+      const orig = notice.innerHTML;
+      notice.innerHTML = `<span style="color:#EF4444;font-weight:800">⚠ ${err.message || 'Submission failed. Please try again.'}</span>`;
+      setTimeout(() => { notice.innerHTML = orig; }, 5000);
+    }
+  }
+}
+
+function shakeNotice(){
+  const notice = document.querySelector('.sv-notice');
+  notice.style.animation='shake .4s ease';
+  notice.style.borderColor='var(--orange)';
+  notice.style.background='rgba(232,98,42,0.12)';
+  setTimeout(()=>{
+    notice.style.animation='';
+    notice.style.borderColor='';
+    notice.style.background='';
+  },600);
+}
+
+/* Shake keyframe via JS */
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}`;
+document.head.appendChild(shakeStyle);
+</script>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-modal-overlay" id="adminModalOverlay">
+  <div class="admin-modal" id="adminModal">
+    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
+
+    <div class="admin-modal-left">
+      <div class="aml-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+        <span class="logo-text">O.B Kingsland</span>
+      </div>
+      <h2>Admin <em>Portal</em></h2>
+      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
+      <div class="aml-features">
+        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
+        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
+        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
+      </div>
+    </div>
+
+    <div class="admin-modal-right">
+      <div class="amr-header">
+        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your administrator credentials</p>
+      </div>
+
+      <form class="admin-form" onsubmit="handleAdminLogin(event)">
+        <div class="af-group">
+          <label>Email Address</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="admin@obkingsland.gh" required>
+          </div>
+        </div>
+        <div class="af-group">
+          <label>Password</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
+            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
+          </div>
+        </div>
+        <div class="af-row">
+          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
+          <a href="#" class="af-forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="af-submit">
+          <span>Sign In to Dashboard</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="af-error" id="afError"></div>
+      </form>
+
+      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
+    </div>
+  </div>
+</div>
+<script src="api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
