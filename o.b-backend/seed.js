@@ -42,8 +42,8 @@ const seed = async () => {
       console.log(`ℹ️  Admin already exists: ${existingAdmin.email}`);
     } else {
       await Admin.create({
-        email:    process.env.ADMIN_EMAIL    || 'admin@obkingsland.gh',
-        password: process.env.ADMIN_PASSWORD || 'admin123',
+        email:    process.env.ADMIN_EMAIL    || 'yussifdaa@gmail.com',
+        password: process.env.ADMIN_PASSWORD || '05938Dyy',
         name:     'O.B Kingsland Admin',
       });
       console.log(`✅ Admin created: ${process.env.ADMIN_EMAIL}`);
