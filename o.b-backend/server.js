@@ -24,10 +24,13 @@ app.set('trust proxy', 1);
 app.use(helmet());
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:3000',
+  process.env.FRONTEND_URL,
+  'https://o-bkingsland.pages.dev',
+  'https://o-b-website.onrender.com',
   'http://127.0.0.1:5500',
   'http://localhost:5500',
-];
+  'http://localhost:3000',
+].filter(Boolean);
 
 app.use(
   cors({

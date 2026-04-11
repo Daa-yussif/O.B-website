@@ -35,6 +35,10 @@ const sampleListings = [
 ];
 
 const seed = async () => {
+  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+    console.error('❌ ADMIN_EMAIL and ADMIN_PASSWORD must be set in env vars before running seed.js');
+    process.exit(1);
+  }
   await connectDB();
   try {
     const existingAdmin = await Admin.findOne({ email: process.env.ADMIN_EMAIL });
@@ -42,8 +46,8 @@ const seed = async () => {
       console.log(`ℹ️  Admin already exists: ${existingAdmin.email}`);
     } else {
       await Admin.create({
-        email:    process.env.ADMIN_EMAIL    || 'yussifdaa@gmail.com',
-        password: process.env.ADMIN_PASSWORD || '05938Dyy',
+        email:    process.env.ADMIN_EMAIL,
+        password: process.env.ADMIN_PASSWORD,
         name:     'O.B Kingsland Admin',
       });
       console.log(`✅ Admin created: ${process.env.ADMIN_EMAIL}`);

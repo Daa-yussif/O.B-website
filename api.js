@@ -1,4 +1,4 @@
-const API_BASE = 'https://o-b-backend.onrender.com/api';
+const API_BASE = 'https://o-b-website.onrender.com/api';
 
 function getToken() {
   return localStorage.getItem('obk_token') || '';
