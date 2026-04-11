@@ -761,61 +761,57 @@ function toggleChip(el){
 }
 
 /* ── SUBMIT ── */
-async function submitSVForm(e) {
+async function submitSVForm(e){
   e.preventDefault();
-
   const selected = document.querySelectorAll('.chip.selected');
-  if (selected.length === 0) { shakeNotice(); return; }
+  if(selected.length===0){ shakeNotice(); return; }
 
   const btn = document.querySelector('.sv-submit');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:18px"></i><span>Submitting…</span>';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:18px"></i><span>Submitting...</span>';
   btn.style.background = 'var(--orange)';
   btn.disabled = true;
 
-  /* Collect all form fields by ID so order changes won't break anything */
-  const fullName  = document.getElementById('svFullName')  ? document.getElementById('svFullName').value.trim()  : document.querySelectorAll('.sv-form input')[0].value.trim();
-  const phone     = document.getElementById('svPhone')     ? document.getElementById('svPhone').value.trim()     : document.querySelectorAll('.sv-form input')[1].value.trim();
-  const email     = document.getElementById('svEmail')     ? document.getElementById('svEmail').value.trim()     : document.querySelectorAll('.sv-form input[type="email"]')[0].value.trim();
-  const visitDate = document.getElementById('svVisitDate') ? document.getElementById('svVisitDate').value        : document.querySelectorAll('.sv-form input[type="date"]')[0].value;
-  const landType  = document.getElementById('svLandType')  ? document.getElementById('svLandType').value         : document.querySelectorAll('.sv-form select')[0].value;
-  const budget    = document.getElementById('svBudget')    ? document.getElementById('svBudget').value           : (document.querySelectorAll('.sv-form select')[1] || {}).value || '';
-  const plotId    = document.getElementById('svPlotId')    ? document.getElementById('svPlotId').value.trim()    : '';
-  const notes     = document.getElementById('svNotes')     ? document.getElementById('svNotes').value.trim()     : '';
+  /* Collect inputs by position — same order as the form HTML */
+  const inputs   = document.querySelectorAll('.sv-form input, .sv-form select, .sv-form textarea');
+  const fullName  = inputs[0].value.trim();
+  const phone     = inputs[1].value.trim();
+  const email     = inputs[2].value.trim();
+  const visitDate = inputs[3].value;
+  const landType  = inputs[4].value;
+  const budget    = inputs[5] ? inputs[5].value : '';
+  const plotId    = inputs[6] ? inputs[6].value.trim() : '';
+  const notes     = inputs[7] ? inputs[7].value.trim() : '';
   const regions   = [...document.querySelectorAll('.chip.selected')].map(c => c.querySelector('span') ? c.querySelector('span').textContent.trim() : c.textContent.trim());
 
   try {
-    /* POST to the real backend — no localStorage involved */
-    const res  = await fetch(`${typeof API_BASE !== 'undefined' ? API_BASE : 'https://o-b-backend.onrender.com/api'}/site-visits`, {
+    const res  = await fetch('https://o-b-backend.onrender.com/api/site-visits', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ fullName, phone, email, visitDate, landType, budget, plotId, notes, regions }),
+      headers: {'Content-Type':'application/json'},
+      body:    JSON.stringify({fullName, phone, email, visitDate, landType, budget, plotId, notes, regions}),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Submission failed');
+    if(!res.ok) throw new Error(data.message||'Submission failed');
 
-    /* ── Success: animate steps then show success screen ── */
-    setTimeout(() => {
+    /* Animate steps then show success */
+    setTimeout(()=>{
       document.getElementById('line1').classList.add('done');
       document.getElementById('line2').classList.add('done');
       document.getElementById('step3').classList.add('active');
     }, 600);
-    setTimeout(() => {
+    setTimeout(()=>{
       document.getElementById('svForm').classList.add('hide');
       document.getElementById('svSuccess').classList.add('show');
     }, 1600);
 
-  } catch (err) {
-    /* Reset button and show inline error */
+  } catch(err){
     btn.innerHTML = '<div class="btn-icon"><i class="fas fa-paper-plane"></i></div><span>Submit Visit Request</span><i class="fas fa-arrow-right"></i>';
     btn.style.background = '';
     btn.disabled = false;
-
-    /* Show error in the notice box */
     const notice = document.querySelector('.sv-notice p');
-    if (notice) {
+    if(notice){
       const orig = notice.innerHTML;
-      notice.innerHTML = `<span style="color:#EF4444;font-weight:800">⚠ ${err.message || 'Submission failed. Please try again.'}</span>`;
-      setTimeout(() => { notice.innerHTML = orig; }, 5000);
+      notice.innerHTML = `<span style="color:#EF4444;font-weight:800">&#9888; ${err.message||'Submission failed. Please try again.'}</span>`;
+      setTimeout(()=>{ notice.innerHTML = orig; }, 5000);
     }
   }
 }
