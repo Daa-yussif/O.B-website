@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="nav.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -152,6 +153,125 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 
 @media(max-width:960px){.cards-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.cards-grid{grid-template-columns:1fr}.listings-banner{padding:60px 20px 56px}.filter-bar{padding:14px 20px}.listings-main{padding:28px 16px 80px}nav{padding:0 20px}.nav-links{display:none}}
+
+/* ══ LISTING DETAIL MODAL ══════════════════════════════════════════ */
+.ldm-overlay{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(13,27,42,0.85);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;pointer-events:none;
+  transition:opacity .3s ease
+}
+.ldm-overlay.open{opacity:1;pointer-events:all}
+.ldm-box{
+  background:#fff;border-radius:22px;overflow:hidden;
+  max-width:860px;width:100%;max-height:90vh;overflow-y:auto;
+  transform:translateY(30px) scale(0.97);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  position:relative
+}
+.ldm-overlay.open .ldm-box{transform:translateY(0) scale(1)}
+
+/* Image section */
+.ldm-img-wrap{
+  position:relative;height:360px;background:var(--light);
+  overflow:hidden;cursor:zoom-in;flex-shrink:0
+}
+.ldm-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ldm-img-wrap:hover img{transform:scale(1.04)}
+.ldm-img-placeholder{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#e8edf2,#d0d8e0);color:#9bb0c4;font-size:64px
+}
+.ldm-badge{
+  position:absolute;top:18px;left:18px;
+  font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 12px;border-radius:7px;color:#fff
+}
+.ldm-close{
+  position:absolute;top:14px;right:14px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(0,0,0,0.45);color:#fff;border:none;
+  cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:2
+}
+.ldm-close:hover{background:rgba(0,0,0,0.7)}
+
+/* Image lightbox fullscreen */
+.ldm-fullscreen{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,0.95);
+  display:flex;align-items:center;justify-content:center;
+  cursor:zoom-out
+}
+.ldm-fullscreen img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px}
+.ldm-fs-close{
+  position:absolute;top:16px;right:16px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,0.15);color:#fff;border:none;
+  cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center
+}
+
+/* Content */
+.ldm-content{padding:28px 32px 32px}
+.ldm-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px}
+.ldm-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--text);line-height:1.2}
+.ldm-price-wrap{text-align:right;flex-shrink:0}
+.ldm-price{font-size:22px;font-weight:800;color:var(--orange)}
+.ldm-price-unit{font-size:12px;color:var(--muted);font-weight:600}
+.ldm-meta{display:flex;align-items:center;gap:14px;margin:10px 0 20px;flex-wrap:wrap}
+.ldm-meta-item{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--muted);font-weight:700}
+.ldm-meta-item i{color:var(--orange);font-size:12px}
+
+.ldm-divider{height:1px;background:var(--border);margin:18px 0}
+
+.ldm-section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px}
+.ldm-desc{font-size:14px;color:var(--text);line-height:1.8}
+
+.ldm-features{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.ldm-feat{
+  display:flex;align-items:center;gap:7px;
+  background:var(--light);border:1.5px solid var(--border);
+  border-radius:9px;padding:8px 14px;
+  font-size:12px;font-weight:700;color:var(--text)
+}
+.ldm-feat i{color:var(--orange);font-size:13px}
+.ldm-feat.yes{border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.06)}
+.ldm-feat.yes i{color:#10B981}
+
+.ldm-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.ldm-info-item{background:var(--light);border-radius:10px;padding:12px 16px}
+.ldm-info-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px}
+.ldm-info-val{font-size:14px;font-weight:700;color:var(--text)}
+
+.ldm-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.ldm-btn-primary{
+  flex:1;background:var(--orange);color:#fff;border:none;
+  border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:'Nunito Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .25s;text-decoration:none
+}
+.ldm-btn-primary:hover{background:#c95520;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,98,42,0.35)}
+.ldm-btn-secondary{
+  flex:1;background:#fff;color:var(--navy);
+  border:1.5px solid var(--border);
+  border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:'Nunito Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .25s;text-decoration:none
+}
+.ldm-btn-secondary:hover{border-color:var(--navy);background:var(--navy);color:#fff}
+
+@media(max-width:600px){
+  .ldm-img-wrap{height:240px}
+  .ldm-content{padding:20px}
+  .ldm-top{flex-direction:column;gap:6px}
+  .ldm-price-wrap{text-align:left}
+  .ldm-info-grid{grid-template-columns:1fr}
+  .ldm-title{font-size:20px}
+  .ldm-actions{flex-direction:column}
+}
 </style>
 </head>
 <body>
@@ -283,7 +403,85 @@ function renderCard(listing, delay){
 
 function viewListing(id){
   const l = allListings.find(x=>(x._id||x.id)===id);
-  if(l) alert(`📍 ${l.title}\n📌 ${l.location}${l.region?', '+l.region:''}\n💰 GHS ${Number(l.price).toLocaleString()} /${l.priceUnit||'plot'}\n📐 ${l.size||'N/A'}\n\n${l.description||''}`);
+  if(!l) return;
+  openListingModal(l);
+}
+
+function openListingModal(l){
+  const badges = {hot:'badge-hot',new:'badge-new',available:'badge-avail',sold:'badge-sold'};
+  const badgeTxt = {hot:'Hot Deal',new:'New',available:'Available',sold:'Sold'};
+  const featList = [
+    {icon:'fa-map',       label:'GPS Surveyed',  on: l.surveyed},
+    {icon:'fa-scroll',    label:'Title Deed',     on: l.titleDeed},
+    {icon:'fa-tint',      label:'Water Source',   on: l.water},
+  ];
+
+  const imgSection = l.imageUrl
+    ? `<div class="ldm-img-wrap" onclick="openLightbox('${l.imageUrl}')">
+         <img src="${l.imageUrl}" alt="${l.title}">
+         <span style="position:absolute;bottom:14px;right:14px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;pointer-events:none">
+           <i class="fas fa-search-plus"></i> Tap to zoom
+         </span>
+       </div>`
+    : `<div class="ldm-img-wrap" style="cursor:default"><div class="ldm-img-placeholder"><i class="fas fa-image"></i></div></div>`;
+
+  const modal = document.getElementById('listingDetailModal');
+  modal.querySelector('.ldm-img-section').innerHTML =
+    imgSection +
+    `<span class="lcard-badge ${badges[l.status]||'badge-avail'}" style="position:absolute;top:18px;left:18px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:7px;color:#fff">
+       ${badgeTxt[l.status]||'Available'}
+     </span>
+     <button class="ldm-close" onclick="closeListingModal()"><i class="fas fa-times"></i></button>`;
+
+  modal.querySelector('.ldm-title').textContent = l.title;
+  modal.querySelector('.ldm-price').textContent = 'GHS ' + Number(l.price).toLocaleString();
+  modal.querySelector('.ldm-price-unit').textContent = 'per ' + (l.priceUnit||'plot');
+
+  const typeColor = l.type==='Commercial' ? '#10B981' : '#3B82F6';
+  modal.querySelector('.ldm-meta').innerHTML = `
+    <span class="ldm-meta-item" style="background:${typeColor}15;color:${typeColor};border-radius:5px;padding:3px 9px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase">${l.type}</span>
+    <span class="ldm-meta-item"><i class="fas fa-map-marker-alt"></i> ${l.location}${l.region?', '+l.region:''}</span>
+    ${l.size ? `<span class="ldm-meta-item"><i class="fas fa-ruler-combined"></i> ${l.size}</span>` : ''}
+  `;
+
+  modal.querySelector('.ldm-desc').textContent = l.description || 'No description provided.';
+
+  modal.querySelector('.ldm-features').innerHTML = featList.map(f =>
+    `<div class="ldm-feat ${f.on?'yes':''}">
+       <i class="fas ${f.icon}"></i>
+       ${f.label}
+       ${f.on ? '<i class="fas fa-check" style="color:#10B981;margin-left:2px;font-size:10px"></i>' : '<i class="fas fa-times" style="color:#ccc;margin-left:2px;font-size:10px"></i>'}
+     </div>`
+  ).join('');
+
+  const posted = l.createdAt ? new Date(l.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}) : 'N/A';
+  modal.querySelector('.ldm-info-grid').innerHTML = `
+    <div class="ldm-info-item"><div class="ldm-info-label">Plot Size</div><div class="ldm-info-val">${l.size||'N/A'}</div></div>
+    <div class="ldm-info-item"><div class="ldm-info-label">Land Type</div><div class="ldm-info-val">${l.type}</div></div>
+    <div class="ldm-info-item"><div class="ldm-info-label">Region</div><div class="ldm-info-val">${l.region||'N/A'}</div></div>
+    <div class="ldm-info-item"><div class="ldm-info-label">Date Listed</div><div class="ldm-info-val">${posted}</div></div>
+  `;
+
+  modal.querySelector('.ldm-visit-btn').href = 'site-visit.html';
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeListingModal(){
+  document.getElementById('listingDetailModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openLightbox(src){
+  const fs = document.getElementById('ldmFullscreen');
+  fs.querySelector('img').src = src;
+  fs.style.display = 'flex';
+}
+function closeLightbox(){
+  const fs = document.getElementById('ldmFullscreen');
+  fs.style.display = 'none';
+  fs.querySelector('img').src = '';
 }
 function toggleWish(btn){ btn.classList.toggle('liked'); }
 
@@ -395,7 +593,52 @@ async function loadListingsFromAPI(){
 }
 
 loadListingsFromAPI();
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeListingModal(); closeLightbox(); } });
 </script>
+
+<!-- LISTING DETAIL MODAL -->
+<div class="ldm-overlay" id="listingDetailModal" onclick="if(event.target===this)closeListingModal()">
+  <div class="ldm-box">
+    <div class="ldm-img-section" style="position:relative"></div>
+    <div class="ldm-content">
+      <div class="ldm-top">
+        <div class="ldm-title"></div>
+        <div class="ldm-price-wrap">
+          <div class="ldm-price"></div>
+          <div class="ldm-price-unit"></div>
+        </div>
+      </div>
+      <div class="ldm-meta"></div>
+
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Description</div>
+      <div class="ldm-desc"></div>
+
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Features & Documents</div>
+      <div class="ldm-features"></div>
+
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Plot Details</div>
+      <div class="ldm-info-grid"></div>
+
+      <div class="ldm-actions">
+        <a href="site-visit.html" class="ldm-btn-primary ldm-visit-btn">
+          <i class="fas fa-car"></i> Book a Free Site Visit
+        </a>
+        <a href="tel:+233555038144" class="ldm-btn-secondary">
+          <i class="fas fa-phone"></i> Call Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="ldmFullscreen" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;cursor:zoom-out" onclick="closeLightbox()">
+  <button class="ldm-fs-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img src="" alt="Full view" style="max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px">
+</div>
 
 <!-- ADMIN LOGIN MODAL -->
 <div class="admin-modal-overlay" id="adminModalOverlay">
@@ -455,6 +698,7 @@ loadListingsFromAPI();
   </div>
 </div>
 <script src="api.js"></script>
+<script src="nav.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
