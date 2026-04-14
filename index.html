@@ -9,89 +9,49 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="nav.css">
+<style>
+/* HERO clear bg + readable overlay */
+.hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg-img{position:absolute;inset:0;background:url('img/land pic.jpg') center/cover no-repeat;opacity:1}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(105deg,rgba(13,27,42,0.88) 0%,rgba(13,27,42,0.70) 45%,rgba(13,27,42,0.30) 100%)}
+@media(max-width:640px){
+  .hero-bg{background:linear-gradient(180deg,rgba(13,27,42,0.78) 0%,rgba(13,27,42,0.65) 55%,rgba(13,27,42,0.82) 100%)}
+  .hero h1{text-shadow:0 2px 18px rgba(0,0,0,0.55)}
+  .hero p{text-shadow:0 1px 8px rgba(0,0,0,0.4)}
+}
+/* type card links */
+a.type-card-link{text-decoration:none;display:block}
+/* slider */
+.listings-slider-wrap{position:relative}
+.slider-dots{display:none;justify-content:center;gap:8px;margin-top:18px}
+.sdot{width:8px;height:8px;border-radius:50%;background:#E2E8F0;cursor:pointer;transition:all .25s;border:none;padding:0}
+.sdot.active{background:#E8622A;width:22px;border-radius:4px}
+@media(max-width:640px){
+  /* Slider: full-width snap scroll, same as listings page products */
+  .listings-slider-wrap{overflow:hidden}
+  .listings-grid{
+    display:flex!important;
+    flex-direction:row!important;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:0;
+    padding-bottom:4px;
+  }
+  .listings-grid::-webkit-scrollbar{display:none}
+  .listings-grid .land-card{
+    flex:0 0 88vw;
+    min-width:88vw;
+    scroll-snap-align:center;
+    margin-right:12px;
+  }
+  .listings-grid .land-card:last-child{margin-right:0}
+  .slider-dots{display:flex}
+}
+</style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg>
-      </div>
-      <div class="logo-text">O.B Kingsland</div>
-    </a>
-    <div class="nav-links">
-      <a href="#">Home </a>
-      <a href="#featured">Featured </a>
-      <a href="#locations">Locations </a>
-      <a href="#about">About </a>
-      <a href="listings.html">Listings </a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="nav-right">
-      <button class="nav-icon-btn color-mode-toggle" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
-      <button class="nav-cta">＋ Admin</button>
-    </div>
-  </div>
-</nav>
-<!-- ADMIN LOGIN MODAL -->
-<div class="admin-modal-overlay" id="adminModalOverlay">
-  <div class="admin-modal" id="adminModal">
-    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
-
-    <div class="admin-modal-left">
-      <div class="aml-logo">
-        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
-        <span class="logo-text">O.B Kingsland</span>
-      </div>
-      <h2>Admin <em>Portal</em></h2>
-      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
-      <div class="aml-features">
-        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
-        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
-        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
-      </div>
-    </div>
-
-    <div class="admin-modal-right">
-      <div class="amr-header">
-        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
-        <h3>Sign In</h3>
-        <p>Enter your administrator credentials</p>
-      </div>
-
-      <form class="admin-form" onsubmit="handleAdminLogin(event)">
-        <div class="af-group">
-          <label>Email Address</label>
-          <div class="af-input-wrap">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="admin@obkingsland.gh" required>
-          </div>
-        </div>
-        <div class="af-group">
-          <label>Password</label>
-          <div class="af-input-wrap">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
-            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
-          </div>
-        </div>
-        <div class="af-row">
-          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
-          <a href="#" class="af-forgot">Forgot password?</a>
-        </div>
-        <button type="submit" class="af-submit">
-          <span>Sign In to Dashboard</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-        <div class="af-error" id="afError"></div>
-      </form>
-
-      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
-    </div>
-  </div>
-</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -101,37 +61,33 @@
     <div class="hero-badge" data-aos="fade-right" data-aos-delay="200"><span><i class="fas fa-globe"></i> Ghana's #1 Land Marketplace</span></div>
     <h1>Find Your <em>Perfect</em><br>Plot of Land.</h1>
     <p>Verified titles, GPS-surveyed plots, across all regions. Residential and commercial land — all in one place.</p>
-
-    <!-- Search Box -->
     <div class="search-box">
       <div class="search-tabs">
-        <button class="stab active">Residential</button>
-        <button class="stab">Commercial</button>
-      
+        <button class="stab active" data-type="Residential">Residential</button>
+        <button class="stab" data-type="Commercial">Commercial</button>
       </div>
       <div class="search-fields">
         <div class="sfield">
           <label>Keyword</label>
-          <input type="text" placeholder="Search location or ID...">
+          <input type="text" id="heroSearchInput" placeholder="Search location or ID...">
         </div>
         <div class="sdivider"></div>
         <div class="sfield">
           <label>Land Type</label>
-          <select><option>Select Type</option><option>Residential</option><option>Commercial</option></select>
+          <select id="heroTypeSelect"><option value="">Select Type</option><option value="Residential">Residential</option><option value="Commercial">Commercial</option></select>
         </div>
         <div class="sdivider"></div>
         <div class="sfield">
           <label>Region</label>
-          <select><option>All Regions</option><option>Greater Accra</option><option>Ashanti</option><option>Western</option><option>Eastern</option><option>Volta</option><option>Northern</option></select>
+          <select id="heroRegionSelect"><option value="">All Regions</option><option>Greater Accra</option><option>Ashanti</option><option>Western</option><option>Eastern</option><option>Volta</option><option>Northern</option></select>
         </div>
-        <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+        <button class="search-btn" onclick="heroSearch()"><i class="fas fa-search"></i> <span class="search-btn-text">Search</span></button>
       </div>
     </div>
-
     <div class="quick-links">
-      <div class="quick-link">Commercial <span class="arrow"><i class="fas fa-arrow-right"></i></span></div>
-      <div class="quick-link">Prime Plots <span class="arrow"><i class="fas fa-arrow-right"></i></span></div>
-      <div class="quick-link">Corner Plots <span class="arrow"><i class="fas fa-arrow-right"></i></span></div>
+      <a href="listings.html?type=Commercial" class="quick-link" style="text-decoration:none">Commercial <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+      <a href="listings.html" class="quick-link" style="text-decoration:none">Prime Plots <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
+      <a href="listings.html" class="quick-link" style="text-decoration:none">Corner Plots <span class="arrow"><i class="fas fa-arrow-right"></i></span></a>
     </div>
   </div>
 </section>
@@ -142,21 +98,17 @@
     <span class="section-label" data-aos="fade-right" data-aos-delay="100">Land By Category</span>
     <h2 class="section-title" style="color:#fff">Explore <em>Land Types</em></h2>
     <div class="types-grid">
-      <div class="type-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="type-icon"><i class="fas fa-house-user"></i></div>
-        <div class="type-name">Residential</div>
-        <div class="type-count">142 Plots</div>
-      </div>
-      <div class="type-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="type-icon"><i class="fas fa-building"></i></div>
-        <div class="type-name">Commercial</div>
-        <div class="type-count">87 Plots</div>
-      </div>
+      <a href="listings.html?type=Residential" class="type-card-link" data-aos="fade-up" data-aos-delay="150">
+        <div class="type-card"><div class="type-icon"><i class="fas fa-house-user"></i></div><div class="type-name">Residential</div><div class="type-count">142 Plots</div></div>
+      </a>
+      <a href="listings.html?type=Commercial" class="type-card-link" data-aos="fade-up" data-aos-delay="200">
+        <div class="type-card"><div class="type-icon"><i class="fas fa-building"></i></div><div class="type-name">Commercial</div><div class="type-count">87 Plots</div></div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- LISTINGS -->
+<!-- LISTINGS with auto-slider -->
 <section class="listings-section" id="featured" data-aos="fade-up">
   <div class="section-inner">
     <div class="listings-header" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px" data-aos="fade-right" data-aos-delay="100">
@@ -169,93 +121,47 @@
         <a href="listings.html?type=Commercial" class="filter-pill fp-comm"><span class="dot"></span> Commercial</a>
       </div>
     </div>
-
-    <div class="listings-grid" data-aos="fade-up" data-aos-delay="150">
-
-      <!-- Card 1 -->
-      <div class="land-card" data-aos="zoom-in" data-aos-delay="200">
-        <div class="lcard-img">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop" alt="Lakeside Residential Plot" class="land-thumb-svg">
-          <span class="lcard-badge">Hot Deal</span>
-          <button class="lcard-wish">♡</button>
-        </div>
-        <div class="lcard-body">
-          <div class="lcard-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-val">4.8</span>
-            <span class="rating-count">(21 reviews)</span>
-          </div>
-          <div class="lcard-title">Lakeside Residential Plot</div>
-          <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Prampram, Greater Accra</div>
-          <div class="lcard-desc">A beautiful flat plot in a serene gated community, perfect for building your dream family home with easy access to the beach.</div>
-          <div class="lcard-specs">
-            <div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 0.5 acres</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div>
-          </div>
-          <div class="lcard-footer">
-            <div class="lcard-price">GHS 185,000 <small>/plot</small></div>
-            <button class="details-btn"><i class="fas fa-home"></i> Details</button>
+    <div class="listings-slider-wrap">
+      <div class="listings-grid" id="listingsGrid" data-aos="fade-up" data-aos-delay="150">
+        <div class="land-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="lcard-img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop" alt="Lakeside Residential Plot" class="land-thumb-svg"><span class="lcard-badge">Hot Deal</span><button class="lcard-wish"><i class="fas fa-heart"></i></button></div>
+          <div class="lcard-body">
+            <div class="lcard-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rating-val">4.8</span><span class="rating-count">(21 reviews)</span></div>
+            <div class="lcard-title">Lakeside Residential Plot</div>
+            <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Prampram, Greater Accra</div>
+            <div class="lcard-desc">A beautiful flat plot in a serene gated community, perfect for building your dream family home.</div>
+            <div class="lcard-specs"><div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 0.5 acres</div><div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div><div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div></div>
+            <div class="lcard-footer"><div class="lcard-price">GHS 185,000 <small>/plot</small></div><a href="listings.html" class="details-btn"><i class="fas fa-home"></i> Details</a></div>
           </div>
         </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="land-card" data-aos="zoom-in" data-aos-delay="250">
-        <div class="lcard-img">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop" alt="Prime Commercial Corner Plot" class="land-thumb-svg">
-          <span class="lcard-badge avail">Available</span>
-          <button class="lcard-wish">♡</button>
+        <div class="land-card" data-aos="zoom-in" data-aos-delay="250">
+          <div class="lcard-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop" alt="Prime Commercial Corner Plot" class="land-thumb-svg"><span class="lcard-badge avail">Available</span><button class="lcard-wish"><i class="fas fa-heart"></i></button></div>
+          <div class="lcard-body">
+            <div class="lcard-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rating-val">5.0</span><span class="rating-count">(8 reviews)</span></div>
+            <div class="lcard-title">Prime Commercial Corner Plot</div>
+            <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Tantra Hill, Accra</div>
+            <div class="lcard-desc">High-traffic corner plot zoned for commercial use. Ideal for retail, offices or mixed-use development.</div>
+            <div class="lcard-specs"><div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 1.2 acres</div><div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div><div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div></div>
+            <div class="lcard-footer"><div class="lcard-price">GHS 620,000 <small>/plot</small></div><a href="listings.html" class="details-btn"><i class="fas fa-home"></i> Details</a></div>
+          </div>
         </div>
-        <div class="lcard-body">
-          <div class="lcard-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-val">5.0</span>
-            <span class="rating-count">(8 reviews)</span>
-          </div>
-          <div class="lcard-title">Prime Commercial Corner Plot</div>
-          <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Tantra Hill, Accra</div>
-          <div class="lcard-desc">High-traffic corner plot zoned for commercial use. Ideal for retail, offices or mixed-use development in a fast-growing area.</div>
-          <div class="lcard-specs">
-            <div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 1.2 acres</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div>
-          </div>
-          <div class="lcard-footer">
-            <div class="lcard-price">GHS 620,000 <small>/plot</small></div>
-            <button class="details-btn"><i class="fas fa-home"></i> Details</button>
+        <div class="land-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="lcard-img"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop" alt="Scenic land plot in Volta" class="land-thumb-svg"><span class="lcard-badge" style="background:#3B82F6">New</span><button class="lcard-wish"><i class="fas fa-heart"></i></button></div>
+          <div class="lcard-body">
+            <div class="lcard-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="rating-val">4.0</span><span class="rating-count">(5 reviews)</span></div>
+            <div class="lcard-title">Scenic Land Plot - Volta Region</div>
+            <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Ho, Volta Region</div>
+            <div class="lcard-desc">Lush, spacious land with access to natural water features. Ideal for private development or investment.</div>
+            <div class="lcard-specs"><div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 5 acres</div><div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div><div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div></div>
+            <div class="lcard-footer"><div class="lcard-price">GHS 95,000 <small>/acre</small></div><a href="listings.html" class="details-btn"><i class="fas fa-home"></i> Details</a></div>
           </div>
         </div>
       </div>
-
-      <!-- Card 3 -->
-      <div class="land-card" data-aos="zoom-in" data-aos-delay="300">
-        <div class="lcard-img">
-          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop" alt="Scenic land plot in Volta" class="land-thumb-svg">
-          <span class="lcard-badge" style="background:#3B82F6">New</span>
-          <button class="lcard-wish">♡</button>
-        </div>
-        <div class="lcard-body">
-          <div class="lcard-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-val">4.0</span>
-            <span class="rating-count">(5 reviews)</span>
-          </div>
-          <div class="lcard-title">Scenic Land Plot – Volta Region</div>
-          <div class="lcard-loc"><i class="fas fa-map-marker-alt"></i> Ho, Volta Region</div>
-          <div class="lcard-desc">Lush, spacious land with access to natural water features. Ideal for private development or investment.</div>
-          <div class="lcard-specs">
-            <div class="spec"><span class="spec-icon"><i class="fas fa-ruler-combined"></i></span> 5 acres</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-map"></i></span> GPS Surveyed</div>
-            <div class="spec"><span class="spec-icon"><i class="fas fa-scroll"></i></span> Title Deed</div>
-          </div>
-          <div class="lcard-footer">
-            <div class="lcard-price">GHS 95,000 <small>/acre</small></div>
-            <button class="details-btn"><i class="fas fa-home"></i> Details</button>
-          </div>
-        </div>
+      <div class="slider-dots" id="sliderDots">
+        <span class="sdot active" data-idx="0"></span>
+        <span class="sdot" data-idx="1"></span>
+        <span class="sdot" data-idx="2"></span>
       </div>
-
     </div>
   </div>
 </section>
@@ -276,55 +182,15 @@
     <span class="section-label" data-aos="fade-right" data-aos-delay="100">Our Property List</span>
     <h2 class="section-title" style="color:#fff">Our Top Locations <em>For Your Land</em></h2>
     <div class="loc-grid">
-
-      <!-- Featured Big Card -->
       <div class="loc-card featured" data-aos="fade-up" data-aos-delay="200">
         <img src="/img/advert.jpg" alt="Greater Accra Region" style="width:100%;height:100%;object-fit:cover">
         <div class="loc-overlay"></div>
-        <div class="loc-info">
-          <div class="loc-count">78 Plots Available</div>
-          <div class="loc-name">Greater Accra</div>
-          <div class="loc-sub">Luxury Plots With Modern Conveniences</div>
-        </div>
+        <div class="loc-info"><div class="loc-count">78 Plots Available</div><div class="loc-name">Greater Accra</div><div class="loc-sub">Luxury Plots With Modern Conveniences</div></div>
       </div>
-
-      <!-- Small Cards -->
-      <div class="loc-card small">
-        <img src="/img/list1.jpg" alt="Ashanti Region" style="width:100%;height:100%;object-fit:cover">
-        <div class="loc-overlay"></div>
-        <div class="loc-info">
-          <div class="loc-count">42 Plots</div>
-          <div class="loc-name small">Ashanti Region</div>
-          <div class="loc-sub">Prime Land Near Kumasi</div>
-        </div>
-      </div>
-      <div class="loc-card small">
-        <img src="/img/list2.jpg" alt="Volta Region" style="width:100%;height:100%;object-fit:cover">
-        <div class="loc-overlay"></div>
-        <div class="loc-info">
-          <div class="loc-count">31 Plots</div>
-          <div class="loc-name small">Volta Region</div>
-          <div class="loc-sub">Serene Countryside with natural water views</div>
-        </div>
-      </div>
-      <div class="loc-card small">
-        <img src="/img/list3.jpg" alt="Western Region" style="width:100%;height:100%;object-fit:cover">
-        <div class="loc-overlay"></div>
-        <div class="loc-info">
-          <div class="loc-count">27 Plots</div>
-          <div class="loc-name small">Western Region</div>
-          <div class="loc-sub">Forest-Edge Plots & Cocoa Land</div>
-        </div>
-      </div>
-      <div class="loc-card small">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=260&h=240&fit=crop" alt="Northern Region" style="width:100%;height:100%;object-fit:cover">
-        <div class="loc-overlay"></div>
-        <div class="loc-info">
-          <div class="loc-count">19 Plots</div>
-          <div class="loc-name small">Northern Region</div>
-          <div class="loc-sub">Large Acre Plots & Farmland</div>
-        </div>
-      </div>
+      <div class="loc-card small"><img src="/img/list1.jpg" alt="Ashanti Region" style="width:100%;height:100%;object-fit:cover"><div class="loc-overlay"></div><div class="loc-info"><div class="loc-count">42 Plots</div><div class="loc-name small">Ashanti Region</div><div class="loc-sub">Prime Land Near Kumasi</div></div></div>
+      <div class="loc-card small"><img src="/img/list2.jpg" alt="Volta Region" style="width:100%;height:100%;object-fit:cover"><div class="loc-overlay"></div><div class="loc-info"><div class="loc-count">31 Plots</div><div class="loc-name small">Volta Region</div><div class="loc-sub">Serene Countryside with natural water views</div></div></div>
+      <div class="loc-card small"><img src="/img/list3.jpg" alt="Western Region" style="width:100%;height:100%;object-fit:cover"><div class="loc-overlay"></div><div class="loc-info"><div class="loc-count">27 Plots</div><div class="loc-name small">Western Region</div><div class="loc-sub">Forest-Edge Plots &amp; Cocoa Land</div></div></div>
+      <div class="loc-card small"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=260&h=240&fit=crop" alt="Northern Region" style="width:100%;height:100%;object-fit:cover"><div class="loc-overlay"></div><div class="loc-info"><div class="loc-count">19 Plots</div><div class="loc-name small">Northern Region</div><div class="loc-sub">Large Acre Plots &amp; Farmland</div></div></div>
     </div>
   </div>
 </section>
@@ -334,70 +200,34 @@
   <div class="section-inner">
     <div style="text-align:center;margin-bottom:48px" data-aos="fade-right" data-aos-delay="100">
       <span class="section-label" style="display:block;text-align:center">Why Choose Us</span>
-      <h2 class="section-title">We Make Land Buying <em>Simple & Safe</em></h2>
+      <h2 class="section-title">We Make Land Buying <em>Simple &amp; Safe</em></h2>
     </div>
-    
-      <div class="why-card" data-aos="flip-left" onclick="window.location.href='gps-survey.html'" style="cursor:pointer">
-      <div class="why-icon"><i class="fas fa-ruler-combined"></i></div>
-      <h3>GPS Survey Included</h3>
-      <p>All plots come with certified survey plans from licensed surveyors. Know exactly what you're buying down to the last metre.</p>
-      </div>
-
-      <div class="why-card" data-aos="flip-left" onclick="window.location.href='payment-plans.html'" style="cursor:pointer">
-      <div class="why-icon"><i class="fas fa-credit-card"></i></div>
-      <h3>Flexible Payment Plans</h3>
-      <p>Spread payments over 6, 12, or 24 months with zero interest. We also work with trusted banks and mortgage providers.</p>
-      </div>
-      
-      <div class="why-card" data-aos="flip-left" onclick="window.location.href='site-visit.html'" style="cursor:pointer">
-        <div class="why-icon"><i class="fas fa-car"></i></div>
-        <h3>Free Site Visits</h3>
-        <p>We'll take you to the land. Our team organises free site visits across all regions so you can see what you're buying.</p>
-      </div>
-     
+    <div class="why-grid">
+      <div class="why-card" data-aos="flip-left" onclick="window.location.href='gps-survey.html'" style="cursor:pointer"><div class="why-icon"><i class="fas fa-ruler-combined"></i></div><h3>GPS Survey Included</h3><p>All plots come with certified survey plans from licensed surveyors. Know exactly what you're buying down to the last metre.</p></div>
+      <div class="why-card" data-aos="flip-left" onclick="window.location.href='payment-plans.html'" style="cursor:pointer"><div class="why-icon"><i class="fas fa-credit-card"></i></div><h3>Flexible Payment Plans</h3><p>Spread payments over 6, 12, or 24 months with zero interest. We also work with trusted banks and mortgage providers.</p></div>
+      <div class="why-card" data-aos="flip-left" onclick="window.location.href='site-visit.html'" style="cursor:pointer"><div class="why-icon"><i class="fas fa-car"></i></div><h3>Free Site Visits</h3><p>We'll take you to the land. Our team organises free site visits across all regions so you can see what you're buying.</p></div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer data-aos="fade-up" data-aos-delay="100" id="contact">
+<footer id="contact">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
-        <span class="logo-text">O.B Kingsland</span>
-        <p>Ghana's most trusted land marketplace. Verified plots across all regions, backed by legal expertise and transparent processes.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <a href="#">Home</a>
-        <a href="#featured">Browse Listings</a>
-        <a href="#locations">Our Locations</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Land Types</h4>
-        <a href="#">Residential Plots</a>
-        <a href="#">Commercial Land</a>
-        
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="#"><i class="fas fa-phone"></i> +233 55 503 8144</a>
-        <a href="#"><i class="fas fa-envelope"></i> o.b.kingsland@gmail.com</a>
-        <a href="#"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</a>
-        <a href="#">Mon–Fri: 8am – 6pm</a>
-      </div>
+      <div class="footer-brand"><span class="logo-text">O.B Kingsland</span><p>Ghana's most trusted land marketplace. Verified plots across all regions, backed by legal expertise and transparent processes.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="#">Home</a><a href="#featured">Browse Listings</a><a href="#locations">Our Locations</a><a href="#about">About Us</a><a href="#contact">Contact</a></div>
+      <div class="footer-col"><h4>Land Types</h4><a href="listings.html?type=Residential">Residential Plots</a><a href="listings.html?type=Commercial">Commercial Land</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:+233555038144"><i class="fas fa-phone"></i> +233 55 503 8144</a><a href="mailto:o.b.kingsland@gmail.com"><i class="fas fa-envelope"></i> o.b.kingsland@gmail.com</a><a href="#"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</a><a href="#">Mon-Fri: 8am - 6pm</a></div>
     </div>
     <div class="footer-bottom">
-      <p id="copyright">© 2025 O.B Kingsland. All rights reserved.</p>
-      <p>Privacy Policy · Terms of Service · Cookie Policy</p>
+      <p id="copyright">&#169; 2025 O.B Kingsland. All rights reserved.</p>
+      <p>Privacy Policy &middot; Terms of Service &middot; Cookie Policy</p>
     </div>
   </div>
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="nav.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

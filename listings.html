@@ -35,22 +35,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 .nav-cta{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:background .2s}
 .nav-cta:hover{background:var(--orange2)}
 
+/* HAMBURGER */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;background:rgba(255,255,255,0.08);border:none;border-radius:8px;cursor:pointer;padding:8px 6px}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:all .3s ease}
+
+/* MOBILE NAV DRAWER */
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(13,27,42,0.65);backdrop-filter:blur(6px);z-index:1900;opacity:0;transition:opacity .3s ease}
+.mobile-nav-overlay.open{opacity:1}
+.mobile-nav-drawer{position:fixed;top:0;right:0;bottom:0;width:280px;background:var(--navy);z-index:2000;transform:translateX(100%);transition:transform .35s cubic-bezier(.34,1.1,.64,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.35)}
+.mobile-nav-drawer.open{transform:translateX(0)}
+.mnd-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.mnd-close{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mnd-links{flex:1;display:flex;flex-direction:column;padding:16px 12px;gap:4px;overflow-y:auto}
+.mnd-link{color:rgba(255,255,255,0.75);text-decoration:none;font-size:15px;font-weight:700;padding:13px 16px;border-radius:10px;display:flex;align-items:center;gap:12px;transition:all .2s}
+.mnd-link i{color:var(--orange);width:18px;font-size:14px}
+.mnd-link:hover,.mnd-link:active{background:rgba(255,255,255,0.08);color:#fff}
+.mnd-footer{padding:16px 20px 28px;border-top:1px solid rgba(255,255,255,0.08)}
+
 /* BANNER */
-.listings-banner{
-  background:linear-gradient(125deg,var(--navy) 0%,var(--navy3) 100%);
-  padding:64px 40px 72px;position:relative;overflow:hidden
-}
+.listings-banner{background:linear-gradient(125deg,var(--navy) 0%,var(--navy3) 100%);padding:64px 40px 72px;position:relative;overflow:hidden}
 .listings-banner::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:44px 44px;animation:gridDrift 22s linear infinite}
 @keyframes gridDrift{from{background-position:0 0}to{background-position:44px 44px}}
 .blob-a{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,42,0.1),transparent 70%);top:-80px;right:-60px;animation:bp 5s ease-in-out infinite alternate}
 .blob-b{position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);bottom:-60px;left:-40px;animation:bp 6s ease-in-out infinite alternate-reverse}
 @keyframes bp{from{transform:scale(1)}to{transform:scale(1.18)}}
-
 .banner-inner{max-width:1280px;margin:0 auto;position:relative;z-index:2}
 .b-back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:13px;font-weight:700;text-decoration:none;transition:all .25s;margin-bottom:24px;animation:fadeInLeft .7s .2s ease both}
 .b-back:hover{color:#fff;gap:12px}
-.b-back i{transition:transform .25s}
-.b-back:hover i{transform:translateX(-3px)}
 .b-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(232,98,42,0.18);border:1px solid rgba(232,98,42,0.35);border-radius:20px;padding:5px 14px;margin-bottom:18px;animation:fadeInUp .7s .3s ease both}
 .b-badge span{color:var(--orange);font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
 .banner-inner h1{font-family:'Playfair Display',serif;color:#fff;font-size:clamp(28px,4vw,52px);font-weight:800;line-height:1.12;margin-bottom:14px;animation:fadeInUp .7s .4s ease both}
@@ -58,12 +69,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 .banner-inner p{color:rgba(255,255,255,0.55);font-size:15px;line-height:1.8;max-width:500px;animation:fadeInUp .7s .5s ease both}
 
 /* SEARCH + FILTER BAR */
-.filter-bar{
-  background:#fff;border-bottom:1px solid var(--border);
-  padding:18px 40px;position:sticky;top:68px;z-index:900;
-  box-shadow:0 2px 16px rgba(0,0,0,0.06);
-  animation:fadeInDown .5s .3s ease both
-}
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);padding:18px 40px;position:sticky;top:68px;z-index:900;box-shadow:0 2px 16px rgba(0,0,0,0.06);animation:fadeInDown .5s .3s ease both}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 .filter-bar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .fb-search{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:10px;padding:0 14px;transition:border-color .25s,box-shadow .25s}
@@ -79,10 +85,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 .listings-main{max-width:1280px;margin:0 auto;padding:40px 40px 100px}
 
 /* EMPTY STATE */
-.empty-state{
-  text-align:center;padding:100px 20px;
-  animation:fadeInUp .6s ease both
-}
+.empty-state{text-align:center;padding:100px 20px;animation:fadeInUp .6s ease both}
 .empty-icon{font-size:64px;color:var(--border);margin-bottom:20px}
 .empty-state h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px}
 .empty-state p{font-size:14px;color:var(--muted);line-height:1.7;max-width:360px;margin:0 auto 28px}
@@ -90,52 +93,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 .empty-cta:hover{background:var(--orange2);transform:translateY(-2px)}
 
 /* GRID */
-.cards-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px
-}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 
 /* LAND CARD */
-.land-card{
-  background:#fff;border-radius:18px;overflow:hidden;
-  border:1.5px solid var(--border);
-  transition:all .3s;cursor:pointer;
-  opacity:0;transform:translateY(24px);
-  animation:cardIn .5s ease forwards
-}
+.land-card{background:#fff;border-radius:18px;overflow:hidden;border:1.5px solid var(--border);transition:all .3s;cursor:pointer;opacity:0;transform:translateY(24px);animation:cardIn .5s ease forwards}
 @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
 .land-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.12);border-color:rgba(232,98,42,0.3)}
-
 .lcard-img{position:relative;height:210px;overflow:hidden;background:var(--light)}
 .lcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .land-card:hover .lcard-img img{transform:scale(1.06)}
 .lcard-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edf2,#d0d8e0);color:#9bb0c4;font-size:48px}
-
 .lcard-badge{position:absolute;top:14px;left:14px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:6px;color:#fff}
 .badge-hot{background:var(--orange)}
 .badge-new{background:#3B82F6}
 .badge-avail{background:#10B981}
 .badge-sold{background:#6B7C8D}
-
 .lcard-wish{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:background .2s;color:#ccc}
 .lcard-wish.liked{color:var(--orange)}
 .lcard-wish:hover{background:#fff}
-
 .lcard-body{padding:18px}
 .lcard-type-tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:8px}
 .tag-residential{background:rgba(59,130,246,0.1);color:#3B82F6}
 .tag-commercial{background:rgba(16,185,129,0.1);color:#10B981}
-
 .lcard-title{font-size:15.5px;font-weight:800;color:var(--text);margin-bottom:5px;line-height:1.3}
 .lcard-loc{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-bottom:10px}
 .lcard-loc i{color:var(--orange);font-size:11px}
 .lcard-desc{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
 .lcard-specs{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px;flex-wrap:wrap}
 .spec{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:700}
 .spec i{color:var(--orange);font-size:12px}
-
 .lcard-footer{display:flex;align-items:center;justify-content:space-between}
 .lcard-price{font-size:18px;font-weight:800;color:var(--orange)}
 .lcard-price small{font-size:11px;font-weight:600;color:var(--muted);margin-left:2px}
@@ -151,68 +137,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeInLeft{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
 
-@media(max-width:960px){.cards-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.cards-grid{grid-template-columns:1fr}.listings-banner{padding:60px 20px 56px}.filter-bar{padding:14px 20px}.listings-main{padding:28px 16px 80px}nav{padding:0 20px}.nav-links{display:none}}
-
 /* ══ LISTING DETAIL MODAL ══════════════════════════════════════════ */
-.ldm-overlay{
-  position:fixed;inset:0;z-index:9000;
-  background:rgba(13,27,42,0.85);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;opacity:0;pointer-events:none;
-  transition:opacity .3s ease
-}
+.ldm-overlay{position:fixed;inset:0;z-index:9000;background:rgba(13,27,42,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
 .ldm-overlay.open{opacity:1;pointer-events:all}
-.ldm-box{
-  background:#fff;border-radius:22px;overflow:hidden;
-  max-width:860px;width:100%;max-height:90vh;overflow-y:auto;
-  transform:translateY(30px) scale(0.97);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
-  position:relative
-}
+.ldm-box{background:#fff;border-radius:22px;overflow:hidden;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(30px) scale(0.97);transition:transform .35s cubic-bezier(.34,1.56,.64,1);position:relative}
 .ldm-overlay.open .ldm-box{transform:translateY(0) scale(1)}
-
-/* Image section */
-.ldm-img-wrap{
-  position:relative;height:360px;background:var(--light);
-  overflow:hidden;cursor:zoom-in;flex-shrink:0
-}
+.ldm-img-wrap{position:relative;height:360px;background:var(--light);overflow:hidden;cursor:zoom-in;flex-shrink:0}
 .ldm-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .ldm-img-wrap:hover img{transform:scale(1.04)}
-.ldm-img-placeholder{
-  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#e8edf2,#d0d8e0);color:#9bb0c4;font-size:64px
-}
-.ldm-badge{
-  position:absolute;top:18px;left:18px;
-  font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
-  padding:5px 12px;border-radius:7px;color:#fff
-}
-.ldm-close{
-  position:absolute;top:14px;right:14px;
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(0,0,0,0.45);color:#fff;border:none;
-  cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
-  transition:background .2s;z-index:2
-}
+.ldm-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8edf2,#d0d8e0);color:#9bb0c4;font-size:64px}
+.ldm-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.45);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
 .ldm-close:hover{background:rgba(0,0,0,0.7)}
-
-/* Image lightbox fullscreen */
-.ldm-fullscreen{
-  position:fixed;inset:0;z-index:9999;
-  background:rgba(0,0,0,0.95);
-  display:flex;align-items:center;justify-content:center;
-  cursor:zoom-out
-}
-.ldm-fullscreen img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px}
-.ldm-fs-close{
-  position:absolute;top:16px;right:16px;
-  width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,0.15);color:#fff;border:none;
-  cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center
-}
-
-/* Content */
 .ldm-content{padding:28px 32px 32px}
 .ldm-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px}
 .ldm-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--text);line-height:1.2}
@@ -222,55 +157,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
 .ldm-meta{display:flex;align-items:center;gap:14px;margin:10px 0 20px;flex-wrap:wrap}
 .ldm-meta-item{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--muted);font-weight:700}
 .ldm-meta-item i{color:var(--orange);font-size:12px}
-
 .ldm-divider{height:1px;background:var(--border);margin:18px 0}
-
 .ldm-section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px}
 .ldm-desc{font-size:14px;color:var(--text);line-height:1.8}
-
 .ldm-features{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.ldm-feat{
-  display:flex;align-items:center;gap:7px;
-  background:var(--light);border:1.5px solid var(--border);
-  border-radius:9px;padding:8px 14px;
-  font-size:12px;font-weight:700;color:var(--text)
-}
+.ldm-feat{display:flex;align-items:center;gap:7px;background:var(--light);border:1.5px solid var(--border);border-radius:9px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--text)}
 .ldm-feat i{color:var(--orange);font-size:13px}
 .ldm-feat.yes{border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.06)}
 .ldm-feat.yes i{color:#10B981}
-
 .ldm-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .ldm-info-item{background:var(--light);border-radius:10px;padding:12px 16px}
 .ldm-info-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px}
 .ldm-info-val{font-size:14px;font-weight:700;color:var(--text)}
-
 .ldm-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
-.ldm-btn-primary{
-  flex:1;background:var(--orange);color:#fff;border:none;
-  border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;
-  cursor:pointer;font-family:'Nunito Sans',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .25s;text-decoration:none
-}
+.ldm-btn-primary{flex:1;background:var(--orange);color:#fff;border:none;border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s;text-decoration:none}
 .ldm-btn-primary:hover{background:#c95520;transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,98,42,0.35)}
-.ldm-btn-secondary{
-  flex:1;background:#fff;color:var(--navy);
-  border:1.5px solid var(--border);
-  border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;
-  cursor:pointer;font-family:'Nunito Sans',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .25s;text-decoration:none
-}
+.ldm-btn-secondary{flex:1;background:#fff;color:var(--navy);border:1.5px solid var(--border);border-radius:11px;padding:14px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s;text-decoration:none}
 .ldm-btn-secondary:hover{border-color:var(--navy);background:var(--navy);color:#fff}
 
-@media(max-width:600px){
-  .ldm-img-wrap{height:240px}
-  .ldm-content{padding:20px}
+/* ── RESPONSIVE ── */
+@media(max-width:960px){.cards-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){
+  /* Keep filter bar exactly as desktop — no changes */
+  .listings-banner{padding:60px 20px 56px}
+  .listings-main{padding:28px 14px 80px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  /* 2-column product grid */
+  .cards-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .lcard-img{height:135px}
+  .lcard-body{padding:11px}
+  .lcard-title{font-size:13px;line-height:1.25;margin-bottom:3px}
+  .lcard-desc{display:none}
+  .lcard-specs{gap:5px;padding:7px 0;margin-bottom:9px}
+  .spec{font-size:9.5px}
+  .lcard-price{font-size:14px}
+  .lcard-price small{font-size:10px}
+  .details-btn{padding:7px 10px;font-size:11px}
+  .details-btn i{display:none}
+  .lcard-loc{font-size:10.5px;margin-bottom:5px}
+  .lcard-type-tag{font-size:8px;padding:2px 6px;margin-bottom:5px}
+  .lcard-wish{width:26px;height:26px;font-size:11px}
+  .lcard-badge{font-size:8px;padding:3px 7px}
+  /* Modal responsive */
+  .ldm-img-wrap{height:220px}
+  .ldm-content{padding:18px}
   .ldm-top{flex-direction:column;gap:6px}
   .ldm-price-wrap{text-align:left}
   .ldm-info-grid{grid-template-columns:1fr}
   .ldm-title{font-size:20px}
   .ldm-actions{flex-direction:column}
+}
+@media(max-width:380px){
+  .cards-grid{grid-template-columns:1fr}
+  .lcard-img{height:170px}
 }
 </style>
 </head>
@@ -290,12 +230,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
       <a href="index.html#contact">Contact</a>
     </div>
     <div class="nav-right">
-      
-      <button class="nav-icon-btn color-mode-toggle" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
+      <button class="nav-icon-btn" id="colorModeToggle" aria-label="Toggle color mode"><i class="fas fa-sun"></i></button>
       <button class="nav-cta">＋ Admin</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+
+
 
 <!-- BANNER -->
 <div class="listings-banner">
@@ -336,6 +280,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
+    <!-- Mobile search button -->
+    <button class="fb-mobile-search-btn" onclick="filterListings()"><i class="fas fa-sliders-h"></i></button>
     <div class="fb-count">Showing <span id="countDisplay">0</span> listings</div>
   </div>
 </div>
@@ -358,8 +304,101 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,0.
   <div class="pagination" id="pagination"></div>
 </div>
 
+<!-- LISTING DETAIL MODAL -->
+<div class="ldm-overlay" id="listingDetailModal" onclick="if(event.target===this)closeListingModal()">
+  <div class="ldm-box">
+    <div class="ldm-img-section" style="position:relative"></div>
+    <div class="ldm-content">
+      <div class="ldm-top">
+        <div class="ldm-title"></div>
+        <div class="ldm-price-wrap">
+          <div class="ldm-price"></div>
+          <div class="ldm-price-unit"></div>
+        </div>
+      </div>
+      <div class="ldm-meta"></div>
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Description</div>
+      <div class="ldm-desc"></div>
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Features & Documents</div>
+      <div class="ldm-features"></div>
+      <div class="ldm-divider"></div>
+      <div class="ldm-section-label">Plot Details</div>
+      <div class="ldm-info-grid"></div>
+      <div class="ldm-actions">
+        <a href="site-visit.html" class="ldm-btn-primary ldm-visit-btn">
+          <i class="fas fa-car"></i> Book a Free Site Visit
+        </a>
+        <a href="tel:+233555038144" class="ldm-btn-secondary">
+          <i class="fas fa-phone"></i> Call Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="ldmFullscreen" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;cursor:zoom-out" onclick="closeLightbox()">
+  <button style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img src="" alt="Full view" style="max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px">
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-modal-overlay" id="adminModalOverlay">
+  <div class="admin-modal" id="adminModal">
+    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
+    <div class="admin-modal-left">
+      <div class="aml-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
+        <span class="logo-text">O.B Kingsland</span>
+      </div>
+      <h2>Admin <em>Portal</em></h2>
+      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
+      <div class="aml-features">
+        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
+        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
+        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
+      </div>
+    </div>
+    <div class="admin-modal-right">
+      <div class="amr-header">
+        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
+        <h3>Sign In</h3>
+        <p>Enter your administrator credentials</p>
+      </div>
+      <form class="admin-form" onsubmit="handleAdminLogin(event)">
+        <div class="af-group">
+          <label>Email Address</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="admin@obkingsland.gh" required>
+          </div>
+        </div>
+        <div class="af-group">
+          <label>Password</label>
+          <div class="af-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
+            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
+          </div>
+        </div>
+        <div class="af-row">
+          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
+          <a href="#" class="af-forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="af-submit">
+          <span>Sign In to Dashboard</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="af-error" id="afError"></div>
+      </form>
+      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
+    </div>
+  </div>
+</div>
+
 <script>
-/* Loads listings from the live backend API — no localStorage */
 const LISTINGS_API = 'https://o-b-website.onrender.com/api';
 const ITEMS_PER_PAGE = 9;
 let currentPage  = 1;
@@ -374,7 +413,7 @@ function typeTagClass(t){ return {Residential:'tag-residential',Commercial:'tag-
 function renderCard(listing, delay){
   const id  = listing._id || listing.id;
   const img = listing.imageUrl
-    ? `<img src="${listing.imageUrl}" alt="${listing.title}" onerror="this.parentElement.innerHTML='<div class=\'lcard-img-placeholder\'><i class=\'fas fa-image\'></i></div>'">`
+    ? `<img src="${listing.imageUrl}" alt="${listing.title}" onerror="this.parentElement.innerHTML='<div class=\\'lcard-img-placeholder\\'><i class=\\'fas fa-image\\'></i></div>'">`
     : `<div class="lcard-img-placeholder"><i class="fas fa-image"></i></div>`;
   const specs=[];
   if(listing.size)      specs.push(`<div class="spec"><i class="fas fa-ruler-combined"></i> ${listing.size}</div>`);
@@ -385,7 +424,7 @@ function renderCard(listing, delay){
     <div class="lcard-img">
       ${img}
       <span class="lcard-badge ${badgeClass(listing.status)}">${badgeLabel(listing.status)}</span>
-      <button class="lcard-wish" onclick="event.stopPropagation();toggleWish(this)"><i class="fas fa-heart"></i></button>
+      <button class="lcard-wish" onclick="event.stopPropagation();this.classList.toggle('liked')"><i class="fas fa-heart"></i></button>
     </div>
     <div class="lcard-body">
       <span class="lcard-type-tag ${typeTagClass(listing.type)}">${listing.type}</span>
@@ -411,49 +450,36 @@ function openListingModal(l){
   const badges = {hot:'badge-hot',new:'badge-new',available:'badge-avail',sold:'badge-sold'};
   const badgeTxt = {hot:'Hot Deal',new:'New',available:'Available',sold:'Sold'};
   const featList = [
-    {icon:'fa-map',       label:'GPS Surveyed',  on: l.surveyed},
-    {icon:'fa-scroll',    label:'Title Deed',     on: l.titleDeed},
-    {icon:'fa-tint',      label:'Water Source',   on: l.water},
+    {icon:'fa-map',    label:'GPS Surveyed', on:l.surveyed},
+    {icon:'fa-scroll', label:'Title Deed',   on:l.titleDeed},
+    {icon:'fa-tint',   label:'Water Source', on:l.water},
   ];
-
   const imgSection = l.imageUrl
     ? `<div class="ldm-img-wrap" onclick="openLightbox('${l.imageUrl}')">
          <img src="${l.imageUrl}" alt="${l.title}">
-         <span style="position:absolute;bottom:14px;right:14px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;pointer-events:none">
-           <i class="fas fa-search-plus"></i> Tap to zoom
-         </span>
+         <span style="position:absolute;bottom:14px;right:14px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;pointer-events:none"><i class="fas fa-search-plus"></i> Tap to zoom</span>
        </div>`
     : `<div class="ldm-img-wrap" style="cursor:default"><div class="ldm-img-placeholder"><i class="fas fa-image"></i></div></div>`;
 
   const modal = document.getElementById('listingDetailModal');
   modal.querySelector('.ldm-img-section').innerHTML =
     imgSection +
-    `<span class="lcard-badge ${badges[l.status]||'badge-avail'}" style="position:absolute;top:18px;left:18px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:7px;color:#fff">
-       ${badgeTxt[l.status]||'Available'}
-     </span>
+    `<span class="lcard-badge ${badges[l.status]||'badge-avail'}" style="position:absolute;top:18px;left:18px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:7px;color:#fff">${badgeTxt[l.status]||'Available'}</span>
      <button class="ldm-close" onclick="closeListingModal()"><i class="fas fa-times"></i></button>`;
 
   modal.querySelector('.ldm-title').textContent = l.title;
   modal.querySelector('.ldm-price').textContent = 'GHS ' + Number(l.price).toLocaleString();
   modal.querySelector('.ldm-price-unit').textContent = 'per ' + (l.priceUnit||'plot');
-
   const typeColor = l.type==='Commercial' ? '#10B981' : '#3B82F6';
   modal.querySelector('.ldm-meta').innerHTML = `
     <span class="ldm-meta-item" style="background:${typeColor}15;color:${typeColor};border-radius:5px;padding:3px 9px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase">${l.type}</span>
     <span class="ldm-meta-item"><i class="fas fa-map-marker-alt"></i> ${l.location}${l.region?', '+l.region:''}</span>
     ${l.size ? `<span class="ldm-meta-item"><i class="fas fa-ruler-combined"></i> ${l.size}</span>` : ''}
   `;
-
   modal.querySelector('.ldm-desc').textContent = l.description || 'No description provided.';
-
   modal.querySelector('.ldm-features').innerHTML = featList.map(f =>
-    `<div class="ldm-feat ${f.on?'yes':''}">
-       <i class="fas ${f.icon}"></i>
-       ${f.label}
-       ${f.on ? '<i class="fas fa-check" style="color:#10B981;margin-left:2px;font-size:10px"></i>' : '<i class="fas fa-times" style="color:#ccc;margin-left:2px;font-size:10px"></i>'}
-     </div>`
+    `<div class="ldm-feat ${f.on?'yes':''}"><i class="fas ${f.icon}"></i>${f.label}${f.on?'<i class="fas fa-check" style="color:#10B981;margin-left:2px;font-size:10px"></i>':'<i class="fas fa-times" style="color:#ccc;margin-left:2px;font-size:10px"></i>'}</div>`
   ).join('');
-
   const posted = l.createdAt ? new Date(l.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'}) : 'N/A';
   modal.querySelector('.ldm-info-grid').innerHTML = `
     <div class="ldm-info-item"><div class="ldm-info-label">Plot Size</div><div class="ldm-info-val">${l.size||'N/A'}</div></div>
@@ -461,9 +487,7 @@ function openListingModal(l){
     <div class="ldm-info-item"><div class="ldm-info-label">Region</div><div class="ldm-info-val">${l.region||'N/A'}</div></div>
     <div class="ldm-info-item"><div class="ldm-info-label">Date Listed</div><div class="ldm-info-val">${posted}</div></div>
   `;
-
   modal.querySelector('.ldm-visit-btn').href = 'site-visit.html';
-
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -472,7 +496,6 @@ function closeListingModal(){
   document.getElementById('listingDetailModal').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function openLightbox(src){
   const fs = document.getElementById('ldmFullscreen');
   fs.querySelector('img').src = src;
@@ -483,13 +506,24 @@ function closeLightbox(){
   fs.style.display = 'none';
   fs.querySelector('img').src = '';
 }
-function toggleWish(btn){ btn.classList.toggle('liked'); }
 
+/* ─── URL Param Init — reads type, q (keyword), region ─── */
 function initFilterFromQuery(){
-  const type = new URLSearchParams(window.location.search).get('type');
+  const params = new URLSearchParams(window.location.search);
+  const type   = params.get('type');
+  const q      = params.get('q');
+  const region = params.get('region');
   if(['Residential','Commercial'].includes(type)){
     const el = document.getElementById('typeFilter');
     if(el) el.value = type;
+  }
+  if(q){
+    const si = document.getElementById('searchInput');
+    if(si) si.value = q;
+  }
+  if(region){
+    const ri = document.getElementById('regionFilter');
+    if(ri) ri.value = region;
   }
 }
 
@@ -504,8 +538,8 @@ function filterListings(){
     const mr = !region||(l.region||'').includes(region);
     return ms&&mt&&mr;
   });
-  if(sort==='newest')     filteredData.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-  else if(sort==='oldest')     filteredData.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
+  if(sort==='newest')      filteredData.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  else if(sort==='oldest') filteredData.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
   else if(sort==='price-low')  filteredData.sort((a,b)=>Number(a.price)-Number(b.price));
   else if(sort==='price-high') filteredData.sort((a,b)=>Number(b.price)-Number(a.price));
   currentPage=1; renderPage();
@@ -555,7 +589,7 @@ function showSkeleton(){
   const grid=document.getElementById('cardsGrid');
   grid.innerHTML=Array(6).fill(0).map(()=>`
     <div class="land-card" style="pointer-events:none;opacity:.55">
-      <div style="height:220px;background:#e2e8f0;border-radius:12px 12px 0 0;animation:obk-pulse 1.4s ease infinite"></div>
+      <div style="height:180px;background:#e2e8f0;border-radius:12px 12px 0 0;animation:obk-pulse 1.4s ease infinite"></div>
       <div class="lcard-body">
         <div style="height:14px;background:#e2e8f0;border-radius:6px;margin-bottom:10px;animation:obk-pulse 1.4s ease infinite"></div>
         <div style="height:10px;background:#e2e8f0;border-radius:6px;width:60%;animation:obk-pulse 1.4s ease infinite"></div>
@@ -563,7 +597,6 @@ function showSkeleton(){
     </div>`).join('');
 }
 
-/* Inject pulse keyframe once */
 const _st=document.createElement('style');
 _st.textContent='@keyframes obk-pulse{0%,100%{opacity:1}50%{opacity:.4}}';
 document.head.appendChild(_st);
@@ -586,119 +619,14 @@ async function loadListingsFromAPI(){
       <i class="fas fa-exclamation-circle" style="font-size:36px;color:#E8622A;display:block;margin-bottom:12px"></i>
       <p style="font-weight:700;color:#1A2B3C;margin-bottom:6px">Could not load listings</p>
       <p style="font-size:13px;color:#6B7C8D;margin-bottom:14px">${err.message}</p>
-      <button onclick="loadListingsFromAPI()" style="padding:10px 22px;background:#E8622A;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit">
-        Try Again</button>`;
+      <button onclick="loadListingsFromAPI()" style="padding:10px 22px;background:#E8622A;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit">Try Again</button>`;
     document.getElementById('countDisplay').textContent='0';
   }
 }
 
 loadListingsFromAPI();
-document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeListingModal(); closeLightbox(); } });
+
 </script>
-
-<!-- LISTING DETAIL MODAL -->
-<div class="ldm-overlay" id="listingDetailModal" onclick="if(event.target===this)closeListingModal()">
-  <div class="ldm-box">
-    <div class="ldm-img-section" style="position:relative"></div>
-    <div class="ldm-content">
-      <div class="ldm-top">
-        <div class="ldm-title"></div>
-        <div class="ldm-price-wrap">
-          <div class="ldm-price"></div>
-          <div class="ldm-price-unit"></div>
-        </div>
-      </div>
-      <div class="ldm-meta"></div>
-
-      <div class="ldm-divider"></div>
-      <div class="ldm-section-label">Description</div>
-      <div class="ldm-desc"></div>
-
-      <div class="ldm-divider"></div>
-      <div class="ldm-section-label">Features & Documents</div>
-      <div class="ldm-features"></div>
-
-      <div class="ldm-divider"></div>
-      <div class="ldm-section-label">Plot Details</div>
-      <div class="ldm-info-grid"></div>
-
-      <div class="ldm-actions">
-        <a href="site-visit.html" class="ldm-btn-primary ldm-visit-btn">
-          <i class="fas fa-car"></i> Book a Free Site Visit
-        </a>
-        <a href="tel:+233555038144" class="ldm-btn-secondary">
-          <i class="fas fa-phone"></i> Call Us Now
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- LIGHTBOX -->
-<div id="ldmFullscreen" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;cursor:zoom-out" onclick="closeLightbox()">
-  <button class="ldm-fs-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-  <img src="" alt="Full view" style="max-width:95vw;max-height:95vh;object-fit:contain;border-radius:8px">
-</div>
-
-<!-- ADMIN LOGIN MODAL -->
-<div class="admin-modal-overlay" id="adminModalOverlay">
-  <div class="admin-modal" id="adminModal">
-    <button class="admin-modal-close" id="adminModalClose"><i class="fas fa-times"></i></button>
-
-    <div class="admin-modal-left">
-      <div class="aml-logo">
-        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
-        <span class="logo-text">O.B Kingsland</span>
-      </div>
-      <h2>Admin <em>Portal</em></h2>
-      <p>Secure access for authorised personnel only. Manage listings, agents, and platform settings.</p>
-      <div class="aml-features">
-        <div class="aml-feat"><i class="fas fa-shield-alt"></i> SSL Encrypted Connection</div>
-        <div class="aml-feat"><i class="fas fa-lock"></i> Two-Factor Ready</div>
-        <div class="aml-feat"><i class="fas fa-clock"></i> Session Timeout: 30 min</div>
-      </div>
-    </div>
-
-    <div class="admin-modal-right">
-      <div class="amr-header">
-        <div class="amr-icon"><i class="fas fa-user-shield"></i></div>
-        <h3>Sign In</h3>
-        <p>Enter your administrator credentials</p>
-      </div>
-
-      <form class="admin-form" onsubmit="handleAdminLogin(event)">
-        <div class="af-group">
-          <label>Email Address</label>
-          <div class="af-input-wrap">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="admin@obkingsland.gh" required>
-          </div>
-        </div>
-        <div class="af-group">
-          <label>Password</label>
-          <div class="af-input-wrap">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="adminPwdInput" placeholder="••••••••••" required>
-            <button type="button" class="pwd-toggle" onclick="togglePwd()"><i class="fas fa-eye" id="pwdEyeIcon"></i></button>
-          </div>
-        </div>
-        <div class="af-row">
-          <label class="af-check"><input type="checkbox"> <span>Remember me</span></label>
-          <a href="#" class="af-forgot">Forgot password?</a>
-        </div>
-        <button type="submit" class="af-submit">
-          <span>Sign In to Dashboard</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-        <div class="af-error" id="afError"></div>
-      </form>
-
-      <p class="amr-footer">Having trouble? <a href="#">Contact IT Support</a></p>
-    </div>
-  </div>
-</div>
-<script src="api.js"></script>
 <script src="nav.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
