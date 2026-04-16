@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Admin Dashboard – O.B Kingsland</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -15,120 +15,56 @@
   --text:#1A2B3C;--muted:#6B7C8D;--border:#E2E8F0;
   --green:#10B981;--red:#EF4444;--blue:#3B82F6;
   --sidebar-w:240px;
+  --topbar-h:60px;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden;display:flex;min-height:100vh}
+html,body{height:100%}
+body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden;overflow-y:auto;display:flex;min-height:100vh}
 
-/* ══════════════════════════════════════
-   SIDEBAR
-══════════════════════════════════════ */
-.sidebar{
-  width:var(--sidebar-w);min-width:var(--sidebar-w);
-  background:var(--navy);min-height:100vh;
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;z-index:900;
-  box-shadow:4px 0 24px rgba(0,0,0,0.18);
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-.sb-logo{
-  padding:28px 20px 24px;
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  display:flex;align-items:center;gap:11px;
-}
-.sb-logo .logo-icon{
-  width:38px;height:38px;background:var(--orange);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--navy);height:100vh;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:900;box-shadow:4px 0 24px rgba(0,0,0,0.18);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;overflow-x:hidden}
+.sb-logo{padding:28px 20px 24px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:11px;flex-shrink:0}
+.sb-logo .logo-icon{width:38px;height:38px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sb-logo .logo-icon svg{width:20px;height:20px;fill:#fff}
 .sb-logo-text{display:flex;flex-direction:column;gap:2px}
 .sb-logo-text span{color:#fff;font-weight:800;font-size:15px;line-height:1}
 .sb-logo-text small{color:rgba(255,255,255,0.35);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
-
-.sb-section-label{
-  padding:18px 20px 6px;
-  font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
-  color:rgba(255,255,255,0.25);
-}
-
+.sb-section-label{padding:18px 20px 6px;font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,0.25);flex-shrink:0}
 .sb-nav{flex:1;padding:8px 10px;display:flex;flex-direction:column;gap:3px}
-.sb-item{
-  display:flex;align-items:center;gap:11px;
-  padding:11px 12px;border-radius:10px;
-  cursor:pointer;transition:all .2s;
-  color:rgba(255,255,255,0.55);font-size:13.5px;font-weight:700;
-  position:relative;border:none;background:none;font-family:'Nunito Sans',sans-serif;
-  width:100%;text-align:left;
-}
+.sb-item{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,0.55);font-size:13.5px;font-weight:700;position:relative;border:none;background:none;font-family:'Nunito Sans',sans-serif;width:100%;text-align:left;min-height:46px;-webkit-tap-highlight-color:transparent}
 .sb-item i{font-size:15px;width:18px;text-align:center;flex-shrink:0}
 .sb-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85)}
 .sb-item.active{background:rgba(232,98,42,0.18);color:var(--orange)}
 .sb-item.active i{color:var(--orange)}
-.sb-badge{
-  margin-left:auto;
-  background:var(--orange);color:#fff;
-  font-size:9px;font-weight:800;
-  border-radius:10px;padding:2px 6px;min-width:18px;text-align:center;
-}
-.sb-divider{height:1px;background:rgba(255,255,255,0.07);margin:8px 10px}
-
-.sb-bottom{padding:12px 10px 20px;display:flex;flex-direction:column;gap:3px}
-.sb-logout{
-  display:flex;align-items:center;gap:11px;
-  padding:11px 12px;border-radius:10px;
-  cursor:pointer;transition:all .2s;
-  color:rgba(239,100,100,0.7);font-size:13.5px;font-weight:700;
-  border:none;background:none;font-family:'Nunito Sans',sans-serif;width:100%;text-align:left;
-}
+.sb-badge{margin-left:auto;background:var(--orange);color:#fff;font-size:9px;font-weight:800;border-radius:10px;padding:2px 6px;min-width:18px;text-align:center}
+.sb-divider{height:1px;background:rgba(255,255,255,0.07);margin:8px 10px;flex-shrink:0}
+.sb-bottom{padding:12px 10px 20px;display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.sb-logout{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;cursor:pointer;transition:all .2s;color:rgba(239,100,100,0.7);font-size:13.5px;font-weight:700;border:none;background:none;font-family:'Nunito Sans',sans-serif;width:100%;text-align:left;min-height:46px;-webkit-tap-highlight-color:transparent}
 .sb-logout i{font-size:15px;width:18px;text-align:center}
 .sb-logout:hover{background:rgba(239,68,68,0.12);color:#f87171}
 
-/* mobile toggle */
-.sb-toggle{
-  display:none;position:fixed;bottom:20px;right:20px;z-index:1100;
-  width:48px;height:48px;border-radius:50%;
-  background:var(--orange);color:#fff;border:none;
-  font-size:18px;cursor:pointer;
-  box-shadow:0 6px 20px rgba(232,98,42,0.4);
-}
-.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:800;backdrop-filter:blur(2px)}
+/* Hamburger toggle — inside top-bar on mobile */
+.sb-toggle{display:none;width:40px;height:40px;border-radius:9px;background:transparent;color:var(--text);border:none;font-size:20px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;transition:color .2s;-webkit-tap-highlight-color:transparent}
+.sb-toggle:hover{color:var(--orange)}
+.sb-overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:800;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.sb-overlay.show{opacity:1;pointer-events:all}
 
-/* ══════════════════════════════════════
-   MAIN AREA
-══════════════════════════════════════ */
-.main-wrap{
-  margin-left:var(--sidebar-w);flex:1;
-  min-height:100vh;display:flex;flex-direction:column;
-}
+/* MAIN WRAP */
+.main-wrap{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;min-width:0;overflow-x:hidden}
 
-/* Top bar (thin) */
-.top-bar{
-  background:#fff;height:60px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 32px;position:sticky;top:0;z-index:800;
-}
-.tb-page-title{font-size:16px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
-.tb-page-title i{color:var(--orange);font-size:15px}
-.tb-right{display:flex;align-items:center;gap:10px}
-.tb-view-btn{
-  background:var(--light);border:1.5px solid var(--border);
-  color:var(--muted);border-radius:8px;padding:7px 14px;
-  font-size:12px;font-weight:700;cursor:pointer;
-  font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;gap:7px;
-  transition:all .2s;text-decoration:none;
-}
+/* TOP BAR — fixed, never scrolls, no horizontal overflow */
+.top-bar{background:#fff;height:var(--topbar-h);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:var(--sidebar-w);right:0;z-index:800;padding:0 24px;gap:12px;overflow:hidden}
+.tb-page-title{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-page-title i{color:var(--orange);font-size:14px;flex-shrink:0}
+.tb-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.tb-view-btn{background:var(--light);border:1.5px solid var(--border);color:var(--muted);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;gap:7px;transition:all .2s;text-decoration:none;white-space:nowrap}
 .tb-view-btn:hover{border-color:var(--orange);color:var(--orange)}
 
-/* CONTENT */
-.content{flex:1;padding:28px 32px 60px;max-width:1320px;width:100%}
-
-/* ── SECTIONS ── */
+/* CONTENT — top margin accounts for fixed bar */
+.content{flex:1;padding:28px 24px 60px;max-width:1320px;width:100%;margin-top:var(--topbar-h);overflow-x:hidden}
 .section-view{display:none}
 .section-view.active{display:block}
 
-/* ══════════════════════════════════════
-   STATS ROW
-══════════════════════════════════════ */
+/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
 .stat-card{background:#fff;border-radius:14px;padding:20px 22px;border:1.5px solid var(--border);display:flex;align-items:center;gap:16px;animation:fadeInUp .5s ease both}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -137,13 +73,10 @@ body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--te
 .stat-ico.green{background:rgba(16,185,129,0.1);color:var(--green)}
 .stat-ico.blue{background:rgba(59,130,246,0.1);color:var(--blue)}
 .stat-ico.navy{background:rgba(13,27,42,0.07);color:var(--navy)}
-.stat-ico.purple{background:rgba(139,92,246,0.1);color:#8B5CF6}
 .stat-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--text);line-height:1}
 .stat-lbl{font-size:11.5px;font-weight:700;color:var(--muted);margin-top:3px}
 
-/* ══════════════════════════════════════
-   SECTION CARDS / TABLES
-══════════════════════════════════════ */
+/* SECTION CARDS */
 .section-card{background:#fff;border-radius:18px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:20px}
 .sc-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .sc-header h2{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:9px}
@@ -152,90 +85,155 @@ body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--te
 .sc-search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);border-radius:9px;padding:0 12px;transition:border-color .2s}
 .sc-search:focus-within{border-color:var(--orange)}
 .sc-search i{color:var(--muted);font-size:13px}
-.sc-search input{border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;padding:8px 0;width:160px;background:transparent;color:var(--text)}
+.sc-search input{border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:16px;font-weight:600;padding:8px 0;width:160px;background:transparent;color:var(--text)}
 
-.listings-table{width:100%;border-collapse:collapse}
-.listings-table th{padding:10px 16px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:var(--light);border-bottom:1px solid var(--border)}
+/* TABLE SCROLL — isolated, doesn't affect page scroll */
+.table-scroll{overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch}
+.listings-table{width:100%;border-collapse:collapse;min-width:580px}
+.listings-table th{padding:10px 16px;text-align:left;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:var(--light);border-bottom:1px solid var(--border);white-space:nowrap}
 .listings-table td{padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
 .listings-table tr:last-child td{border-bottom:none}
 .listings-table tr:hover td{background:rgba(232,98,42,0.02)}
-.tbl-title{font-weight:800;color:var(--text);max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tbl-loc{font-size:11px;color:var(--muted);margin-top:2px}
+.tbl-title{font-weight:800;color:var(--text);max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbl-loc{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap}
 .tbl-price{font-weight:800;color:var(--orange);white-space:nowrap}
-.tbl-badge{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px}
+.tbl-badge{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px;white-space:nowrap}
 .tbl-badge.hot{background:rgba(232,98,42,0.12);color:var(--orange)}
 .tbl-badge.new{background:rgba(59,130,246,0.12);color:var(--blue)}
 .tbl-badge.available{background:rgba(16,185,129,0.12);color:var(--green)}
 .tbl-badge.sold{background:rgba(107,124,141,0.12);color:var(--muted)}
-.tbl-type{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px;background:rgba(13,27,42,0.07);color:var(--navy)}
+.tbl-type{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:5px;background:rgba(13,27,42,0.07);color:var(--navy);white-space:nowrap}
 .tbl-actions{display:flex;gap:6px}
-.tbl-btn{width:30px;height:30px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s}
+.tbl-btn{width:32px;height:32px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;-webkit-tap-highlight-color:transparent;flex-shrink:0}
 .tbl-btn.edit{background:rgba(59,130,246,0.1);color:var(--blue)}
 .tbl-btn.edit:hover{background:var(--blue);color:#fff}
 .tbl-btn.del{background:rgba(239,68,68,0.1);color:var(--red)}
 .tbl-btn.del:hover{background:var(--red);color:#fff}
+.tbl-btn.view{background:rgba(16,185,129,0.1);color:var(--green)}
+.tbl-btn.view:hover{background:var(--green);color:#fff}
 .tbl-empty{text-align:center;padding:44px 20px;color:var(--muted)}
 .tbl-empty i{font-size:32px;display:block;margin-bottom:10px;color:var(--border)}
 .tbl-empty p{font-size:13px;font-weight:700}
+.tbl-thumb-stack{display:flex;align-items:center;cursor:pointer;padding:2px 0}
+.tbl-thumb{width:34px;height:34px;border-radius:7px;object-fit:cover;border:2px solid #fff;margin-right:-10px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,0.12);flex-shrink:0}
+.tbl-thumb:hover{transform:scale(1.1) translateY(-2px);z-index:5}
+.tbl-thumb-more{width:34px;height:34px;border-radius:7px;background:var(--navy);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff;margin-right:-10px;flex-shrink:0}
+.tbl-thumb-video{width:34px;height:34px;border-radius:7px;background:rgba(232,98,42,0.15);color:var(--orange);font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;flex-shrink:0}
+.tbl-thumb-empty{width:34px;height:34px;border-radius:7px;background:var(--light);border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
 
-/* ══════════════════════════════════════
-   LISTINGS LAYOUT (table + form side by side)
-══════════════════════════════════════ */
-.listings-layout{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:start}
+/* LISTINGS LAYOUT */
+.listings-layout{display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start}
 
-/* FORM */
-.form-card{background:#fff;border-radius:18px;border:1.5px solid var(--border);overflow:hidden;position:sticky;top:80px}
-.form-card-header{background:linear-gradient(90deg,var(--navy),var(--navy3));padding:18px 22px;display:flex;align-items:center;gap:12px}
+/* FORM CARD — internal scroll, max height, no page overflow */
+.form-card{background:#fff;border-radius:18px;border:1.5px solid var(--border);overflow:hidden;position:sticky;top:calc(var(--topbar-h) + 16px);max-height:calc(100vh - var(--topbar-h) - 32px);display:flex;flex-direction:column}
+.form-card-header{background:linear-gradient(90deg,var(--navy),var(--navy3));padding:18px 22px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .form-card-header i{color:var(--orange);font-size:17px}
 .form-card-header div h3{color:#fff;font-size:14px;font-weight:800}
 .form-card-header div p{color:rgba(255,255,255,0.4);font-size:11px;margin-top:1px}
-.post-form{padding:20px;display:flex;flex-direction:column;gap:14px}
-.pf-group{display:flex;flex-direction:column;gap:5px}
+
+/* Form body scrolls independently */
+.post-form{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;flex:1;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.post-form::-webkit-scrollbar{width:4px}
+.post-form::-webkit-scrollbar-track{background:transparent}
+.post-form::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+.pf-group{display:flex;flex-direction:column;gap:5px;flex-shrink:0}
 .pf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pf-group label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text)}
 .pf-group label span{color:var(--orange)}
-.pf-wrap{display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);border-radius:10px;padding:0 11px;transition:border-color .25s,box-shadow .25s}
+.pf-wrap{display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);border-radius:10px;padding:0 11px;transition:border-color .25s,box-shadow .25s;min-width:0}
 .pf-wrap:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,98,42,0.1)}
-.pf-wrap i{color:var(--muted);font-size:12px;flex-shrink:0;transition:color .25s}
-.pf-wrap:focus-within i{color:var(--orange)}
-.pf-wrap input,.pf-wrap select,.pf-wrap textarea{flex:1;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text);padding:10px 0;background:transparent}
+.pf-wrap i.fi{color:var(--muted);font-size:12px;flex-shrink:0;transition:color .25s}
+.pf-wrap:focus-within i.fi{color:var(--orange)}
+/* font-size 16px prevents iOS zoom */
+.pf-wrap input,.pf-wrap select,.pf-wrap textarea{flex:1;min-width:0;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:16px;font-weight:600;color:var(--text);padding:10px 0;background:transparent;-webkit-appearance:none}
 .pf-wrap select{cursor:pointer}
-.pf-wrap textarea{resize:vertical;min-height:72px;padding:10px 0;line-height:1.6}
+.pf-wrap textarea{resize:none;min-height:68px;padding:10px 0;line-height:1.6}
 .pf-wrap input::placeholder,.pf-wrap textarea::placeholder{color:#c0ccd8;font-weight:400}
 .pf-checks{display:flex;gap:14px;flex-wrap:wrap}
 .pf-check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:700;cursor:pointer}
-.pf-check input{accent-color:var(--orange);width:13px;height:13px}
-.img-preview{border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .25s;position:relative}
-.img-preview:hover{border-color:var(--orange);background:rgba(232,98,42,0.03)}
-.img-preview i{font-size:24px;color:var(--border);display:block;margin-bottom:6px;transition:color .25s}
-.img-preview:hover i{color:var(--orange)}
-.img-preview p{font-size:11.5px;color:var(--muted);font-weight:600}
-.img-preview input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-preview img{width:100%;height:100px;object-fit:cover;border-radius:7px;display:none}
-.pf-submit{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .25s;position:relative;overflow:hidden}
+.pf-check input{accent-color:var(--orange);width:15px;height:15px;flex-shrink:0}
+.pf-submit{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .25s;position:relative;overflow:hidden;min-height:48px;flex-shrink:0;-webkit-tap-highlight-color:transparent}
 .pf-submit::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:shimmer 2.5s infinite}
 @keyframes shimmer{to{left:160%}}
 .pf-submit:hover{background:var(--orange);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,98,42,0.3)}
-.edit-mode-bar{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9px;padding:9px 12px;display:none;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--blue)}
+.edit-mode-bar{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9px;padding:9px 12px;display:none;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--blue);flex-shrink:0}
 .edit-mode-bar.show{display:flex}
 .edit-cancel{margin-left:auto;background:none;border:none;color:var(--red);cursor:pointer;font-size:12.5px;font-weight:700;font-family:'Nunito Sans',sans-serif}
 
-/* ══════════════════════════════════════
-   VISITS
-══════════════════════════════════════ */
-.visit-status-filter{border:1.5px solid var(--border);border-radius:9px;padding:7px 11px;font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text);background:#fff;cursor:pointer;outline:none;transition:border-color .2s}
+/* MEDIA UPLOAD */
+.media-upload-section{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.media-tabs{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.media-tab{flex:1;padding:9px 10px;border:none;background:transparent;font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.media-tab:not(:last-child){border-right:1px solid var(--border)}
+.media-tab.active{background:var(--navy);color:#fff}
+.media-tab i{font-size:13px}
+.img-dropzone{border:2px dashed var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;position:relative;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.img-dropzone:hover,.img-dropzone.dragover{border-color:var(--orange);background:rgba(232,98,42,0.03)}
+.img-dropzone .dz-icon{font-size:22px;color:var(--border);transition:color .25s}
+.img-dropzone:hover .dz-icon{color:var(--orange)}
+.img-dropzone p{font-size:11.5px;color:var(--muted);font-weight:600}
+.img-dropzone small{font-size:10px;color:#b0bec8}
+.img-dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+.img-preview-item{position:relative;border-radius:9px;overflow:hidden;aspect-ratio:1;border:1.5px solid var(--border);background:var(--light)}
+.img-preview-item img{width:100%;height:100%;object-fit:cover;display:block}
+.img-preview-item .remove-img{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:5px;background:rgba(239,68,68,0.9);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;opacity:0;transition:opacity .2s;z-index:2}
+.img-preview-item:hover .remove-img{opacity:1}
+.img-preview-item .cover-badge{position:absolute;bottom:4px;left:4px;background:rgba(232,98,42,0.92);color:#fff;font-size:8px;font-weight:800;letter-spacing:.6px;padding:2px 6px;border-radius:4px;text-transform:uppercase}
+.img-count-badge{font-size:10.5px;color:var(--muted);font-weight:700;text-align:right;margin-top:2px}
+.video-dropzone{border:2px dashed var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;position:relative;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.video-dropzone:hover,.video-dropzone.dragover{border-color:var(--orange);background:rgba(232,98,42,0.03)}
+.video-dropzone .dz-icon{font-size:22px;color:var(--border);transition:color .25s}
+.video-dropzone:hover .dz-icon{color:var(--orange)}
+.video-dropzone p{font-size:11.5px;color:var(--muted);font-weight:600}
+.video-dropzone small{font-size:10px;color:#b0bec8}
+.video-dropzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.video-preview-wrap{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;background:#000;position:relative}
+.video-preview-wrap video{width:100%;display:block;max-height:140px;object-fit:contain}
+.video-preview-wrap .remove-video{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.92);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;z-index:2}
+.video-name{font-size:11px;color:var(--muted);font-weight:700;padding:7px 11px;background:var(--light);border-top:1px solid var(--border);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(4,8,16,0.97);z-index:9100;display:none;flex-direction:column;align-items:center;justify-content:center}
+.lightbox-overlay.show{display:flex}
+.lightbox-header{position:absolute;top:0;left:0;right:0;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;z-index:3;background:linear-gradient(to bottom,rgba(4,8,16,0.85),transparent);pointer-events:none}
+.lightbox-header>*{pointer-events:all}
+.lb-title{color:#fff;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw}
+.lb-header-right{display:flex;align-items:center;gap:12px}
+.lb-counter{color:rgba(255,255,255,0.45);font-size:12px;font-weight:700;white-space:nowrap}
+.lb-close{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.1);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-close:hover{background:var(--red)}
+.lightbox-main{flex:1;width:100%;display:flex;align-items:center;justify-content:center;padding:68px 60px 86px;position:relative}
+.lb-media{max-width:100%;max-height:100%;border-radius:12px;display:block;object-fit:contain;animation:lbFade .22s ease}
+@keyframes lbFade{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.lb-video{max-width:100%;max-height:100%;border-radius:12px;animation:lbFade .22s ease}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,0.1);color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent;z-index:3}
+.lb-nav:hover{background:var(--orange)}
+.lb-nav.prev{left:10px}
+.lb-nav.next{right:10px}
+.lb-nav:disabled{opacity:.18;cursor:default;pointer-events:none}
+.lightbox-thumbs{position:absolute;bottom:0;left:0;right:0;padding:10px 16px 14px;display:flex;align-items:center;gap:8px;overflow-x:auto;background:linear-gradient(to top,rgba(4,8,16,0.88),transparent);scrollbar-width:none;z-index:3}
+.lightbox-thumbs::-webkit-scrollbar{display:none}
+.lb-thumb{width:54px;height:54px;border-radius:8px;object-fit:cover;cursor:pointer;border:2.5px solid transparent;opacity:.5;transition:all .2s;flex-shrink:0}
+.lb-thumb.active{border-color:var(--orange);opacity:1}
+.lb-thumb:hover:not(.active){opacity:.8}
+.lb-thumb-vid{width:54px;height:54px;border-radius:8px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2.5px solid transparent;opacity:.5;transition:all .2s;flex-shrink:0;font-size:20px}
+.lb-thumb-vid.active{border-color:var(--orange);opacity:1;color:#fff}
+.lb-thumb-vid:hover:not(.active){opacity:.8}
+
+/* VISITS */
+.visit-status-filter{border:1.5px solid var(--border);border-radius:9px;padding:7px 11px;font-family:'Nunito Sans',sans-serif;font-size:16px;font-weight:600;color:var(--text);background:#fff;cursor:pointer;outline:none;transition:border-color .2s;-webkit-appearance:none}
 .visit-status-filter:focus{border-color:var(--orange)}
-.visit-badge{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px}
+.visit-badge{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;white-space:nowrap}
 .visit-badge.pending{background:rgba(245,158,11,0.12);color:#F59E0B}
 .visit-badge.confirmed{background:rgba(16,185,129,0.12);color:var(--green)}
 .visit-badge.completed{background:rgba(59,130,246,0.12);color:var(--blue)}
 .visit-badge.cancelled{background:rgba(107,124,141,0.12);color:var(--muted)}
-.status-select{border:1.5px solid var(--border);border-radius:7px;padding:5px 8px;font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;color:var(--text);background:#fff;cursor:pointer;outline:none;transition:border-color .2s;max-width:125px}
+.status-select{border:1.5px solid var(--border);border-radius:7px;padding:5px 8px;font-family:'Nunito Sans',sans-serif;font-size:16px;font-weight:700;color:var(--text);background:#fff;cursor:pointer;outline:none;transition:border-color .2s;max-width:130px;-webkit-appearance:none}
 .status-select:focus{border-color:var(--orange)}
 
-/* ══════════════════════════════════════
-   SETTINGS
-══════════════════════════════════════ */
+/* SETTINGS */
 .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 .settings-card{background:#fff;border-radius:18px;border:1.5px solid var(--border);overflow:hidden}
 .settings-card-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
@@ -246,914 +244,513 @@ body{font-family:'Nunito Sans',sans-serif;background:var(--light);color:var(--te
 .sf-group{display:flex;flex-direction:column;gap:6px}
 .sf-group label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text)}
 .sf-group label span{color:var(--orange)}
-.sf-wrap{display:flex;align-items:center;gap:9px;border:1.5px solid var(--border);border-radius:10px;padding:0 13px;transition:border-color .25s,box-shadow .25s}
+.sf-wrap{display:flex;align-items:center;gap:9px;border:1.5px solid var(--border);border-radius:10px;padding:0 13px;transition:border-color .25s,box-shadow .25s;min-width:0}
 .sf-wrap:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,98,42,0.1)}
-.sf-wrap i{color:var(--muted);font-size:13px;flex-shrink:0;transition:color .25s}
+.sf-wrap i{color:var(--muted);font-size:13px;flex-shrink:0}
 .sf-wrap:focus-within i{color:var(--orange)}
-.sf-wrap input{flex:1;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--text);padding:12px 0;background:transparent}
+.sf-wrap input{flex:1;min-width:0;border:none;outline:none;font-family:'Nunito Sans',sans-serif;font-size:16px;font-weight:600;color:var(--text);padding:12px 0;background:transparent}
 .sf-wrap input::placeholder{color:#c0ccd8;font-weight:400}
-.sf-btn{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .25s;width:100%}
+.sf-btn{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .25s;width:100%;min-height:48px}
 .sf-btn:hover{background:var(--orange);transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,98,42,0.3)}
 .sf-hint{font-size:11.5px;color:var(--muted);line-height:1.6;padding:10px 14px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);border-radius:9px;display:flex;align-items:flex-start;gap:8px}
 .sf-hint i{color:var(--blue);font-size:12px;margin-top:1px;flex-shrink:0}
 .sf-divider{height:1px;background:var(--border);margin:4px 0}
-
-/* credentials display card */
 .cred-display{padding:22px;display:flex;flex-direction:column;gap:14px}
-.cred-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--light);border-radius:10px;border:1.5px solid var(--border)}
+.cred-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:var(--light);border-radius:10px;border:1.5px solid var(--border)}
 .cred-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
-.cred-value{font-size:14px;font-weight:700;color:var(--text);font-family:monospace}
+.cred-value{font-size:14px;font-weight:700;color:var(--text);font-family:monospace;word-break:break-all}
 .cred-value.masked{letter-spacing:3px;color:var(--muted)}
 
-/* ══════════════════════════════════════
-   TOAST
-══════════════════════════════════════ */
-.toast{position:fixed;bottom:28px;right:28px;z-index:9999;background:var(--navy);color:#fff;border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:11px;font-size:13px;font-weight:700;box-shadow:0 10px 36px rgba(0,0,0,0.25);transform:translateY(80px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1)}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy);color:#fff;border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:11px;font-size:13px;font-weight:700;box-shadow:0 10px 36px rgba(0,0,0,0.25);transform:translateY(80px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);max-width:320px}
 .toast.show{transform:translateY(0);opacity:1}
-.toast i{font-size:15px}
+.toast i{font-size:15px;flex-shrink:0}
 .toast.success i{color:var(--green)}
 .toast.error i{color:var(--red)}
 .toast.info i{color:var(--blue)}
 
-/* ══════════════════════════════════════
-   DELETE MODAL
-══════════════════════════════════════ */
-.del-overlay{position:fixed;inset:0;background:rgba(13,27,42,0.7);backdrop-filter:blur(6px);z-index:8000;display:none;align-items:center;justify-content:center}
+/* DELETE MODAL */
+.del-overlay{position:fixed;inset:0;background:rgba(13,27,42,0.7);backdrop-filter:blur(6px);z-index:8000;display:none;align-items:center;justify-content:center;padding:20px}
 .del-overlay.show{display:flex}
-.del-modal{background:#fff;border-radius:18px;padding:32px 28px;max-width:360px;width:90%;text-align:center;animation:cardPop .4s ease both}
+.del-modal{background:#fff;border-radius:18px;padding:32px 28px;max-width:360px;width:100%;text-align:center;animation:cardPop .4s ease both}
 @keyframes cardPop{from{transform:scale(0.9) translateY(20px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
-.del-modal i{font-size:40px;color:var(--red);margin-bottom:14px}
+.del-modal .del-ico{font-size:40px;color:var(--red);display:block;margin-bottom:14px}
 .del-modal h3{font-size:19px;font-weight:800;margin-bottom:7px}
 .del-modal p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:22px}
 .del-btns{display:flex;gap:10px;justify-content:center}
-.del-cancel-btn{padding:10px 22px;border-radius:9px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .2s}
+.del-cancel-btn{padding:10px 22px;border-radius:9px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .2s;min-height:44px}
 .del-cancel-btn:hover{border-color:var(--muted)}
-.del-confirm-btn{padding:10px 22px;border-radius:9px;border:none;background:var(--red);color:#fff;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .2s}
+.del-confirm-btn{padding:10px 22px;border-radius:9px;border:none;background:var(--red);color:#fff;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .2s;min-height:44px}
 .del-confirm-btn:hover{background:#dc2626}
 
-/* ══════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════ */
+/* ============================================================
+   DROP-IN CSS REPLACEMENT for the admin dashboard
+   Replace the three existing @media blocks + .table-scroll rule
+   ============================================================ */
+
+/* TABLE SCROLL — horizontal + vertical, header stays fixed */
+.table-scroll{
+  overflow-x:auto;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  max-height:calc(100vh - 260px);
+  min-height:120px;
+  /* thin scrollbar on webkit */
+  scrollbar-width:thin;
+  scrollbar-color:var(--border) transparent;
+}
+.table-scroll::-webkit-scrollbar{height:5px;width:5px}
+.table-scroll::-webkit-scrollbar-track{background:transparent}
+.table-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+/* Sticky header — works because .table-scroll has overflow set */
+.listings-table th{
+  padding:10px 16px;
+  text-align:left;
+  font-size:10.5px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--muted);
+  background:var(--light);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+  position:sticky;
+  top:0;
+  z-index:2;
+  /* prevent seam between sticky cells */
+  box-shadow:0 1px 0 var(--border);
+}
+
+/* ── 1100px — tablet ─────────────────────────────────────── */
 @media(max-width:1100px){
   .listings-layout{grid-template-columns:1fr}
-  .form-card{position:static}
+  /* form no longer sticky on tablet */
+  .form-card{position:static;max-height:none}
+  .post-form{overflow-y:visible;max-height:none}
   .settings-grid{grid-template-columns:1fr}
   .stats-row{grid-template-columns:repeat(2,1fr)}
+  /* give table more vertical room since form is stacked below */
+  .table-scroll{max-height:60vh}
 }
+
+/* ── 800px — mobile ──────────────────────────────────────── */
 @media(max-width:800px){
-  .sidebar{transform:translateX(-100%)}
+  .sidebar{transform:translateX(-100%);width:280px;min-width:0}
   .sidebar.open{transform:translateX(0)}
-  .sb-overlay.show{display:block}
-  .sb-toggle{display:flex;align-items:center;justify-content:center}
+  .sb-toggle{display:flex}
+  .top-bar{left:0;padding:0 14px;gap:8px}
   .main-wrap{margin-left:0}
+  .content{padding:16px 12px 50px;overflow-x:hidden}
   .stats-row{grid-template-columns:repeat(2,1fr)}
-  .content{padding:20px 16px 50px}
-  .top-bar{padding:0 16px}
+  .quick-links-grid{grid-template-columns:1fr 1fr!important}
+
+  /* table: scrolls horizontally, header stays put, constrained height */
+  .table-scroll{max-height:55vh}
+  .listings-table{min-width:560px}
+
+  /* listings columns stack vertically, each fills width */
+  .listings-layout>div{min-width:0;width:100%}
+
+  /* form card full width */
+  .form-card{width:100%;box-sizing:border-box}
+  .post-form{padding:14px 14px 18px}
 }
+
+/* ── 520px — small phones ────────────────────────────────── */
 @media(max-width:520px){
   .stats-row{grid-template-columns:1fr 1fr}
   .pf-row{grid-template-columns:1fr}
   .sc-header{flex-direction:column;align-items:flex-start}
-  .sc-search input{width:130px}
+  .settings-grid{grid-template-columns:1fr}
+  .quick-links-grid{grid-template-columns:1fr!important}
+
+  /* tighter table cells on very small screens */
+  .listings-table{min-width:520px}
+  .listings-table th,.listings-table td{padding:9px 11px}
+  .tbl-title{max-width:120px}
+
+  /* search bar fills header */
+  .sc-header-right{width:100%}
+  .sc-search{flex:1;width:100%}
+  .sc-search input{width:100%;min-width:0;flex:1}
+
+  /* prevent form inputs / wraps from overflowing */
+  .pf-wrap{min-width:0;width:100%;box-sizing:border-box}
+  .post-form{padding:12px 12px 16px}
+
+  /* media tabs fill full width */
+  .media-tabs{width:100%}
+
+  /* action buttons tighter */
+  .tbl-actions{gap:4px}
+  .tbl-btn{width:30px;height:30px}
 }
+
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR OVERLAY (mobile) -->
 <div class="sb-overlay" id="sbOverlay" onclick="closeSidebar()"></div>
 
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-logo">
     <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L20 9v6l-8 4-8-4V9l8-4.5z"/></svg></div>
-    <div class="sb-logo-text">
-      <span>O.B Kingsland</span>
-      <small>Admin Panel</small>
-    </div>
+    <div class="sb-logo-text"><span>O.B Kingsland</span><small>Admin Panel</small></div>
   </div>
-
   <div class="sb-nav">
     <div class="sb-section-label">Main</div>
-
-    <button class="sb-item active" onclick="showSection('overview')" id="nav-overview">
-      <i class="fas fa-tachometer-alt"></i> Overview
-    </button>
-    <button class="sb-item" onclick="showSection('listings')" id="nav-listings">
-      <i class="fas fa-map"></i> Listings
-    </button>
-    <button class="sb-item" onclick="showSection('visits')" id="nav-visits">
-      <i class="fas fa-calendar-check"></i> Site Visits
-      <span class="sb-badge" id="visitsBadge">0</span>
-    </button>
-
+    <button class="sb-item active" onclick="showSection('overview')" id="nav-overview"><i class="fas fa-tachometer-alt"></i> Overview</button>
+    <button class="sb-item" onclick="showSection('listings')" id="nav-listings"><i class="fas fa-map"></i> Listings</button>
+    <button class="sb-item" onclick="showSection('visits')" id="nav-visits"><i class="fas fa-calendar-check"></i> Site Visits<span class="sb-badge" id="visitsBadge" style="display:none">0</span></button>
     <div class="sb-divider"></div>
     <div class="sb-section-label">Account</div>
-
-    <button class="sb-item" onclick="showSection('settings')" id="nav-settings">
-      <i class="fas fa-cog"></i> Settings
-    </button>
-    <a href="listings.html" target="_blank" class="sb-item" style="text-decoration:none">
-      <i class="fas fa-external-link-alt"></i> View Site
-    </a>
+    <button class="sb-item" onclick="showSection('settings')" id="nav-settings"><i class="fas fa-cog"></i> Settings</button>
+    <a href="listings.html" target="_blank" class="sb-item" style="text-decoration:none"><i class="fas fa-external-link-alt"></i> View Site</a>
   </div>
-
   <div class="sb-bottom">
     <div class="sb-divider"></div>
-    <button class="sb-logout" onclick="doLogout()">
-      <i class="fas fa-sign-out-alt"></i> Logout
-    </button>
+    <button class="sb-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </div>
 </aside>
 
-<!-- MAIN -->
 <div class="main-wrap">
-
-  <!-- TOP BAR -->
   <div class="top-bar">
+    <button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()" aria-label="Open navigation"><i class="fas fa-bars" id="sbToggleIcon"></i></button>
     <div class="tb-page-title" id="pageTitle"><i class="fas fa-tachometer-alt"></i> Overview</div>
-    <div class="tb-right">
-      <a href="listings.html" target="_blank" class="tb-view-btn"><i class="fas fa-external-link-alt"></i> View Listings</a>
-    </div>
+    <div class="tb-right"><a href="listings.html" target="_blank" class="tb-view-btn"><i class="fas fa-external-link-alt"></i> View Listings</a></div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
-    <!-- ── OVERVIEW ── -->
+    <!-- OVERVIEW -->
     <div class="section-view active" id="sec-overview">
       <div class="stats-row">
-        <div class="stat-card" style="animation-delay:.05s">
-          <div class="stat-ico orange"><i class="fas fa-map"></i></div>
-          <div><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">Total Listings</div></div>
-        </div>
-        <div class="stat-card" style="animation-delay:.1s">
-          <div class="stat-ico green"><i class="fas fa-check-circle"></i></div>
-          <div><div class="stat-num" id="statAvail">0</div><div class="stat-lbl">Available</div></div>
-        </div>
-        <div class="stat-card" style="animation-delay:.15s">
-          <div class="stat-ico blue"><i class="fas fa-fire"></i></div>
-          <div><div class="stat-num" id="statHot">0</div><div class="stat-lbl">Hot Deals</div></div>
-        </div>
-        <div class="stat-card" style="animation-delay:.2s">
-          <div class="stat-ico navy"><i class="fas fa-tag"></i></div>
-          <div><div class="stat-num" id="statSold">0</div><div class="stat-lbl">Sold</div></div>
-        </div>
+        <div class="stat-card" style="animation-delay:.05s"><div class="stat-ico orange"><i class="fas fa-map"></i></div><div><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">Total Listings</div></div></div>
+        <div class="stat-card" style="animation-delay:.1s"><div class="stat-ico green"><i class="fas fa-check-circle"></i></div><div><div class="stat-num" id="statAvail">0</div><div class="stat-lbl">Available</div></div></div>
+        <div class="stat-card" style="animation-delay:.15s"><div class="stat-ico blue"><i class="fas fa-fire"></i></div><div><div class="stat-num" id="statHot">0</div><div class="stat-lbl">Hot Deals</div></div></div>
+        <div class="stat-card" style="animation-delay:.2s"><div class="stat-ico navy"><i class="fas fa-tag"></i></div><div><div class="stat-num" id="statSold">0</div><div class="stat-lbl">Sold</div></div></div>
       </div>
-
-      <!-- quick links -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('listings')">
-          <i class="fas fa-map" style="color:var(--orange);font-size:20px;display:block;margin-bottom:10px"></i>
-          <div style="font-weight:800;font-size:14px;margin-bottom:4px">Manage Listings</div>
-          <div style="font-size:12px;color:var(--muted)">Add, edit or remove land listings</div>
-        </div>
-        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('visits')">
-          <i class="fas fa-calendar-check" style="color:#8B5CF6;font-size:20px;display:block;margin-bottom:10px"></i>
-          <div style="font-weight:800;font-size:14px;margin-bottom:4px">Site Visit Requests</div>
-          <div style="font-size:12px;color:var(--muted)">Review and manage visit bookings</div>
-        </div>
-        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('settings')">
-          <i class="fas fa-cog" style="color:var(--blue);font-size:20px;display:block;margin-bottom:10px"></i>
-          <div style="font-weight:800;font-size:14px;margin-bottom:4px">Account Settings</div>
-          <div style="font-size:12px;color:var(--muted)">Update your login credentials</div>
-        </div>
+      <div class="quick-links-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('listings')"><i class="fas fa-map" style="color:var(--orange);font-size:20px;display:block;margin-bottom:10px"></i><div style="font-weight:800;font-size:14px;margin-bottom:4px">Manage Listings</div><div style="font-size:12px;color:var(--muted)">Add, edit or remove land listings</div></div>
+        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('visits')"><i class="fas fa-calendar-check" style="color:#8B5CF6;font-size:20px;display:block;margin-bottom:10px"></i><div style="font-weight:800;font-size:14px;margin-bottom:4px">Site Visit Requests</div><div style="font-size:12px;color:var(--muted)">Review and manage visit bookings</div></div>
+        <div style="background:#fff;border-radius:14px;border:1.5px solid var(--border);padding:22px 20px;cursor:pointer" onclick="showSection('settings')"><i class="fas fa-cog" style="color:var(--blue);font-size:20px;display:block;margin-bottom:10px"></i><div style="font-weight:800;font-size:14px;margin-bottom:4px">Account Settings</div><div style="font-size:12px;color:var(--muted)">Update your login credentials</div></div>
       </div>
     </div>
 
-    <!-- ── LISTINGS ── -->
+    <!-- LISTINGS -->
     <div class="section-view" id="sec-listings">
       <div class="listings-layout">
-        <!-- Table -->
         <div>
           <div class="section-card">
             <div class="sc-header">
               <h2><i class="fas fa-list"></i> All Listings</h2>
-              <div class="sc-header-right">
-                <div class="sc-search">
-                  <i class="fas fa-search"></i>
-                  <input type="text" placeholder="Search…" oninput="renderTable(this.value)">
-                </div>
-              </div>
+              <div class="sc-header-right"><div class="sc-search"><i class="fas fa-search"></i><input type="text" placeholder="Search…" oninput="renderTable(this.value)"></div></div>
             </div>
-            <div style="overflow-x:auto">
+            <div class="table-scroll">
               <table class="listings-table">
-                <thead><tr>
-                  <th>Listing</th><th>Type</th><th>Price</th><th>Status</th><th>Date</th><th>Actions</th>
-                </tr></thead>
+                <thead><tr><th>Listing</th><th>Media</th><th>Type</th><th>Price</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
                 <tbody id="tableBody"></tbody>
               </table>
             </div>
           </div>
         </div>
-
-        <!-- Form -->
         <div>
           <div class="form-card">
             <div class="form-card-header">
               <i class="fas fa-plus-circle"></i>
               <div><h3 id="formTitle">Post New Listing</h3><p id="formSub">Fill in details and publish instantly</p></div>
             </div>
-            <div class="post-form">
-              <div class="edit-mode-bar" id="editBar">
-                <i class="fas fa-pencil-alt"></i> Editing existing listing
-                <button class="edit-cancel" onclick="cancelEdit()">✕ Cancel</button>
-              </div>
-              <div class="pf-group">
-                <label>Plot Image</label>
-                <div class="img-preview" id="imgPreviewWrap">
-                  <input type="file" id="pfImageFile" accept="image/*" onchange="previewImg(event)">
-                  <img id="imgPreviewEl" alt="preview">
-                  <i class="fas fa-image" id="imgIcon"></i>
-                  <p id="imgText">Click to upload image</p>
+            <div class="post-form" id="postFormScroll">
+              <div class="edit-mode-bar" id="editBar"><i class="fas fa-pencil-alt"></i> Editing listing<button class="edit-cancel" onclick="cancelEdit()">✕ Cancel</button></div>
+              <div class="media-upload-section">
+                <label style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text)">Media</label>
+                <div class="media-tabs">
+                  <button class="media-tab active" id="tabImages" onclick="switchMediaTab('images')"><i class="fas fa-images"></i> Photos</button>
+                  <button class="media-tab" id="tabVideo" onclick="switchMediaTab('video')"><i class="fas fa-video"></i> Video</button>
                 </div>
-                <input type="hidden" id="pfImageUrl">
+                <div id="panelImages">
+                  <div class="img-dropzone" id="imgDropzone"><input type="file" id="pfImageFiles" accept="image/*" multiple onchange="handleImageFiles(event)"><i class="fas fa-cloud-upload-alt dz-icon"></i><p>Click or drag photos</p><small>Up to 10 · JPG PNG WEBP · First = cover</small></div>
+                  <div class="img-preview-grid" id="imgPreviewGrid" style="display:none"></div>
+                  <div class="img-count-badge" id="imgCountBadge" style="display:none"></div>
+                </div>
+                <div id="panelVideo" style="display:none">
+                  <div class="video-dropzone" id="videoDropzone"><input type="file" id="pfVideoFile" accept="video/*" onchange="handleVideoFile(event)"><i class="fas fa-film dz-icon"></i><p>Click or drag video</p><small>MP4, MOV, WEBM · Max 200 MB</small></div>
+                  <div id="videoPreviewWrap" style="display:none" class="video-preview-wrap"><video id="videoPreviewEl" controls muted playsinline></video><div class="video-name" id="videoNameEl"></div><button class="remove-video" onclick="removeVideo()"><i class="fas fa-times"></i></button></div>
+                </div>
               </div>
-              <div class="pf-group">
-                <label>Listing Title <span>*</span></label>
-                <div class="pf-wrap"><i class="fas fa-heading"></i><input type="text" id="pfTitle" placeholder="e.g. Lakeside Residential Plot"></div>
+              <div class="pf-group"><label>Title <span>*</span></label><div class="pf-wrap"><i class="fas fa-heading fi"></i><input type="text" id="pfTitle" placeholder="e.g. Lakeside Residential Plot"></div></div>
+              <div class="pf-row">
+                <div class="pf-group"><label>Type <span>*</span></label><div class="pf-wrap"><i class="fas fa-layer-group fi"></i><select id="pfType"><option value="Residential">Residential</option><option value="Commercial">Commercial</option></select></div></div>
+                <div class="pf-group"><label>Status</label><div class="pf-wrap"><i class="fas fa-tag fi"></i><select id="pfStatus"><option value="available">Available</option><option value="hot">Hot Deal</option><option value="new">New</option><option value="sold">Sold</option></select></div></div>
               </div>
               <div class="pf-row">
-                <div class="pf-group">
-                  <label>Land Type <span>*</span></label>
-                  <div class="pf-wrap"><i class="fas fa-layer-group"></i>
-                    <select id="pfType"><option value="Residential">Residential</option><option value="Commercial">Commercial</option></select>
-                  </div>
-                </div>
-                <div class="pf-group">
-                  <label>Status</label>
-                  <div class="pf-wrap"><i class="fas fa-tag"></i>
-                    <select id="pfStatus">
-                      <option value="available">Available</option>
-                      <option value="hot">Hot Deal</option>
-                      <option value="new">New</option>
-                      <option value="sold">Sold</option>
-                    </select>
-                  </div>
-                </div>
+                <div class="pf-group"><label>Location <span>*</span></label><div class="pf-wrap"><i class="fas fa-map-marker-alt fi"></i><input type="text" id="pfLocation" placeholder="e.g. Prampram"></div></div>
+                <div class="pf-group"><label>Region <span>*</span></label><div class="pf-wrap"><i class="fas fa-map fi"></i><select id="pfRegion"><option value="Greater Accra">Greater Accra</option><option value="Ashanti">Ashanti</option><option value="Western">Western</option><option value="Eastern">Eastern</option><option value="Volta">Volta</option><option value="Northern">Northern</option><option value="Central">Central</option></select></div></div>
               </div>
               <div class="pf-row">
-                <div class="pf-group">
-                  <label>Location <span>*</span></label>
-                  <div class="pf-wrap"><i class="fas fa-map-marker-alt"></i><input type="text" id="pfLocation" placeholder="e.g. Prampram"></div>
-                </div>
-                <div class="pf-group">
-                  <label>Region <span>*</span></label>
-                  <div class="pf-wrap"><i class="fas fa-map"></i>
-                    <select id="pfRegion">
-                      <option value="Greater Accra">Greater Accra</option>
-                      <option value="Ashanti">Ashanti</option>
-                      <option value="Western">Western</option>
-                      <option value="Eastern">Eastern</option>
-                      <option value="Volta">Volta</option>
-                      <option value="Northern">Northern</option>
-                      <option value="Central">Central</option>
-                    </select>
-                  </div>
-                </div>
+                <div class="pf-group"><label>Price (GHS) <span>*</span></label><div class="pf-wrap"><i class="fas fa-coins fi"></i><input type="number" id="pfPrice" placeholder="185000" min="0" inputmode="numeric"></div></div>
+                <div class="pf-group"><label>Price Per</label><div class="pf-wrap"><i class="fas fa-divide fi"></i><select id="pfPriceUnit"><option value="plot">plot</option><option value="acre">acre</option><option value="sqm">sqm</option></select></div></div>
               </div>
-              <div class="pf-row">
-                <div class="pf-group">
-                  <label>Price (GHS) <span>*</span></label>
-                  <div class="pf-wrap"><i class="fas fa-coins"></i><input type="number" id="pfPrice" placeholder="e.g. 185000" min="0"></div>
-                </div>
-                <div class="pf-group">
-                  <label>Price Per</label>
-                  <div class="pf-wrap"><i class="fas fa-divide"></i>
-                    <select id="pfPriceUnit"><option value="plot">plot</option><option value="acre">acre</option><option value="sqm">sqm</option></select>
-                  </div>
-                </div>
-              </div>
-              <div class="pf-group">
-                <label>Plot Size</label>
-                <div class="pf-wrap"><i class="fas fa-ruler-combined"></i><input type="text" id="pfSize" placeholder="e.g. 0.5 acres"></div>
-              </div>
-              <div class="pf-group">
-                <label>Description</label>
-                <div class="pf-wrap"><i class="fas fa-align-left" style="align-self:flex-start;margin-top:11px"></i><textarea id="pfDesc" placeholder="Brief description of the plot…"></textarea></div>
-              </div>
-              <div class="pf-group">
-                <label>Features</label>
-                <div class="pf-checks">
-                  <label class="pf-check"><input type="checkbox" id="pfSurveyed" checked><span>GPS Surveyed</span></label>
-                  <label class="pf-check"><input type="checkbox" id="pfTitleDeed" checked><span>Title Deed</span></label>
-                  <label class="pf-check"><input type="checkbox" id="pfWater"><span>Water Source</span></label>
-                </div>
-              </div>
-              <button class="pf-submit" onclick="submitListing()">
-                <i class="fas fa-paper-plane" id="submitIcon"></i>
-                <span id="submitLabel">Publish Listing</span>
-              </button>
+              <div class="pf-group"><label>Plot Size</label><div class="pf-wrap"><i class="fas fa-ruler-combined fi"></i><input type="text" id="pfSize" placeholder="e.g. 0.5 acres"></div></div>
+              <div class="pf-group"><label>Description</label><div class="pf-wrap"><i class="fas fa-align-left fi" style="align-self:flex-start;margin-top:11px"></i><textarea id="pfDesc" placeholder="Brief description…"></textarea></div></div>
+              <div class="pf-group"><label>Features</label><div class="pf-checks"><label class="pf-check"><input type="checkbox" id="pfSurveyed" checked><span>GPS Surveyed</span></label><label class="pf-check"><input type="checkbox" id="pfTitleDeed" checked><span>Title Deed</span></label><label class="pf-check"><input type="checkbox" id="pfWater"><span>Water Source</span></label></div></div>
+              <button class="pf-submit" onclick="submitListing()"><i class="fas fa-paper-plane"></i><span id="submitLabel">Publish Listing</span></button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── SITE VISITS ── -->
+    <!-- VISITS -->
     <div class="section-view" id="sec-visits">
       <div class="section-card">
         <div class="sc-header">
           <h2><i class="fas fa-calendar-check"></i> Site Visit Requests</h2>
           <div class="sc-header-right">
-            <div class="sc-search">
-              <i class="fas fa-search"></i>
-              <input type="text" placeholder="Search name or email…" oninput="searchVisits(this.value)">
-            </div>
-            <select class="visit-status-filter" id="visitStatusFilter" onchange="loadVisits()">
-              <option value="">All Statuses</option>
-              <option value="pending">Pending</option>
-              <option value="confirmed">Confirmed</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
+            <div class="sc-search"><i class="fas fa-search"></i><input type="text" placeholder="Search…" oninput="searchVisits(this.value)"></div>
+            <select class="visit-status-filter" id="visitStatusFilter" onchange="loadVisits()"><option value="">All</option><option value="pending">Pending</option><option value="confirmed">Confirmed</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select>
           </div>
         </div>
-        <div style="overflow-x:auto">
+        <div class="table-scroll">
           <table class="listings-table">
-            <thead><tr>
-              <th>Name</th><th>Contact</th><th>Date Requested</th><th>Land Type</th><th>Regions</th><th>Status</th><th>Update</th><th>Delete</th>
-            </tr></thead>
+            <thead><tr><th>Name</th><th>Contact</th><th>Visit Date</th><th>Type</th><th>Regions</th><th>Status</th><th>Update</th><th>Delete</th></tr></thead>
             <tbody id="visitsTableBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ── SETTINGS ── -->
+    <!-- SETTINGS -->
     <div class="section-view" id="sec-settings">
       <div class="settings-grid">
-
-        <!-- Current credentials display -->
         <div class="settings-card">
-          <div class="settings-card-header">
-            <i class="fas fa-user-shield"></i>
-            <div>
-              <h3>Current Credentials</h3>
-              <p>Your active admin login details</p>
-            </div>
-          </div>
+          <div class="settings-card-header"><i class="fas fa-user-shield"></i><div><h3>Current Credentials</h3><p>Active admin login details</p></div></div>
           <div class="cred-display">
-            <div class="cred-row">
-              <div>
-                <div class="cred-label">Email / Username</div>
-                <div class="cred-value" id="displayEmail">Loading…</div>
-              </div>
-              <i class="fas fa-envelope" style="color:var(--orange);font-size:16px"></i>
-            </div>
-            <div class="cred-row">
-              <div>
-                <div class="cred-label">Password</div>
-                <div class="cred-value masked" id="displayPassword">••••••••</div>
-              </div>
-              <i class="fas fa-lock" style="color:var(--orange);font-size:16px"></i>
-            </div>
-            <div class="sf-hint">
-              <i class="fas fa-info-circle"></i>
-              <span>Credentials are stored securely in MongoDB with bcrypt hashing. Passwords are never stored in plain text.</span>
-            </div>
+            <div class="cred-row"><div><div class="cred-label">Email</div><div class="cred-value" id="displayEmail">Loading…</div></div><i class="fas fa-envelope" style="color:var(--orange);font-size:16px;flex-shrink:0"></i></div>
+            <div class="cred-row"><div><div class="cred-label">Password</div><div class="cred-value masked">••••••••</div></div><i class="fas fa-lock" style="color:var(--orange);font-size:16px;flex-shrink:0"></i></div>
+            <div class="sf-hint"><i class="fas fa-info-circle"></i><span>Stored with bcrypt hashing. Passwords are never stored in plain text.</span></div>
           </div>
         </div>
-
-        <!-- Update password -->
         <div class="settings-card">
-          <div class="settings-card-header">
-            <i class="fas fa-lock"></i>
-            <div>
-              <h3>Update Password</h3>
-              <p>Change your admin login password</p>
-            </div>
-          </div>
+          <div class="settings-card-header"><i class="fas fa-lock"></i><div><h3>Update Password</h3><p>Change your admin login password</p></div></div>
           <div class="settings-form">
-            <div class="sf-group">
-              <label>Current Password <span>*</span></label>
-              <div class="sf-wrap"><i class="fas fa-lock"></i>
-                <input type="password" id="currentPassword" placeholder="Your current password">
-                <button class="pwd-eye" onclick="togglePwd('currentPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px"><i class="fas fa-eye"></i></button>
-              </div>
-            </div>
+            <div class="sf-group"><label>Current Password <span>*</span></label><div class="sf-wrap"><i class="fas fa-lock"></i><input type="password" id="currentPassword" placeholder="Current password"><button onclick="togglePwd('currentPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px;min-width:32px;min-height:32px;flex-shrink:0"><i class="fas fa-eye"></i></button></div></div>
             <div class="sf-divider"></div>
-            <div class="sf-group">
-              <label>New Password <span>*</span></label>
-              <div class="sf-wrap"><i class="fas fa-key"></i>
-                <input type="password" id="newPassword" placeholder="Min. 6 characters">
-                <button class="pwd-eye" onclick="togglePwd('newPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px"><i class="fas fa-eye"></i></button>
-              </div>
-            </div>
-            <div class="sf-group">
-              <label>Confirm New Password <span>*</span></label>
-              <div class="sf-wrap"><i class="fas fa-check"></i>
-                <input type="password" id="confirmPassword" placeholder="Re-enter new password">
-                <button class="pwd-eye" onclick="togglePwd('confirmPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px"><i class="fas fa-eye"></i></button>
-              </div>
-            </div>
+            <div class="sf-group"><label>New Password <span>*</span></label><div class="sf-wrap"><i class="fas fa-key"></i><input type="password" id="newPassword" placeholder="Min. 6 characters"><button onclick="togglePwd('newPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px;min-width:32px;min-height:32px;flex-shrink:0"><i class="fas fa-eye"></i></button></div></div>
+            <div class="sf-group"><label>Confirm New Password <span>*</span></label><div class="sf-wrap"><i class="fas fa-check"></i><input type="password" id="confirmPassword" placeholder="Re-enter new password"><button onclick="togglePwd('confirmPassword',this)" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px;min-width:32px;min-height:32px;flex-shrink:0"><i class="fas fa-eye"></i></button></div></div>
             <button class="sf-btn" onclick="updatePassword()"><i class="fas fa-save"></i> Save Password</button>
           </div>
         </div>
-
       </div>
-    </div>
-
-  </div><!-- /content -->
-</div><!-- /main-wrap -->
-
-<!-- Mobile toggle -->
-<button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-
-<!-- TOAST -->
-<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
-
-<!-- SHARED DELETE MODAL -->
-<div class="del-overlay" id="delOverlay">
-  <div class="del-modal">
-    <i class="fas fa-trash-alt"></i>
-    <h3 id="delModalTitle">Delete?</h3>
-    <p id="delModalDesc">This action cannot be undone.</p>
-    <div class="del-btns">
-      <button class="del-cancel-btn" onclick="closeDelModal()">Cancel</button>
-      <button class="del-confirm-btn" onclick="confirmDelete()">Yes, Delete</button>
     </div>
   </div>
 </div>
 
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+<div class="del-overlay" id="delOverlay"><div class="del-modal"><i class="fas fa-trash-alt del-ico"></i><h3 id="delModalTitle">Delete?</h3><p id="delModalDesc">This cannot be undone.</p><div class="del-btns"><button class="del-cancel-btn" onclick="closeDelModal()">Cancel</button><button class="del-confirm-btn" onclick="confirmDelete()">Yes, Delete</button></div></div></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <div class="lightbox-header"><div class="lb-title" id="lbTitle">Media Viewer</div><div class="lb-header-right"><div class="lb-counter" id="lbCounter"></div><button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button></div></div>
+  <button class="lb-nav prev" id="lbPrev" onclick="lbNavigate(-1)"><i class="fas fa-chevron-left"></i></button>
+  <div class="lightbox-main" id="lbMain"></div>
+  <button class="lb-nav next" id="lbNext" onclick="lbNavigate(1)"><i class="fas fa-chevron-right"></i></button>
+  <div class="lightbox-thumbs" id="lbThumbs"></div>
+</div>
+
 <script>
-/* ══════════════════════════════════════════════════════════════════
-   CONFIG  ← change API_BASE when you deploy to production
-══════════════════════════════════════════════════════════════════ */
-const API_BASE = 'https://o-b-website.onrender.com/api';
+const API_BASE='https://o-b-website.onrender.com/api';
+const getToken=()=>localStorage.getItem('obk_token');
+const clearToken=()=>localStorage.removeItem('obk_token');
+if(!getToken()){window.location.href='index.html';}
 
-/* ── Token helpers ─────────────────────────────────────────────── */
-const getToken   = () => localStorage.getItem('obk_token');
-const clearToken = () => localStorage.removeItem('obk_token');
-
-/* ── Auth guard ─────────────────────────────────────────────────── */
-if (!getToken()) { window.location.href = 'index.html'; }
-
-/* ── Core fetch wrapper ─────────────────────────────────────────── */
-async function apiFetch(path, opts = {}) {
-  const headers = { 'Authorization': 'Bearer ' + getToken() };
-  // Only set Content-Type for JSON bodies (not FormData)
-  if (opts.body && !(opts.body instanceof FormData)) {
-    headers['Content-Type'] = 'application/json';
-  }
-  const res  = await fetch(API_BASE + path, { ...opts, headers });
-  const data = await res.json().catch(() => ({}));
-  if (res.status === 401) { clearToken(); window.location.href = 'index.html'; return; }
-  if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
+async function apiFetch(path,opts={}){
+  const headers={Authorization:'Bearer '+getToken()};
+  if(opts.body&&!(opts.body instanceof FormData))headers['Content-Type']='application/json';
+  const res=await fetch(API_BASE+path,{...opts,headers});
+  const data=await res.json().catch(()=>({}));
+  if(res.status===401){clearToken();window.location.href='index.html';return;}
+  if(!res.ok)throw new Error(data.message||'Error '+res.status);
   return data;
 }
+function doLogout(){clearToken();window.location.href='index.html';}
 
-/* ── Logout ─────────────────────────────────────────────────────── */
-function doLogout() { clearToken(); window.location.href = 'index.html'; }
+/* SIDEBAR */
+const sectionTitles={overview:{icon:'fa-tachometer-alt',label:'Overview'},listings:{icon:'fa-map',label:'Listings'},visits:{icon:'fa-calendar-check',label:'Site Visit Requests'},settings:{icon:'fa-cog',label:'Settings'}};
+function showSection(name){
+  document.querySelectorAll('.section-view').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  const btn=document.getElementById('nav-'+name);if(btn)btn.classList.add('active');
+  const t=sectionTitles[name];if(t)document.getElementById('pageTitle').innerHTML='<i class="fas '+t.icon+'"></i> '+t.label;
+  if(name==='listings')loadListings();if(name==='visits')loadVisits();if(name==='settings')loadMe();
+  if(window.innerWidth<=800)closeSidebar();
+}
+function toggleSidebar(){document.getElementById('sidebar').classList.contains('open')?closeSidebar():openSidebar();}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sbOverlay').classList.add('show');document.getElementById('sbToggleIcon').className='fas fa-times';document.body.style.overflow='hidden';}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sbOverlay').classList.remove('show');document.getElementById('sbToggleIcon').className='fas fa-bars';document.body.style.overflow='';}
 
-/* ══════════════════════════════════════════════════════════════════
-   SIDEBAR NAVIGATION
-══════════════════════════════════════════════════════════════════ */
-const sectionTitles = {
-  overview: { icon: 'fa-tachometer-alt', label: 'Overview' },
-  listings: { icon: 'fa-map',            label: 'Listings' },
-  visits:   { icon: 'fa-calendar-check', label: 'Site Visit Requests' },
-  settings: { icon: 'fa-cog',            label: 'Settings' },
-};
+/* TOAST */
+function showToast(msg,type='success'){const t=document.getElementById('toast');t.className='toast '+type;const ic={success:'fa-check-circle',error:'fa-exclamation-circle',info:'fa-info-circle'};t.querySelector('i').className='fas '+(ic[type]||'fa-check-circle');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
 
-function showSection(name) {
-  document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
-  document.getElementById('sec-' + name).classList.add('active');
-  const btn = document.getElementById('nav-' + name);
-  if (btn) btn.classList.add('active');
-  const t = sectionTitles[name];
-  if (t) document.getElementById('pageTitle').innerHTML = `<i class="fas ${t.icon}"></i> ${t.label}`;
-  if (name === 'listings') loadListings();
-  if (name === 'visits')   loadVisits();
-  if (name === 'settings') loadMe();
-  if (window.innerWidth <= 800) closeSidebar();
+/* STATS */
+async function loadStats(){
+  try{
+    const[ls,vs]=await Promise.all([apiFetch('/listings/stats'),apiFetch('/site-visits/stats')]);
+    if(ls){document.getElementById('statTotal').textContent=ls.data.total;document.getElementById('statAvail').textContent=ls.data.available;document.getElementById('statHot').textContent=ls.data.hot;document.getElementById('statSold').textContent=ls.data.sold;}
+    if(vs){const p=vs.data.pending;const b=document.getElementById('visitsBadge');b.textContent=p;b.style.display=p>0?'':'none';}
+  }catch(e){console.error('Stats:',e.message);}
 }
 
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sbOverlay').classList.toggle('show');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sbOverlay').classList.remove('show');
-}
+/* MEDIA */
+let selectedImageFiles=[],existingImages=[],removedImages=[];
+let selectedVideoFile=null,existingVideoUrl='',removeExistingVideo=false;
+function switchMediaTab(tab){const isImg=tab==='images';document.getElementById('tabImages').classList.toggle('active',isImg);document.getElementById('tabVideo').classList.toggle('active',!isImg);document.getElementById('panelImages').style.display=isImg?'':'none';document.getElementById('panelVideo').style.display=isImg?'none':'';}
+function handleImageFiles(e){const files=Array.from(e.target.files);const room=Math.max(0,10-selectedImageFiles.length-existingImages.length);if(!room){showToast('Maximum 10 images.','error');return;}if(files.length>room)showToast('Added '+room+' of '+files.length+' (max 10).','info');selectedImageFiles=[...selectedImageFiles,...files.slice(0,room)];renderImagePreviews();e.target.value='';}
+function renderImagePreviews(){const grid=document.getElementById('imgPreviewGrid');const badge=document.getElementById('imgCountBadge');const total=existingImages.length+selectedImageFiles.length;if(!total){grid.style.display='none';badge.style.display='none';return;}grid.style.display='grid';badge.style.display='';badge.textContent=total+' photo'+(total!==1?'s':'')+' · first is the cover';let html='';existingImages.forEach(function(url,i){html+='<div class="img-preview-item"><img src="'+url+'" loading="lazy">'+(i===0&&!selectedImageFiles.length?'<div class="cover-badge">Cover</div>':'')+'<button class="remove-img" onclick="removeExistingImage('+i+')"><i class="fas fa-times"></i></button></div>';});selectedImageFiles.forEach(function(file,i){const blob=URL.createObjectURL(file);const isFirst=!existingImages.length&&i===0;html+='<div class="img-preview-item"><img src="'+blob+'">'+(isFirst?'<div class="cover-badge">Cover</div>':'')+'<button class="remove-img" onclick="removeNewImage('+i+')"><i class="fas fa-times"></i></button></div>';});grid.innerHTML=html;}
+function removeExistingImage(i){removedImages.push(existingImages[i]);existingImages.splice(i,1);renderImagePreviews();}
+function removeNewImage(i){selectedImageFiles.splice(i,1);renderImagePreviews();}
+(function(){const dz=document.getElementById('imgDropzone');dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('dragover');});dz.addEventListener('dragleave',function(){dz.classList.remove('dragover');});dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('dragover');handleImageFiles({target:{files:e.dataTransfer.files}});});})();
+function handleVideoFile(e){const file=e.target.files[0];if(!file)return;if(file.size>200*1024*1024){showToast('Video must be under 200 MB.','error');return;}selectedVideoFile=file;renderVideoPreview();}
+function renderVideoPreview(){const wrap=document.getElementById('videoPreviewWrap');const dz=document.getElementById('videoDropzone');if(selectedVideoFile){document.getElementById('videoPreviewEl').src=URL.createObjectURL(selectedVideoFile);document.getElementById('videoNameEl').textContent=selectedVideoFile.name;wrap.style.display='';dz.style.display='none';return;}if(existingVideoUrl&&!removeExistingVideo){document.getElementById('videoPreviewEl').src=existingVideoUrl;document.getElementById('videoNameEl').textContent='Existing video';wrap.style.display='';dz.style.display='none';return;}wrap.style.display='none';dz.style.display='';}
+function removeVideo(){selectedVideoFile=null;if(existingVideoUrl)removeExistingVideo=true;document.getElementById('pfVideoFile').value='';renderVideoPreview();}
+(function(){const dz=document.getElementById('videoDropzone');dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('dragover');});dz.addEventListener('dragleave',function(){dz.classList.remove('dragover');});dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('dragover');handleVideoFile({target:{files:e.dataTransfer.files}});});})();
 
-/* ══════════════════════════════════════════════════════════════════
-   TOAST
-══════════════════════════════════════════════════════════════════ */
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.className = 'toast ' + type;
-  const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' };
-  t.querySelector('i').className = 'fas ' + (icons[type] || icons.success);
-  document.getElementById('toastMsg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+/* LIGHTBOX */
+let lbItems=[],lbIdx=0;
+function openLightbox(items,startIdx,title){lbItems=items;lbIdx=startIdx||0;document.getElementById('lbTitle').textContent=title||'';renderLbMedia();buildLbThumbs();document.getElementById('lightboxOverlay').classList.add('show');document.body.style.overflow='hidden';}
+function closeLightbox(){const vid=document.querySelector('#lbMain video');if(vid){vid.pause();vid.removeAttribute('src');}document.getElementById('lightboxOverlay').classList.remove('show');document.body.style.overflow='';}
+function lbNavigate(dir){const next=lbIdx+dir;if(next<0||next>=lbItems.length)return;const vid=document.querySelector('#lbMain video');if(vid){vid.pause();vid.removeAttribute('src');}lbIdx=next;renderLbMedia();updateLbThumbs();}
+function lbJump(i){const vid=document.querySelector('#lbMain video');if(vid){vid.pause();vid.removeAttribute('src');}lbIdx=i;renderLbMedia();updateLbThumbs();}
+function renderLbMedia(){const main=document.getElementById('lbMain');const item=lbItems[lbIdx];document.getElementById('lbCounter').textContent=(lbIdx+1)+' / '+lbItems.length;document.getElementById('lbPrev').disabled=lbIdx===0;document.getElementById('lbNext').disabled=lbIdx===lbItems.length-1;if(item.type==='video'){main.innerHTML='<video class="lb-video" controls autoplay playsinline src="'+item.src+'"></video>';}else{main.innerHTML='<img class="lb-media" src="'+item.src+'" alt="">';}}
+function buildLbThumbs(){document.getElementById('lbThumbs').innerHTML=lbItems.map(function(m,i){if(m.type==='video')return'<div class="lb-thumb-vid'+(i===lbIdx?' active':'')+'" onclick="lbJump('+i+')"><i class="fas fa-play-circle"></i></div>';return'<img class="lb-thumb'+(i===lbIdx?' active':'')+'" src="'+m.src+'" onclick="lbJump('+i+')">';}).join('');}
+function updateLbThumbs(){document.querySelectorAll('.lb-thumb,.lb-thumb-vid').forEach(function(el,i){el.classList.toggle('active',i===lbIdx);});const active=document.querySelector('#lbThumbs .active');if(active)active.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});}
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightboxOverlay').classList.contains('show'))return;if(e.key==='ArrowLeft')lbNavigate(-1);if(e.key==='ArrowRight')lbNavigate(1);if(e.key==='Escape')closeLightbox();});
+document.getElementById('lightboxOverlay').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+function buildMediaItems(l){const arr=[];const imgs=l.images&&l.images.length?l.images:(l.imageUrl?[l.imageUrl]:[]);imgs.forEach(function(src){arr.push({type:'image',src});});if(l.videoUrl)arr.push({type:'video',src:l.videoUrl});return arr;}
+
+/* LISTINGS */
+let allListings=[];
+function setTableLoading(cols){document.getElementById('tableBody').innerHTML='<tr><td colspan="'+cols+'"><div class="tbl-empty" style="padding:30px"><i class="fas fa-circle-notch" style="animation:spin 1s linear infinite;color:var(--orange)"></i><p style="margin-top:8px">Loading…</p></div></td></tr>';}
+async function loadListings(search=''){
+  setTableLoading(7);
+  try{const params=new URLSearchParams({limit:100});if(search)params.set('search',search);const res=await apiFetch('/listings?'+params);allListings=res.data||[];renderTable(search);loadStats();}
+  catch(e){document.getElementById('tableBody').innerHTML='<tr><td colspan="7"><div class="tbl-empty"><i class="fas fa-exclamation-circle"></i><p>'+e.message+'</p></div></td></tr>';}
 }
-
-/* ══════════════════════════════════════════════════════════════════
-   STATS (Overview section)
-══════════════════════════════════════════════════════════════════ */
-async function loadStats() {
-  try {
-    // Use dedicated stats endpoints — single DB query each
-    const [lstats, vstats] = await Promise.all([
-      apiFetch('/listings/stats'),
-      apiFetch('/site-visits/stats'),
-    ]);
-    if (lstats) {
-      document.getElementById('statTotal').textContent = lstats.data.total;
-      document.getElementById('statAvail').textContent = lstats.data.available;
-      document.getElementById('statHot').textContent   = lstats.data.hot;
-      document.getElementById('statSold').textContent  = lstats.data.sold;
-    }
-    if (vstats) {
-      const pending = vstats.data.pending;
-      const badge   = document.getElementById('visitsBadge');
-      badge.textContent    = pending;
-      badge.style.display  = pending > 0 ? '' : 'none';
-    }
-  } catch (e) {
-    console.error('Stats error:', e.message);
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   LISTINGS — load & render table
-══════════════════════════════════════════════════════════════════ */
-let allListings = [];
-
-function setTableLoading(cols) {
-  document.getElementById('tableBody').innerHTML =
-    `<tr><td colspan="${cols}"><div class="tbl-empty" style="padding:30px">
-      <i class="fas fa-circle-notch" style="animation:spin 1s linear infinite;color:var(--orange)"></i>
-      <p style="margin-top:8px">Loading…</p></div></td></tr>`;
-}
-// spin keyframe (injected once)
-const spinStyle = document.createElement('style');
-spinStyle.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
-document.head.appendChild(spinStyle);
-
-async function loadListings(search = '') {
-  setTableLoading(6);
-  try {
-    const params = new URLSearchParams({ limit: 100 });
-    if (search) params.set('search', search);
-    const res   = await apiFetch('/listings?' + params);
-    allListings = res.data || [];
-    renderTable(search);
-    loadStats();
-  } catch (e) {
-    document.getElementById('tableBody').innerHTML =
-      `<tr><td colspan="6"><div class="tbl-empty"><i class="fas fa-exclamation-circle"></i><p>${e.message}</p></div></td></tr>`;
-  }
-}
-
-function renderTable(search = '') {
-  const q        = (search || '').toLowerCase();
-  const filtered = allListings.filter(l =>
-    !q || l.title.toLowerCase().includes(q) || (l.location || '').toLowerCase().includes(q)
-  );
-  const body = document.getElementById('tableBody');
-  if (!filtered.length) {
-    body.innerHTML = `<tr><td colspan="6"><div class="tbl-empty"><i class="fas fa-inbox"></i><p>No listings found</p></div></td></tr>`;
-    return;
-  }
-  const labels = { hot: 'Hot Deal', new: 'New', available: 'Available', sold: 'Sold' };
-  body.innerHTML = filtered.map(l => {
-    const date = new Date(l.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    return `<tr>
-      <td>
-        <div class="tbl-title">${l.title}</div>
-        <div class="tbl-loc">
-          <i class="fas fa-map-marker-alt" style="color:var(--orange);font-size:10px;margin-right:3px"></i>
-          ${l.location || ''}${l.region ? ', ' + l.region : ''}
-        </div>
-      </td>
-      <td><span class="tbl-type">${l.type}</span></td>
-      <td><span class="tbl-price">GHS ${Number(l.price).toLocaleString()}</span></td>
-      <td><span class="tbl-badge ${l.status}">${labels[l.status] || 'Available'}</span></td>
-      <td style="font-size:11.5px;color:var(--muted)">${date}</td>
-      <td><div class="tbl-actions">
-        <button class="tbl-btn edit" onclick="editListing('${l._id}')" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-        <button class="tbl-btn del"  onclick="openDelModal('listing','${l._id}')" title="Delete"><i class="fas fa-trash"></i></button>
-      </div></td>
-    </tr>`;
+function renderTable(search=''){
+  const q=(search||'').toLowerCase();
+  const rows=allListings.filter(l=>!q||l.title.toLowerCase().includes(q)||(l.location||'').toLowerCase().includes(q));
+  const body=document.getElementById('tableBody');
+  if(!rows.length){body.innerHTML='<tr><td colspan="7"><div class="tbl-empty"><i class="fas fa-inbox"></i><p>No listings found</p></div></td></tr>';return;}
+  const lbl={hot:'Hot Deal',new:'New',available:'Available',sold:'Sold'};
+  body.innerHTML=rows.map(function(l){
+    const date=new Date(l.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const media=buildMediaItems(l);const imgs=media.filter(m=>m.type==='image');const hasVid=media.some(m=>m.type==='video');
+    let stack='<div class="tbl-thumb-stack" onclick="openListingLightbox(\''+l._id+'\')">';
+    if(!media.length){stack+='<div class="tbl-thumb-empty"><i class="fas fa-image"></i></div>';}
+    else{imgs.slice(0,3).forEach(function(img){stack+='<img class="tbl-thumb" src="'+img.src+'">';});if(imgs.length>3)stack+='<div class="tbl-thumb-more">+'+(imgs.length-3)+'</div>';if(hasVid)stack+='<div class="tbl-thumb-video"><i class="fas fa-film"></i></div>';}
+    stack+='</div>';
+    return'<tr><td><div class="tbl-title">'+l.title+'</div><div class="tbl-loc">'+(l.location||'')+(l.region?', '+l.region:'')+'</div></td>'+
+      '<td>'+stack+'</td><td><span class="tbl-type">'+l.type+'</span></td>'+
+      '<td><span class="tbl-price">GHS '+Number(l.price).toLocaleString()+'</span></td>'+
+      '<td><span class="tbl-badge '+l.status+'">'+(lbl[l.status]||'Available')+'</span></td>'+
+      '<td style="font-size:11.5px;color:var(--muted);white-space:nowrap">'+date+'</td>'+
+      '<td><div class="tbl-actions"><button class="tbl-btn view" onclick="openListingLightbox(\''+l._id+'\')" title="View"><i class="fas fa-eye"></i></button><button class="tbl-btn edit" onclick="editListing(\''+l._id+'\')" title="Edit"><i class="fas fa-pencil-alt"></i></button><button class="tbl-btn del" onclick="openDelModal(\'listing\',\''+l._id+'\')" title="Delete"><i class="fas fa-trash"></i></button></div></td></tr>';
   }).join('');
 }
+function openListingLightbox(id){const l=allListings.find(x=>x._id===id);if(!l)return;const items=buildMediaItems(l);if(!items.length){showToast('No media for this listing.','info');return;}openLightbox(items,0,l.title);}
 
-/* ── Listing form ────────────────────────────────────────────────── */
-let editingId = null;
-
-async function submitListing() {
-  const title    = document.getElementById('pfTitle').value.trim();
-  const location = document.getElementById('pfLocation').value.trim();
-  const price    = document.getElementById('pfPrice').value;
-  if (!title || !location || !price) {
-    showToast('Please fill in all required fields.', 'error');
-    return;
-  }
-
-  const btn = document.querySelector('.pf-submit');
-  btn.disabled = true;
-  document.getElementById('submitLabel').textContent = editingId ? 'Saving…' : 'Publishing…';
-
-  // Use FormData so the image file is sent as multipart/form-data
-  const fd = new FormData();
-  fd.append('title',       title);
-  fd.append('location',    location);
-  fd.append('price',       price);
-  fd.append('type',        document.getElementById('pfType').value);
-  fd.append('status',      document.getElementById('pfStatus').value);
-  fd.append('region',      document.getElementById('pfRegion').value);
-  fd.append('priceUnit',   document.getElementById('pfPriceUnit').value);
-  fd.append('size',        document.getElementById('pfSize').value.trim());
-  fd.append('description', document.getElementById('pfDesc').value.trim());
-  fd.append('surveyed',    document.getElementById('pfSurveyed').checked);
-  fd.append('titleDeed',   document.getElementById('pfTitleDeed').checked);
-  fd.append('water',       document.getElementById('pfWater').checked);
-
-  const imgFile = document.getElementById('pfImageFile') && document.getElementById('pfImageFile').files[0];
-  if (imgFile) fd.append('image', imgFile);
-
-  try {
-    if (editingId) {
-      await apiFetch('/listings/' + editingId, { method: 'PUT', body: fd });
-      showToast('Listing updated successfully!', 'success');
-      cancelEdit();
-    } else {
-      await apiFetch('/listings', { method: 'POST', body: fd });
-      showToast('Listing published!', 'success');
-      resetForm();
-    }
+/* FORM */
+let editingId=null;
+async function submitListing(){
+  const title=document.getElementById('pfTitle').value.trim();
+  const location=document.getElementById('pfLocation').value.trim();
+  const price=document.getElementById('pfPrice').value;
+  if(!title||!location||!price){showToast('Please fill in all required fields.','error');return;}
+  const btn=document.querySelector('.pf-submit');btn.disabled=true;document.getElementById('submitLabel').textContent=editingId?'Saving…':'Publishing…';
+  const fd=new FormData();
+  fd.append('title',title);fd.append('location',location);fd.append('price',price);
+  fd.append('type',document.getElementById('pfType').value);fd.append('status',document.getElementById('pfStatus').value);
+  fd.append('region',document.getElementById('pfRegion').value);fd.append('priceUnit',document.getElementById('pfPriceUnit').value);
+  fd.append('size',document.getElementById('pfSize').value.trim());fd.append('description',document.getElementById('pfDesc').value.trim());
+  fd.append('surveyed',document.getElementById('pfSurveyed').checked);fd.append('titleDeed',document.getElementById('pfTitleDeed').checked);fd.append('water',document.getElementById('pfWater').checked);
+  selectedImageFiles.forEach(function(f){fd.append('images',f);});
+  if(removedImages.length)fd.append('removeImages',JSON.stringify(removedImages));
+  if(selectedVideoFile)fd.append('video',selectedVideoFile);
+  if(removeExistingVideo)fd.append('removeVideo','true');
+  try{
+    if(editingId){await apiFetch('/listings/'+editingId,{method:'PUT',body:fd});showToast('Listing updated!','success');cancelEdit();}
+    else{await apiFetch('/listings',{method:'POST',body:fd});showToast('Listing published!','success');resetForm();}
     loadListings();
-  } catch (e) {
-    showToast(e.message, 'error');
-  } finally {
-    btn.disabled = false;
-    document.getElementById('submitLabel').textContent = editingId ? 'Save Changes' : 'Publish Listing';
-  }
+  }catch(e){showToast(e.message,'error');}
+  finally{btn.disabled=false;document.getElementById('submitLabel').textContent=editingId?'Save Changes':'Publish Listing';}
+}
+function editListing(id){
+  const l=allListings.find(x=>x._id===id);if(!l)return;editingId=id;
+  document.getElementById('pfTitle').value=l.title||'';document.getElementById('pfType').value=l.type||'Residential';document.getElementById('pfStatus').value=l.status||'available';
+  document.getElementById('pfLocation').value=l.location||'';document.getElementById('pfRegion').value=l.region||'Greater Accra';document.getElementById('pfPrice').value=l.price||'';
+  document.getElementById('pfPriceUnit').value=l.priceUnit||'plot';document.getElementById('pfSize').value=l.size||'';document.getElementById('pfDesc').value=l.description||'';
+  document.getElementById('pfSurveyed').checked=!!l.surveyed;document.getElementById('pfTitleDeed').checked=!!l.titleDeed;document.getElementById('pfWater').checked=!!l.water;
+  existingImages=l.images&&l.images.length?[...l.images]:(l.imageUrl?[l.imageUrl]:[]);existingVideoUrl=l.videoUrl||'';
+  selectedImageFiles=[];removedImages=[];selectedVideoFile=null;removeExistingVideo=false;
+  renderImagePreviews();renderVideoPreview();
+  document.getElementById('editBar').classList.add('show');document.getElementById('formTitle').textContent='Edit Listing';document.getElementById('formSub').textContent='Modify and save changes';document.getElementById('submitLabel').textContent='Save Changes';
+  document.querySelector('.form-card').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('postFormScroll').scrollTop=0;
+}
+function cancelEdit(){editingId=null;resetForm();document.getElementById('editBar').classList.remove('show');document.getElementById('formTitle').textContent='Post New Listing';document.getElementById('formSub').textContent='Fill in details and publish instantly';document.getElementById('submitLabel').textContent='Publish Listing';}
+function resetForm(){
+  ['pfTitle','pfLocation','pfPrice','pfSize','pfDesc'].forEach(function(id){const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('pfType').value='Residential';document.getElementById('pfStatus').value='available';document.getElementById('pfRegion').value='Greater Accra';document.getElementById('pfPriceUnit').value='plot';
+  document.getElementById('pfSurveyed').checked=true;document.getElementById('pfTitleDeed').checked=true;document.getElementById('pfWater').checked=false;
+  selectedImageFiles=[];existingImages=[];removedImages=[];selectedVideoFile=null;existingVideoUrl='';removeExistingVideo=false;
+  document.getElementById('pfImageFiles').value='';document.getElementById('pfVideoFile').value='';
+  renderImagePreviews();renderVideoPreview();switchMediaTab('images');
 }
 
-function editListing(id) {
-  const l = allListings.find(x => x._id === id);
-  if (!l) return;
-  editingId = id;
-  document.getElementById('pfTitle').value      = l.title    || '';
-  document.getElementById('pfType').value       = l.type     || 'Residential';
-  document.getElementById('pfStatus').value     = l.status   || 'available';
-  document.getElementById('pfLocation').value   = l.location || '';
-  document.getElementById('pfRegion').value     = l.region   || 'Greater Accra';
-  document.getElementById('pfPrice').value      = l.price    || '';
-  document.getElementById('pfPriceUnit').value  = l.priceUnit|| 'plot';
-  document.getElementById('pfSize').value       = l.size     || '';
-  document.getElementById('pfDesc').value       = l.description || '';
-  document.getElementById('pfSurveyed').checked  = !!l.surveyed;
-  document.getElementById('pfTitleDeed').checked = !!l.titleDeed;
-  document.getElementById('pfWater').checked     = !!l.water;
-  if (l.imageUrl) showImgPreview(l.imageUrl);
-  document.getElementById('editBar').classList.add('show');
-  document.getElementById('formTitle').textContent   = 'Edit Listing';
-  document.getElementById('formSub').textContent     = 'Modify and save changes';
-  document.getElementById('submitLabel').textContent = 'Save Changes';
-  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
+/* VISITS */
+let allVisits=[],visitSearch='';
+function setVisitLoading(){document.getElementById('visitsTableBody').innerHTML='<tr><td colspan="8"><div class="tbl-empty" style="padding:30px"><i class="fas fa-circle-notch" style="animation:spin 1s linear infinite;color:var(--orange)"></i><p style="margin-top:8px">Loading…</p></div></td></tr>';}
+async function loadVisits(){
+  setVisitLoading();
+  try{const params=new URLSearchParams({limit:100});const st=document.getElementById('visitStatusFilter').value;if(st)params.set('status',st);if(visitSearch)params.set('search',visitSearch);const res=await apiFetch('/site-visits?'+params);allVisits=res.data||[];renderVisitsTable();loadStats();}
+  catch(e){document.getElementById('visitsTableBody').innerHTML='<tr><td colspan="8"><div class="tbl-empty"><i class="fas fa-exclamation-circle"></i><p>'+e.message+'</p></div></td></tr>';}
 }
-
-function cancelEdit() {
-  editingId = null;
-  resetForm();
-  document.getElementById('editBar').classList.remove('show');
-  document.getElementById('formTitle').textContent   = 'Post New Listing';
-  document.getElementById('formSub').textContent     = 'Fill in details and publish instantly';
-  document.getElementById('submitLabel').textContent = 'Publish Listing';
-}
-
-function resetForm() {
-  ['pfTitle','pfLocation','pfPrice','pfSize','pfDesc'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  document.getElementById('pfType').value      = 'Residential';
-  document.getElementById('pfStatus').value    = 'available';
-  document.getElementById('pfRegion').value    = 'Greater Accra';
-  document.getElementById('pfPriceUnit').value = 'plot';
-  document.getElementById('pfSurveyed').checked  = true;
-  document.getElementById('pfTitleDeed').checked = true;
-  document.getElementById('pfWater').checked     = false;
-  const imgFile = document.getElementById('pfImageFile');
-  if (imgFile) imgFile.value = '';
-  const imgEl = document.getElementById('imgPreviewEl');
-  if (imgEl) imgEl.style.display = 'none';
-  const imgIcon = document.getElementById('imgIcon');
-  if (imgIcon) imgIcon.style.display = '';
-  const imgText = document.getElementById('imgText');
-  if (imgText) imgText.style.display = '';
-}
-
-/* ── Image preview ───────────────────────────────────────────────── */
-function previewImg(e) {
-  const file = e.target.files[0]; if (!file) return;
-  showImgPreview(URL.createObjectURL(file));
-}
-function showImgPreview(src) {
-  const img = document.getElementById('imgPreviewEl');
-  img.src = src; img.style.display = 'block';
-  document.getElementById('imgIcon').style.display = 'none';
-  document.getElementById('imgText').style.display = 'none';
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SITE VISITS — load, render, update status, delete
-══════════════════════════════════════════════════════════════════ */
-let allVisits   = [];
-let visitSearch = '';
-
-async function loadVisits() {
-  setTableLoading(8);
-  try {
-    const params = new URLSearchParams({ limit: 100 });
-    const status = document.getElementById('visitStatusFilter').value;
-    if (status)      params.set('status', status);
-    if (visitSearch) params.set('search', visitSearch);
-    const res = await apiFetch('/site-visits?' + params);
-    allVisits = res.data || [];
-    renderVisitsTable();
-    loadStats();
-  } catch (e) {
-    document.getElementById('visitsTableBody').innerHTML =
-      `<tr><td colspan="8"><div class="tbl-empty"><i class="fas fa-exclamation-circle"></i><p>${e.message}</p></div></td></tr>`;
-  }
-}
-
-// Debounce search input so we don't hammer the API on every keystroke
-let visitSearchTimer;
-function searchVisits(val) {
-  visitSearch = val;
-  clearTimeout(visitSearchTimer);
-  visitSearchTimer = setTimeout(() => loadVisits(), 350);
-}
-
-function renderVisitsTable() {
-  const body = document.getElementById('visitsTableBody');
-  if (!allVisits.length) {
-    body.innerHTML = `<tr><td colspan="8"><div class="tbl-empty"><i class="fas fa-calendar-times"></i><p>No site visit requests found</p></div></td></tr>`;
-    return;
-  }
-  const statusIcons = {
-    pending:   'fa-clock',
-    confirmed: 'fa-check-circle',
-    completed: 'fa-flag-checkered',
-    cancelled: 'fa-times-circle',
-  };
-  body.innerHTML = allVisits.map(v => {
-    const submitted = new Date(v.createdAt).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-    const visitDate = v.visitDate
-      ? new Date(v.visitDate).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
-      : 'N/A';
-    const regions = Array.isArray(v.regions) ? v.regions.join(', ') : (v.regions || 'N/A');
-    const st      = v.status || 'pending';
-    return `<tr>
-      <td>
-        <div class="tbl-title">${v.fullName || 'N/A'}</div>
-        <div class="tbl-loc">Submitted: ${submitted}</div>
-      </td>
-      <td>
-        <div style="font-size:12.5px;font-weight:700;color:var(--text)">${v.phone || 'N/A'}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">${v.email || ''}</div>
-      </td>
-      <td style="font-size:12.5px;font-weight:700;color:var(--text)">${visitDate}</td>
-      <td><span class="tbl-type">${v.landType || 'N/A'}</span></td>
-      <td style="font-size:12px;color:var(--muted);max-width:130px;white-space:normal;line-height:1.5">${regions}</td>
-      <td>
-        <span class="visit-badge ${st}">
-          <i class="fas ${statusIcons[st] || 'fa-clock'}"></i>
-          ${st.charAt(0).toUpperCase() + st.slice(1)}
-        </span>
-      </td>
-      <td>
-        <select class="status-select" onchange="updateVisitStatus('${v._id}', this.value)">
-          <option value="pending"   ${st==='pending'   ?'selected':''}>Pending</option>
-          <option value="confirmed" ${st==='confirmed' ?'selected':''}>Confirmed</option>
-          <option value="completed" ${st==='completed' ?'selected':''}>Completed</option>
-          <option value="cancelled" ${st==='cancelled' ?'selected':''}>Cancelled</option>
-        </select>
-      </td>
-      <td>
-        <button class="tbl-btn del" onclick="openDelModal('visit','${v._id}')" title="Delete Visit">
-          <i class="fas fa-trash"></i>
-        </button>
-      </td>
-    </tr>`;
+let vst;function searchVisits(val){visitSearch=val;clearTimeout(vst);vst=setTimeout(loadVisits,350);}
+function renderVisitsTable(){
+  const body=document.getElementById('visitsTableBody');
+  if(!allVisits.length){body.innerHTML='<tr><td colspan="8"><div class="tbl-empty"><i class="fas fa-calendar-times"></i><p>No visit requests found</p></div></td></tr>';return;}
+  const si={pending:'fa-clock',confirmed:'fa-check-circle',completed:'fa-flag-checkered',cancelled:'fa-times-circle'};
+  body.innerHTML=allVisits.map(function(v){
+    const sub=new Date(v.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const vd=v.visitDate?new Date(v.visitDate).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}):'N/A';
+    const reg=Array.isArray(v.regions)?v.regions.join(', '):(v.regions||'N/A');const st=v.status||'pending';
+    return'<tr><td><div class="tbl-title">'+(v.fullName||'N/A')+'</div><div class="tbl-loc">'+sub+'</div></td>'+
+      '<td><div style="font-size:12.5px;font-weight:700;white-space:nowrap">'+(v.phone||'N/A')+'</div><div style="font-size:11px;color:var(--muted)">'+(v.email||'')+'</div></td>'+
+      '<td style="white-space:nowrap;font-size:12.5px;font-weight:700">'+vd+'</td>'+
+      '<td><span class="tbl-type">'+(v.landType||'N/A')+'</span></td>'+
+      '<td style="font-size:12px;color:var(--muted);max-width:120px;white-space:normal;line-height:1.4">'+reg+'</td>'+
+      '<td><span class="visit-badge '+st+'"><i class="fas '+(si[st]||'fa-clock')+'"></i> '+st.charAt(0).toUpperCase()+st.slice(1)+'</span></td>'+
+      '<td><select class="status-select" onchange="updateVisitStatus(\''+v._id+'\',this.value)">'+
+      ['pending','confirmed','completed','cancelled'].map(function(s){return'<option value="'+s+'"'+(st===s?' selected':'')+'>'+s.charAt(0).toUpperCase()+s.slice(1)+'</option>';}).join('')+
+      '</select></td><td><button class="tbl-btn del" onclick="openDelModal(\'visit\',\''+v._id+'\')" title="Delete"><i class="fas fa-trash"></i></button></td></tr>';
   }).join('');
 }
+async function updateVisitStatus(id,ns){try{const r=await apiFetch('/site-visits/'+id+'/status',{method:'PATCH',body:JSON.stringify({status:ns})});showToast('Marked as '+ns+(r.message&&r.message.includes('email')?' ✉️':''),'success');loadVisits();}catch(e){showToast(e.message,'error');loadVisits();}}
 
-async function updateVisitStatus(id, newStatus) {
-  try {
-    const res = await apiFetch('/site-visits/' + id + '/status', {
-      method: 'PATCH',
-      body:   JSON.stringify({ status: newStatus }),
-    });
-    // Backend tells us if an email was sent
-    const emailNote = res.message && res.message.includes('email') ? ' ✉️' : '';
-    showToast(`Marked as ${newStatus}${emailNote}`, 'success');
-    loadVisits();
-  } catch (e) {
-    showToast(e.message, 'error');
-    loadVisits(); // reset select to actual DB value
-  }
-}
+/* DELETE */
+let delTarget={type:null,id:null};
+function openDelModal(type,id){delTarget={type,id};const iv=type==='visit';document.getElementById('delModalTitle').textContent=iv?'Delete Visit Request?':'Delete Listing?';document.getElementById('delModalDesc').textContent=iv?'This will permanently remove the visit request.':'This cannot be undone.';document.getElementById('delOverlay').classList.add('show');}
+function closeDelModal(){document.getElementById('delOverlay').classList.remove('show');delTarget={type:null,id:null};}
+async function confirmDelete(){const{type,id}=delTarget;if(!id)return;closeDelModal();try{if(type==='visit'){await apiFetch('/site-visits/'+id,{method:'DELETE'});showToast('Visit deleted.','info');loadVisits();}else{await apiFetch('/listings/'+id,{method:'DELETE'});showToast('Listing deleted.','info');loadListings();}}catch(e){showToast(e.message,'error');}}
 
-/* ══════════════════════════════════════════════════════════════════
-   SHARED DELETE MODAL  (listings + visits)
-══════════════════════════════════════════════════════════════════ */
-let delTarget = { type: null, id: null };
+/* SETTINGS */
+async function loadMe(){try{const r=await apiFetch('/auth/me');if(r.success&&r.admin)document.getElementById('displayEmail').textContent=r.admin.email;}catch(e){}}
+async function updatePassword(){const cur=document.getElementById('currentPassword').value,nw=document.getElementById('newPassword').value,con=document.getElementById('confirmPassword').value;if(!cur||!nw||!con){showToast('Please fill in all fields.','error');return;}if(nw!==con){showToast('Passwords do not match.','error');return;}if(nw.length<6){showToast('Min. 6 characters.','error');return;}try{await apiFetch('/auth/change-password',{method:'POST',body:JSON.stringify({currentPassword:cur,newPassword:nw})});['currentPassword','newPassword','confirmPassword'].forEach(id=>{document.getElementById(id).value='';});showToast('Password updated!','success');}catch(e){showToast(e.message,'error');}}
+function togglePwd(id,btn){const el=document.getElementById(id);const show=el.type==='password';el.type=show?'text':'password';btn.innerHTML=show?'<i class="fas fa-eye-slash"></i>':'<i class="fas fa-eye"></i>';}
 
-function openDelModal(type, id) {
-  delTarget = { type, id };
-  const isVisit = type === 'visit';
-  document.getElementById('delModalTitle').textContent =
-    isVisit ? 'Delete Visit Request?' : 'Delete Listing?';
-  document.getElementById('delModalDesc').textContent =
-    isVisit
-      ? 'This will permanently remove the visit request from the database.'
-      : 'This action cannot be undone. The listing will be permanently removed.';
-  document.getElementById('delOverlay').classList.add('show');
-}
-
-function closeDelModal() {
-  document.getElementById('delOverlay').classList.remove('show');
-  delTarget = { type: null, id: null };
-}
-
-async function confirmDelete() {
-  const { type, id } = delTarget;
-  if (!id) return;
-  closeDelModal();
-  try {
-    if (type === 'visit') {
-      await apiFetch('/site-visits/' + id, { method: 'DELETE' });
-      showToast('Visit request deleted.', 'info');
-      loadVisits();
-    } else {
-      await apiFetch('/listings/' + id, { method: 'DELETE' });
-      showToast('Listing deleted.', 'info');
-      loadListings();
-    }
-  } catch (e) {
-    showToast(e.message, 'error');
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SETTINGS
-══════════════════════════════════════════════════════════════════ */
-async function loadMe() {
-  try {
-    const res = await apiFetch('/auth/me');
-    if (res.success && res.admin) {
-      document.getElementById('displayEmail').textContent = res.admin.email;
-    }
-  } catch (e) { /* silent — token guard handles auth errors */ }
-}
-
-async function updatePassword() {
-  const currentPassword = document.getElementById('currentPassword').value;
-  const newPassword     = document.getElementById('newPassword').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
-
-  if (!currentPassword || !newPassword || !confirmPassword) {
-    showToast('Please fill in all fields.', 'error'); return;
-  }
-  if (newPassword !== confirmPassword) {
-    showToast('New passwords do not match.', 'error'); return;
-  }
-  if (newPassword.length < 6) {
-    showToast('Password must be at least 6 characters.', 'error'); return;
-  }
-  try {
-    await apiFetch('/auth/change-password', {
-      method: 'POST',
-      body:   JSON.stringify({ currentPassword, newPassword }),
-    });
-    document.getElementById('currentPassword').value = '';
-    document.getElementById('newPassword').value     = '';
-    document.getElementById('confirmPassword').value = '';
-    showToast('Password updated successfully!', 'success');
-  } catch (e) {
-    showToast(e.message, 'error');
-  }
-}
-
-function togglePwd(inputId, btn) {
-  const inp  = document.getElementById(inputId);
-  const show = inp.type === 'password';
-  inp.type   = show ? 'text' : 'password';
-  btn.innerHTML = show ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   INIT — runs on page load
-══════════════════════════════════════════════════════════════════ */
 loadStats();
 loadListings();
 </script>

@@ -53,13 +53,25 @@ const listingSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      maxlength: [1000, 'Description cannot exceed 1000 characters'],
+      maxlength: [2000, 'Description cannot exceed 2000 characters'],
     },
-    surveyed:       { type: Boolean, default: true },
-    titleDeed:      { type: Boolean, default: true },
-    water:          { type: Boolean, default: false },
-    imageUrl:       { type: String, default: '' },
-    imagePublicId:  { type: String, default: '' },
+    surveyed:  { type: Boolean, default: true  },
+    titleDeed: { type: Boolean, default: true  },
+    water:     { type: Boolean, default: false },
+
+    // ── Single image — kept in sync with images[0] for backward compatibility ──
+    // The public listings page (listings.html) reads imageUrl directly.
+    imageUrl:      { type: String, default: '' },
+    imagePublicId: { type: String, default: '' },
+
+    // ── Multi-image (admin dashboard photo gallery) ────────────────────────────
+    images:         { type: [String], default: [] },
+    imagePublicIds: { type: [String], default: [] },
+
+    // ── Video ──────────────────────────────────────────────────────────────────
+    videoUrl:      { type: String, default: '' },
+    videoPublicId: { type: String, default: '' },
+
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Admin',
@@ -67,11 +79,12 @@ const listingSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    toJSON:  { virtuals: true },
-    toObject:{ virtuals: true },
+    toJSON:   { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
+// ── Performance indexes ────────────────────────────────────────────────────────
 listingSchema.index({ title: 'text', location: 'text', description: 'text' });
 listingSchema.index({ type: 1 });
 listingSchema.index({ region: 1 });
@@ -79,4 +92,32 @@ listingSchema.index({ status: 1 });
 listingSchema.index({ price: 1 });
 listingSchema.index({ createdAt: -1 });
 
-module.exports = mongoose.model('Listing', listingSchema);
+// ── Sync imageUrl ↔ images[0] on every save ────────────────────────────────────
+listingSchema.pre('save', function (next) {
+  if (this.images && this.images.length > 0) {
+    // Multi-image path: imageUrl always mirrors images[0]
+    this.imageUrl      = this.images[0];
+    this.imagePublicId = (this.imagePublicIds && this.imagePublicIds[0]) || this.imagePublicId || '';
+  } else if (this.imageUrl && (!this.images || this.images.length === 0)) {
+    // Legacy path (seed / old records): populate array from single URL
+    this.images         = [this.imageUrl];
+    this.imagePublicIds = this.imagePublicId ? [this.imagePublicId] : [];
+  }
+  next();
+});
+
+// ── Same sync when using findByIdAndUpdate ─────────────────────────────────────
+listingSchema.pre('findOneAndUpdate', function (next) {
+  const u = this.getUpdate();
+  if (!u) return next();
+  if (u.images && u.images.length > 0) {
+    u.imageUrl      = u.images[0];
+    u.imagePublicId = (u.imagePublicIds && u.imagePublicIds[0]) || u.imagePublicId || '';
+  } else if (u.imageUrl && (!u.images || u.images.length === 0)) {
+    u.images         = [u.imageUrl];
+    u.imagePublicIds = u.imagePublicId ? [u.imagePublicId] : [];
+  }
+  next();
+});
+
+module.exports = mongoose.models.Listing || mongoose.model('Listing', listingSchema);
